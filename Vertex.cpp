@@ -24,6 +24,11 @@ float Vertex::getZ(){
 	return z;
 }
 
+string Vertex::print(){
+	string res = to_string(x) + " " + to_string(y) + " " + to_string(z);
+	return res;
+}
+
 Vertex::~Vertex(void){
 }
 

@@ -10,8 +10,9 @@ void printFile(vector<Vertex*> v, string file_name){
 
 	ofstream file (file_name);
 	if(file.is_open()){
-		file << "Hello World.\n";
-		file << "Dinis Peixoto.";
+		file << v.size() << endl;
+		for (vector<Vertex*>::iterator it = v.begin() ; it != v.end(); ++it)
+    		file << (*it)->print() << endl;
 		file.close();
 	}
 	else cout << "Unable to open file.\n";
