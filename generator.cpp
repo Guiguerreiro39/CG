@@ -1,24 +1,30 @@
-#include <stdio.h>
 #include <string.h>
+#include <iostream>
+#include <fstream>
+#include "Plane.h"
+
+using namespace std; 
+
+void printFile(vector<Vertex*> v, string file_name){
+
+	ofstream file (file_name);
+	if(file.is_open()){
+		file << "Hello World.\n";
+		file << "Dinis Peixoto.";
+		file.close();
+	}
+	else cout << "Unable to open file.\n";
+}
 
 int main(int argc, char** argv){
 
-	if(!strcmp(argv[1],"plane")){
-		createPlane(argv[2],argv[3]);
-	}
-	else printf("Argumentos inválidos.\n");
+	vector<Vertex*> v;
 
+	if(!strcmp(argv[1],"plane")){
+		v = createPlane(atof(argv[2]));
+		printFile(v,argv[3]);
+	}
+	else cout << "Invalid input.\n"; 
 
 	return 0;
-}
-
-void createPlane(int size, char* file_name){
-}
-
-void printFile(char* file_name){
-	FILE* file;
-	file = fopen(file_name,"w");
-
-
-	fclose(file);
 }

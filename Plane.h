@@ -5,6 +5,6 @@
 #include <vector>
 using namespace std; 
 
-vector<Vertex*> plane(float size);
+vector<Vertex*> createPlane(float size);
 
 #endif
