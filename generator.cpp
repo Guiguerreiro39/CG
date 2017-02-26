@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "Plane.h"
+#include "Vertex.h"
 
 using namespace std; 
 
@@ -19,6 +20,8 @@ void printFile(vector<Vertex*> v, string file_name){
 int main(int argc, char** argv){
 
 	vector<Vertex*> v;
+	
+	if(argc<2) return 0;
 
 	if(!strcmp(argv[1],"plane")){
 		v = createPlane(atof(argv[2]));

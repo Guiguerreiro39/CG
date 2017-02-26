@@ -24,3 +24,6 @@ float Vertex::getZ(){
 	return z;
 }
 
+Vertex::~Vertex(void){
+}
+
