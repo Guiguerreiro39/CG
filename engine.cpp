@@ -3,9 +3,11 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "tinyxml2.h"
 #include "Vertex.h"
 
 using namespace std;
+using namespace tinyxml2;
 
 vector<Vertex*> readFile(char* file_name){
 
@@ -21,7 +23,7 @@ vector<Vertex*> readFile(char* file_name){
 			stringstream ss(line); 
 			while(ss >> buf) tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 			vertex_list.push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
-			index+=3; // incfementar o índice
+			index+=3; // incrementar o índice
 		}
 		file.close();
 	}
