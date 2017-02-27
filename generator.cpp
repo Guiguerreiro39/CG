@@ -10,25 +10,25 @@ void printFile(vector<Vertex*> v, string file_name){
 
 	ofstream file (file_name);
 	if(file.is_open()){
-		file << v.size() << endl;
+		// file << v.size() << endl; imprimir o número de vértices (por enqt não é necessário)
 		for (vector<Vertex*>::iterator it = v.begin() ; it != v.end(); ++it)
     		file << (*it)->print() << endl;
 		file.close();
 	}
-	else cout << "Unable to open file.\n";
+	else cout << "Unable to open file." << endl;
 }
 
 int main(int argc, char** argv){
 
 	vector<Vertex*> v;
 	
-	if(argc<2) return 0;
+	if(argc<2) return 0; // isto vai sair daqui...
 
 	if(!strcmp(argv[1],"plane")){
 		v = createPlane(atof(argv[2]));
 		printFile(v,argv[3]);
 	}
-	else cout << "Invalid input.\n"; 
+	else cout << "Invalid input." << endl; 
 
 	return 0;
 }
