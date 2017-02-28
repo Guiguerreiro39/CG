@@ -5,7 +5,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 	vector<Vertex*> vertex_list;
 	float x = cX/2;
 	float y = cY/2;
-	float z = cz/2;
+	float z = cZ/2;
 	float shiftX = (float)cX/div;
 	float shiftY = (float)cY/div;
 	float shiftZ = (float)cZ/div;
