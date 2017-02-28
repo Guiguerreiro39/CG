@@ -27,8 +27,8 @@ int main(int argc, char** argv){
 	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]));
 
-	else if(!strcmp(argv[1],"box") && argc == 6)
-		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]));
+	else if(!strcmp(argv[1],"box") && argc == 7)
+		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]),atoi(argv[5]));
 
 	else if(!strcmp(argv[1],"sphere") && argc == 6)
 		v = createSphere(atof(argv[2]),atof(argv[3]),atof(argv[4]));

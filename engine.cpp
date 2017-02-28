@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
-#include <tinyxml2.h>
+#include "tinyxml2.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -92,28 +92,33 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
-	int i = 0;
+	int i = 0,x,y,z;
 
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// set the camera
 	glLoadIdentity();
-	gluLookAt(0.0,0.0,5.0, 
-		      0.0,0.0,-1.0,
+	gluLookAt(5.0,5.0,5.0, 
+		      0.0,0.0,0.0,
 			  0.0f,1.0f,0.0f);
 
 	// put drawing instructions here
-	glBegin(GL_TRIANGLES);
+	glEnable(GL_CULL_FACE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	
+	glColor3f(0.33,0.33,0.33);
+
+	glBegin(GL_TRIANGLES);
 	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it)
 		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it){
-			glVertex3f(((*shape_it)->getVertexList())[i]->getX(),((*shape_it)->getVertexList())[i]->getY(),((*shape_it)->getVertexList())[i]->getZ()); 
+			x = ((*shape_it)->getVertexList())[i]->getX();
+			y = ((*shape_it)->getVertexList())[i]->getY();
+			z = ((*shape_it)->getVertexList())[i]->getZ();
+			glVertex3f(x,y,z);
 			i++;
 		}
-
 	glEnd();
-
 	// End of frame
 	glutSwapBuffers();
 } 
@@ -148,20 +153,18 @@ int main(int argc, char** argv){
 
 	// put GLUT init here
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGBA);
+	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(800,800);
-	glutCreateWindow("CG@DI");
+	glutCreateWindow("33 GOD");
 
 	// put callback registration here
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
-	glutIdleFunc(renderScene);
 
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
-	glClearColor(0.0f,0.0f,0.0f,0.0f);
 
 	// enter GLUT's main loop
 	glutMainLoop();
