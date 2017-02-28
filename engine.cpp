@@ -119,6 +119,7 @@ void renderScene(void) {
 			i++;
 		}
 	glEnd();
+	
 	// End of frame
 	glutSwapBuffers();
 } 
@@ -156,7 +157,7 @@ int main(int argc, char** argv){
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(800,800);
-	glutCreateWindow("33 GOD");
+	glutCreateWindow("CG_Trabalho");
 
 	// put callback registration here
 	glutDisplayFunc(renderScene);
