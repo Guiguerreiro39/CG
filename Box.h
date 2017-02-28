@@ -5,6 +5,6 @@
 #include <vector>
 using namespace std; 
 
-vector<Vertex*> createBox(float x, float y, float z);
+vector<Vertex*> createBox(float x, float y, float z, int div);
 
 #endif
