@@ -92,6 +92,8 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
+	int i = 0;
+
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -103,14 +105,18 @@ void renderScene(void) {
 
 	// put drawing instructions here
 	glBegin(GL_TRIANGLES);
+	
 	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it)
-		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it)
-			glVertex3f((*vertex_it)->getX(),(*vertex_it)->getY(),(*vertex_it)->getZ());
+		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it){
+			glVertex3f(((*shape_it)->getVertexList())[i]->getX(),((*shape_it)->getVertexList())[i]->getY(),((*shape_it)->getVertexList())[i]->getZ()); 
+			i++;
+		}
+
 	glEnd();
 
 	// End of frame
 	glutSwapBuffers();
-}
+} 
 
 int main(int argc, char** argv){
 
@@ -130,16 +136,16 @@ int main(int argc, char** argv){
 			vector<Vertex*> aux = readFile(*i);
 			shapes_list.push_back(new Shape(total_shapes,aux));
 			total_shapes++;
-
 		}
 	} 
 
-	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it){
-		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it)
-			cout << (*vertex_it)->print() << endl;
-	}
+	/** int i = 0;
+	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it)
+		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it){
+			cout << ((*shape_it)->getVertexList())[i]->print() << endl; 
+			i++;
+		} **/
 
-	/**
 	// put GLUT init here
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA);
@@ -159,7 +165,7 @@ int main(int argc, char** argv){
 
 	// enter GLUT's main loop
 	glutMainLoop();
-	**/
+
 	return 0;
 }
 
