@@ -15,8 +15,8 @@ vector<Vertex*> createSphere(float radius, int slice, int stack){
 
 		float actualX = radius*sin(i*passoH);
 		float actualZ = radius*cos(i*passoH);
-		float nextX = radius*sin((i + 1)*passoH);
-		float nextZ = radius*cos((i + 1)*passoH);
+		float nextX = radius*sin((i+1)*passoH);
+		float nextZ = radius*cos((i+1)*passoH);
 
 		for (j = 1; j < stack + 2; j++){
 
@@ -41,9 +41,9 @@ vector<Vertex*> createSphere(float radius, int slice, int stack){
 			vertex_list.push_back(new Vertex(cimaNexX,alturaCima,cimaNexZ));
 
 			alturaCima = altura;
-			altura = radius * sin((M_PI / 2) - (passoV*j));
+			altura = radius * sin((M_PI/2) - (passoV*j));
 		}
-		altura = radius * sin((M_PI / 2) - passoV);
+		altura = radius * sin((M_PI/2) - passoV);
 		alturaCima = radius;
 
 		actualX = nextX;
