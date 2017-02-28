@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "Plane.h"
+#include "Box.h"
 #include "Vertex.h"
 
 using namespace std; 
@@ -21,14 +22,15 @@ void printFile(vector<Vertex*> v, string file_name){
 int main(int argc, char** argv){
 
 	vector<Vertex*> v;
-	
-	if(argc<2) return 0; // isto vai sair daqui...
 
-	if(!strcmp(argv[1],"plane")){
+	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]));
-		printFile(v,argv[3]);
-	}
+
+	else if(!strcmp(argv[1],"box") && argc == 6)
+		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]));
+	
 	else cout << "Invalid input." << endl; 
+	printFile(v,argv[argc-1]);
 
 	return 0;
 }
