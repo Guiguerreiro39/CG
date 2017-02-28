@@ -5,7 +5,6 @@ using namespace std;
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <math.h>
 #include "Vertex.h"
 #include <vector>
 using namespace std; 

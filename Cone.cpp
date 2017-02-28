@@ -1,6 +1,6 @@
 #include "Cone.h"
 
-vector<Vertex*> createSphere(float radius, float height, int slice, int stack){
+vector<Vertex*> createCone(float radius, float height, int slice, int stack){
 
 	vector<Vertex*> vertex_list;
 
