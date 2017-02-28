@@ -12,6 +12,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 
 	for(int i=0;i<div;i++){
 		for(int j=0;j<div;j++){
+			//Face da frente
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),-y + (i*shiftY),z));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),-y + (i*shiftY),z));
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),z));
@@ -20,6 +21,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),-y + (i*shiftY),z));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),(-y+shiftY) + (i*shiftY),z));
 
+			//Face traseira
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),-y + (i*shiftY),-z));
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),-y + (i*shiftY),-z));
@@ -28,6 +30,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),-y + (i*shiftY),-z));
 
+			//Face direita
 			vertex_list.push_back(new Vertex(x,-y + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Vertex(x,(-y+shiftY) + (i*shiftY),-z +(j*shiftZ)));
 			vertex_list.push_back(new Vertex(x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
@@ -36,6 +39,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 			vertex_list.push_back(new Vertex(x,(-y+shiftY) + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			vertex_list.push_back(new Vertex(x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			
+			//Face esquerda
 			vertex_list.push_back(new Vertex(-x,-y + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Vertex(-x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			vertex_list.push_back(new Vertex(-x,(-y+shiftY) + (i*shiftY),-z +(j*shiftZ)));
@@ -44,6 +48,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 			vertex_list.push_back(new Vertex(-x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			vertex_list.push_back(new Vertex(-x,(-y+shiftY) + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 
+			//Topo
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),y,-z + (i*shiftZ)));
@@ -52,6 +57,7 @@ vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),y,-z + (i*shiftZ)));
 			
+			//Base
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),-y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Vertex((-x+shiftX) + (j*shiftX),-y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Vertex(-x + (j*shiftX),-y,(-z+shiftZ) + (i*shiftZ)));
