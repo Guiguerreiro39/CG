@@ -110,14 +110,16 @@ void renderScene(void) {
 	glColor3f(0.33,0.33,0.33);
 
 	glBegin(GL_TRIANGLES);
-	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it)
-		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it){
-			x = ((*shape_it)->getVertexList())[i]->getX();
-			y = ((*shape_it)->getVertexList())[i]->getY();
-			z = ((*shape_it)->getVertexList())[i]->getZ();
+	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it){
+		vector<Vertex*> lista = (*shape_it)->getVertexList();
+		for(vector<Vertex*>::iterator vertex_it = lista.begin(); vertex_it != lista.end(); ++vertex_it){
+			x = (*vertex_it)->getX();
+			y = (*vertex_it)->getY();
+			z = (*vertex_it)->getZ();
 			glVertex3f(x,y,z);
 			i++;
 		}
+	}
 	glEnd();
 	
 	// End of frame
