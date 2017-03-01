@@ -79,7 +79,7 @@ void changeSize(int w, int h) {
 	glLoadIdentity();
 	
 	// Set the viewport to be the entire window
-    glViewport(0, 0, w, h);
+	glViewport(0, 0, w, h);
 
 	// Set perspective
 	gluPerspective(45.0f ,ratio, 1.0f ,1000.0f);
@@ -92,7 +92,8 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
-	int i = 0,x,y,z;
+	int i = 0;
+	float x,y,z;
 
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -146,13 +147,6 @@ int main(int argc, char** argv){
 			total_shapes++;
 		}
 	} 
-
-	/** int i = 0;
-	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it)
-		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it){
-			cout << ((*shape_it)->getVertexList())[i]->print() << endl; 
-			i++;
-		} **/
 
 	// put GLUT init here
 	glutInit(&argc, argv);
