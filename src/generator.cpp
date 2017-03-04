@@ -24,7 +24,32 @@ void printFile(vector<Vertex*> v, string file_name){
 }
 
 void printHelp(){
-	cout << " HELP MENU " << endl;
+	cout << "#_____________________________ HELP _____________________________#" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   Usage: ./generator {COMMAND} ... {FILE}                      |" << endl;
+	cout << "|                                            [--help]            |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   COMMANDS:                                                    |" << endl;
+	cout << "| - plane [SIZE]                                                 |" << endl;
+	cout << "|      Creates a square in the XZ plane, centred in the origin.  |" << endl; 
+	cout << "|                                                                |" << endl;
+	cout << "| - box [SIZE X] [SIZE Y] [SIZE Z] [DIVISIONS]                   |" << endl;
+	cout << "|      Creates a box with the dimensions and divisions specified.|" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - sphere [RADIUS] [SLICE] [STACK]                              |" << endl;
+	cout << "|      Creates a sphere with the radius, number of slices and    |" << endl;
+	cout << "|      stacks given.                                             |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - cone [RADIUS] [HEIGHT] [SLICE] [STACK]                       |" << endl;
+	cout << "|      Creates a cone with the radius, height, number of slices  |" << endl;
+	cout << "|      and stacks given.                                         |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|                                                                |" << endl;													        
+	cout << "|   FILE:                                                        |" << endl;														    
+	cout << "| In the file section you can specify any file in which you wish |" << endl;
+	cout << "| to save the coordinates generated with the previous commands.  |" << endl;
+	cout << "|                                                                |" << endl;															
+	cout << "#________________________________________________________________#" << endl;        
 }
 
 int main(int argc, char** argv){
