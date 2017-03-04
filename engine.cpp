@@ -18,6 +18,8 @@ using namespace tinyxml2;
 
 vector<Shape*> shapes_list;
 int total_shapes = 0;
+float angleX = 1.0, angleY = 1.0;
+int linha = GL_LINE;
 
 
 vector<Vertex*> readFile(string file_name){
@@ -106,11 +108,13 @@ void renderScene(void) {
 
 	// put drawing instructions here
 	glEnable(GL_CULL_FACE);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glPolygonMode(GL_FRONT_AND_BACK, linha);
 	
+	glRotatef(angleX,0,1,0);
+	glRotatef(angleY,0,0,1);
+
 	glColor3f(0.33,0.33,0.33);
 
-	printf("tam : %lu\n",shapes_list.size() );
 	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it){
 		vector<Vertex*> lista = (*shape_it)->getVertexList();
 		glBegin(GL_TRIANGLES);
@@ -127,6 +131,27 @@ void renderScene(void) {
 	// End of frame
 	glutSwapBuffers();
 } 
+
+void keyboard (unsigned char key, int x, int y){
+	
+	switch(key){
+		case 'a': angleX+=3.0;
+				  break;
+		case 'd': angleX-=3.0;
+				  break;
+		case 'w': angleY+=3.0;
+				  break;
+		case 's': angleY-=3.0;
+				  break;
+		case 'p': linha = GL_POINT;
+				  break;
+		case 'l': linha = GL_LINE; 
+				  break;
+		case 'o': linha = GL_FILL;
+				  break;
+	}
+	glutPostRedisplay();
+}
 
 int main(int argc, char** argv){
 
@@ -160,6 +185,8 @@ int main(int argc, char** argv){
 	glutDisplayFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
+	// put here the registration of the keyboard callbacks
+	glutKeyboardFunc(keyboard);
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
