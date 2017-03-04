@@ -1,0 +1,12 @@
+Usage: ./generator {COMMAND} ... {FILE}
+				   [--help]
+
+Commands:
+ plane [SIZE]  					     	     Creates a square in the XZ plane, centred in the origin
+ box [SIZE X] [SIZE Y] [SIZE Z] [DIVISIONS]  Creates a box with the dimensions and divisions specified  
+ sphere [RADIUS] [SLICE] [STACK]		 	 Creates a sphere with the radius, number of slices and stacks given
+ cone [RADIUS] [HEIGHT] [SLICE] [STACK] 	 Creates a cone with the radius, height, number of slices and stacks given
+
+File:
+ In the file section you can specify any file in which you wish to save the coordinates generated with the previous commands
+
