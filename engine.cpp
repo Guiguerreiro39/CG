@@ -79,7 +79,7 @@ void changeSize(int w, int h) {
 	glLoadIdentity();
 	
 	// Set the viewport to be the entire window
-    glViewport(0, 0, w, h);
+	glViewport(0, 0, w, h);
 
 	// Set perspective
 	gluPerspective(45.0f ,ratio, 1.0f ,1000.0f);
@@ -149,19 +149,12 @@ int main(int argc, char** argv){
 		}
 	} 
 
-	/** int i = 0;
-	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it)
-		for(vector<Vertex*>::iterator vertex_it = (*shape_it)->getVertexList().begin(); vertex_it != (*shape_it)->getVertexList().end(); ++vertex_it){
-			cout << ((*shape_it)->getVertexList())[i]->print() << endl; 
-			i++;
-		} **/
-
 	// put GLUT init here
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(800,800);
-	glutCreateWindow("33 GOD");
+	glutCreateWindow("CG_Trabalho");
 
 	// put callback registration here
 	glutDisplayFunc(renderScene);
