@@ -8,7 +8,7 @@ vector<Vertex*> createCone(float radius, float height, int slice, int stack){
 	float h = height;
 	float l = sqrt(pow(h,2) + pow(radius,2))/stack;
 	float t = radius/stack;
-	float dimSide = 2*M_PI/slice;
+	float dimSide = (2*M_PI)/slice;
 
 	for (int i = 0; i < stack; i++) {		
 		for (int j = 0; j < slice; j++) {
@@ -56,7 +56,7 @@ vector<Vertex*> createCone(float radius, float height, int slice, int stack){
 				vertex_list.push_back(new Vertex(x,i*l,z));
 
 				x = (radius - (i*t)) * sin(alfa + dimSide);
-				z = (radius - (i*t)) * cos(alfa + dimSide );
+				z = (radius - (i*t)) * cos(alfa + dimSide);
 				vertex_list.push_back(new Vertex(x,i*l,z));
 
 				vertex_list.push_back(new Vertex(0,(i+1)*l,0));

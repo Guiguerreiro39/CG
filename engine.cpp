@@ -92,7 +92,8 @@ void changeSize(int w, int h) {
 
 void renderScene(void) {
 
-	int i = 0,x,y,z;
+	int i = 0;
+	float x,y,z;
 
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -109,9 +110,10 @@ void renderScene(void) {
 	
 	glColor3f(0.33,0.33,0.33);
 
-	glBegin(GL_TRIANGLES);
+	printf("tam : %lu\n",shapes_list.size() );
 	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it){
 		vector<Vertex*> lista = (*shape_it)->getVertexList();
+		glBegin(GL_TRIANGLES);
 		for(vector<Vertex*>::iterator vertex_it = lista.begin(); vertex_it != lista.end(); ++vertex_it){
 			x = (*vertex_it)->getX();
 			y = (*vertex_it)->getY();
@@ -119,8 +121,9 @@ void renderScene(void) {
 			glVertex3f(x,y,z);
 			i++;
 		}
+		glEnd();
 	}
-	glEnd();
+	
 	// End of frame
 	glutSwapBuffers();
 } 
