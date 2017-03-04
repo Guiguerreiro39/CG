@@ -1,4 +1,4 @@
-#include "Sphere.h"
+#include "headers/Sphere.h"
 
 vector<Vertex*> createSphere(float radius, int slice, int stack){
 

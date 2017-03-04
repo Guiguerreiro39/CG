@@ -1,4 +1,4 @@
-#include "Box.h"
+#include "headers/Box.h"
 
 vector<Vertex*> createBox(float cX, float cY, float cZ, int div){
 

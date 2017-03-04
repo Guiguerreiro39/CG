@@ -9,8 +9,8 @@
 #include <math.h>
 #include <GL/glut.h>
 
-#include "Vertex.h"
-#include "Shape.h"
+#include "headers/Vertex.h"
+#include "headers/Shape.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -20,6 +20,10 @@ vector<Shape*> shapes_list;
 int total_shapes = 0;
 float angleX = 1.0, angleY = 1.0;
 int linha = GL_LINE;
+
+void printHelp(){
+	cout << "HELP MENU" << endl;
+}
 
 
 vector<Vertex*> readFile(string file_name){
@@ -50,17 +54,23 @@ vector<string> lookupFiles(char* file_name){
 	vector<string> file_list;
 	XMLDocument doc;
 	XMLElement* element;
+	XMLError error;
 	string file;
 
-	doc.LoadFile(file_name);
-	element = doc.FirstChildElement("scene")->FirstChildElement("model");
-	for(;element;element=element->NextSiblingElement()){
-		if(!strcmp(element->Name(),"model")){
-			file = element->Attribute("file");
-			file_list.push_back(file);
-			cout << file << endl;
+	error = doc.LoadFile(file_name);
+	if(error == 0){
+		element = doc.FirstChildElement("scene")->FirstChildElement("model");
+		for(;element;element=element->NextSiblingElement()){
+			if(!strcmp(element->Name(),"model")){
+				file = element->Attribute("file");
+				file_list.push_back(file);
+				cout << file << endl;
+			}
 		}
 	}
+	else
+		cout << "Could not load XML file: " << file_name << "." << endl;
+
 	return file_list;
 
 }
@@ -159,19 +169,26 @@ int main(int argc, char** argv){
 	string line;
 	int r;
 
-	if(argc != 2){
-		cout << "Invalid input." << endl;
+
+	if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help")){
+		printHelp();
+		return 0;
+	}
+	else if(argc != 2){
+		cout << "Invalid input. Use -h if you need some help." << endl;
 		return 0;
 	}
 	else{
 
 		file_list = lookupFiles(argv[1]);
-
-		for(vector<string>::const_iterator i = file_list.begin(); i != file_list.end(); ++i){
-			vector<Vertex*> aux = readFile(*i);
-			shapes_list.push_back(new Shape(total_shapes,aux));
-			total_shapes++;
+		if(file_list.size()){
+			for(vector<string>::const_iterator i = file_list.begin(); i != file_list.end(); ++i){
+				vector<Vertex*> aux = readFile(*i);
+				shapes_list.push_back(new Shape(total_shapes,aux));
+				total_shapes++;
+			}
 		}
+		else return 0;
 	} 
 
 	// put GLUT init here

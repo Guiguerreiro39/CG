@@ -1,0 +1,4 @@
+<scene>
+	<model file='./CG/files/test_sphere2.3d' />
+	<model file='./CG/files/test_plane.3d' />
+</scene> 

@@ -1,4 +1,4 @@
-#include "Cone.h"
+#include "headers/Cone.h"
 
 vector<Vertex*> createCone(float radius, float height, int slice, int stack){
 

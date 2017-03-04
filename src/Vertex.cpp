@@ -1,4 +1,4 @@
-#include "Vertex.h"
+#include "headers/Vertex.h"
 
 Vertex::Vertex(){
 	x = 0;
