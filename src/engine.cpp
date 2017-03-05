@@ -123,7 +123,7 @@ void renderScene(void) {
 	glRotatef(angleX,0,1,0);
 	glRotatef(angleY,0,0,1);
 
-	glColor3f(0.33,0.33,0.33);
+	glColor3f(255,255,255);
 
 	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it){
 		vector<Vertex*> lista = (*shape_it)->getVertexList();
