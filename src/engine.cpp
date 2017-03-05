@@ -22,9 +22,32 @@ float angleX = 1.0, angleY = 1.0;
 int linha = GL_LINE;
 
 void printHelp(){
-	cout << "HELP MENU" << endl;
+	cout << "#_____________________________ HELP _____________________________#" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| Usage: ./engine {XML FILE}                                     |" << endl;
+	cout << "|                 [-h]                                           |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   FILE:                                                        |" << endl;
+	cout << "| Specify a path to an XML file in which the information about   |" << endl;
+	cout << "| the models you wish to create are specified                    |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   MOVE:                                                        |" << endl;
+	cout << "| - a: Move the window to the right (X positive direction)       |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - d: Move the window to the left (X negative direction)        |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - w: Move the window up (Y positive direction)                 |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - s: Move the window down (Y negative direction)               |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   FORMAT:                                                      |" << endl;													        
+	cout << "| - p: Change the figure format into points                      |" << endl;														    
+	cout << "|                                                                |" << endl;
+	cout << "| - l: Change the figure format into lines                       |" << endl;
+	cout << "|                                                                |" << endl;	
+	cout << "| - o: Fill up the figure                                        |" << endl;														
+	cout << "#________________________________________________________________#" << endl;        
 }
-
 
 vector<Vertex*> readFile(string file_name){
 
