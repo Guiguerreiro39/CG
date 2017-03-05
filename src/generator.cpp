@@ -6,6 +6,7 @@
 #include "headers/Sphere.h"
 #include "headers/Cone.h"
 #include "headers/Vertex.h"
+#include "headers/Cylinder.h"
 
 using namespace std; 
 
@@ -42,6 +43,9 @@ int main(int argc, char** argv){
 
 	else if(!strcmp(argv[1],"cone") && argc == 7)
 		v = createCone(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]));
+
+	else if(!strcmp(argv[1],"cylinder") && argc == 7)
+		v = createCylinder(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]));
 
 	else if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help"))
 		printHelp();	
