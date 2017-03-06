@@ -25,8 +25,8 @@ void printFile(vector<Vertex*> v, string file_name){
 }
 
 void printHelp(){
-	cout << " _____________________________ HELP _____________________________ " << endl;
-	cout << "#                                                                #" << endl;
+	cout << "#_____________________________ HELP _____________________________# " << endl;
+	cout << "|                                                                |" << endl;
 	cout << "|   Usage: ./generator {COMMAND} ... {FILE}                      |" << endl;
 	cout << "|                      [-h]                                      |" << endl;
 	cout << "|                                                                |" << endl;
