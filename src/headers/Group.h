@@ -1,26 +1,43 @@
 #ifndef __GROUP_H__
 #define __GROUP_H__
+
+#include <iostream> // TENHO DE TIRAR ISTO DAQUI !!!!! NÃO HÁ IO NESTA CLASSE!!!!
 #include <string>
 #include <vector>
 #include "Shape.h"
+#include "Translation.h"
+#include "Rotation.h"
+#include "Scale.h"
+
 using namespace std;
 
 class Group{
 
-	string transformation;
-	vector<Shape*> group_shapes;
+	int id;
+	vector<string> group_shapes;
 	vector<Group*> group_childs;
+	Translation* translation;
+	Rotation* rotation;
+	Scale* scale;
 
 	public:
 		Group();
-		Group(string, vector<Shape*>, vector<Group*>);
-		string getTransformation();
-		vector<Shape*> getShapes();
+		Group(int);
+		Group(vector<string>, vector<Group*>, Translation*, Rotation*, Scale*);
+		int getID();
+		vector<string> getShapes();
 		vector<Group*> getChilds();
-		void setTransformation(string);
-		void setShapes(vector<Shape*>);
+		Translation* getTranslation();
+		Rotation* getRotation();
+		Scale* getScale();
+		void setShapes(vector<string>);
 		void setChilds(vector<Group*>);
-		virtual ~Group(void);
+		void setTranslation(Translation*);
+		void setRotation(Rotation*);
+		void setScale(Scale*);
+		void addChild(Group*);
+		void print(); // TIRAR ISTO DAQUI 
+		virtual ~Group();
 };
 
 #endif

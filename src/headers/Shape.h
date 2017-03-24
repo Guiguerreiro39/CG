@@ -16,7 +16,7 @@ class Shape{
 		Shape(int,vector<Vertex*>);
 		int getID();
 		vector<Vertex*> getVertexList();
-		virtual ~Shape(void);
+		virtual ~Shape();
 };
 
 #endif

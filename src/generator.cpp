@@ -1,12 +1,8 @@
 #include <string.h>
 #include <iostream>
 #include <fstream>
-#include "headers/Plane.h"
-#include "headers/Box.h"
-#include "headers/Sphere.h"
-#include "headers/Cone.h"
+#include "headers/Figures.h"
 #include "headers/Vertex.h"
-#include "headers/Cylinder.h"
 
 using namespace std; 
 
