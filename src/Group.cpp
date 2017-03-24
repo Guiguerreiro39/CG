@@ -63,7 +63,7 @@ void Group::addChild(Group* child){
 	group_childs.push_back(child);
 }
 
-/** void Group::print(){
+void Group::print(){
 	cout << "################# Grupo " << id << " #################" << endl;
 
 	if(translation){
@@ -94,7 +94,7 @@ void Group::addChild(Group* child){
 	cout << "#################################################" <<endl;
 
 
-} **/
+} 
 
 Group::~Group(){
 }

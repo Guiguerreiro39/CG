@@ -9,14 +9,9 @@
 using namespace std;
 using namespace tinyxml2;
 
+Group* hereditaryChild(Group* father, vector<Group*>* group_list){
 
-vector<Group*> group_list;
-int n_groups = 0;
-
-Group* hereditaryChild(Group* father){
-
-	Group* son = new Group(n_groups++);
-
+	Group* son = new Group(group_list->size());
 	father->addChild(son);
 
 	son->setTranslation(new Translation(0,0,0));
@@ -86,11 +81,16 @@ vector<string> exploreModels(XMLElement* element){
 	return models_list;
 }
 
-void exploreElement(XMLElement* element, Group* group){
+void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_list){
 
 	// NOTA: Cada grupo só pode ter um grupo MODELS e um
 	// grupo para cada transformação, tenho de verificar
 	// essa porra!!!!!!!!!!!!!
+
+	/**for(int i=0; i<group_list.size(); i++){
+		group_list[i]->print();
+	}
+	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl; **/
 
 	XMLElement* initial = element;
 
@@ -114,11 +114,11 @@ void exploreElement(XMLElement* element, Group* group){
 
 	// Percorrer os filhos
 	else if(!strcmp(element->Name(),"group")){	
-		Group* child_group = hereditaryChild(group);
-		group_list.push_back(child_group);
+		Group* child_group = hereditaryChild(group,group_list);
+		group_list->push_back(child_group);
 		element=element->FirstChildElement();
 		if(element){
-			exploreElement(element,child_group);		
+			exploreElement(element,child_group,group_list);		
 		}
 	}
 
@@ -126,34 +126,37 @@ void exploreElement(XMLElement* element, Group* group){
 	initial=initial->NextSiblingElement();
 	if(initial){
 		//Group* new_group = new Group(n_groups++);
-		exploreElement(initial,group);
+		exploreElement(initial,group,group_list);
 		//group_list.push_back(new_group);
 	} 
 }
 
-void parseXML(char* file_name){
+vector<Group*> parseXML(char* file_name){
 
 	XMLDocument doc;
 	XMLElement* element;
 	XMLError error;
+	vector<Group*> group_list;
 
-	Group* group = new Group(n_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
+	Group* group = new Group(group_list.size()); // Este é o grupo 0 -> corresponde à 'Scene'.
+	group_list.push_back(group);
 
 	error = doc.LoadFile(file_name);
 	if(error == 0){
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
-		exploreElement(element,group);
+		exploreElement(element,group,&group_list);
 	}
 	else
 		cout << "Could not load XML file: " << file_name << "." << endl;
 
-	group_list.push_back(group);
+
+	return group_list;
 
 }
 
 int main(int argc, char** argv){
 
-	parseXML(argv[1]);
+	vector<Group*> group_list = parseXML(argv[1]);
 
 	for(int i=0; i<group_list.size(); i++){
 		group_list[i]->print();
