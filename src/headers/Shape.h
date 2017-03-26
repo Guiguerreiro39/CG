@@ -8,13 +8,13 @@ using namespace std;
 
 class Shape{
 
-	int id;
+	string name;
 	vector<Vertex*> vertex_list;
 
 	public:
 		Shape();
-		Shape(int,vector<Vertex*>);
-		int getID();
+		Shape(string,vector<Vertex*>);
+		string getName();
 		vector<Vertex*> getVertexList();
 		virtual ~Shape();
 };

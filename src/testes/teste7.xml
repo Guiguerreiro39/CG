@@ -1,0 +1,110 @@
+<scene>
+	<group>
+		<translate X="3" />
+		<models>
+ 			<model file="planeta1.3d" />
+ 			<model file="planeta2.3d" />
+ 		</models>
+ 		<group>
+ 			<translate Y="1" />
+ 			<rotate angle="50" X="1" Y="0" Z="1" />
+ 			<models>
+ 				<model file="planeta3.3d" />
+ 			</models>
+ 			<group>
+				<translate Z="5" />
+				<rotate angle="50" X="1" Y="0" Z="1" />
+				<models>
+ 					<model file="planeta4.3d" />
+ 					<model file="planeta5.3d" />
+ 					<model file="planeta6.3d" />
+ 					<model file="planeta7.3d" />
+ 					<model file="planeta8.3d" />
+ 				</models>
+ 			</group>
+ 			<group>
+ 				<translate Z="2" />
+ 				<rotate angle="10" X="0" Y="3" Z="1" />
+ 				<models>
+ 					<model file="planeta9.3d" />
+ 				</models>
+ 			</group>
+ 		</group>
+	</group>
+	<group>
+		<rotate angle="3" X="1" />
+		<models>
+ 			<model file="planeta10.3d" />
+ 			<model file="planeta11.3d" />
+ 		</models>
+ 		<group>
+ 			<translate X="40" Y="2" Z="60" />
+ 			<rotate Y="0" Z="8" />
+ 			<models>
+ 				<model file="planeta12.3d" />
+ 			</models>
+ 		</group>
+	</group>
+	<group>
+		<translate Z="3" />
+		<rotate angle="50" />
+		<models>
+ 			<model file="planeta13.3d" />
+ 		</models>
+ 		<group>
+ 			<translate Y="1" />
+ 			<rotate angle="39" X="3" Y="2" />
+ 			<models>
+ 				<model file="planeta14.3d" />
+ 			</models>
+ 			<group>
+				<translate X="5" />
+				<models>
+ 					<model file="planeta15.3d" />
+ 					<model file="planeta16.3d" />
+ 				</models>
+ 			</group>
+ 			<group>
+ 				<translate X="1" />
+ 				<models>
+ 					<model file="planeta17.3d" />
+ 				</models>
+ 				<group>
+ 					<rotate Z="4" />
+ 					<models>
+ 						<model file="planeta18.3d" />
+ 					</models>
+ 				</group>
+ 			</group>
+ 			<group>
+ 				<translate X="4" />
+ 				<models>
+ 					<model file="planeta19.3d" />
+ 				</models>
+ 			</group>
+ 		</group>
+	</group>
+	<group>
+		<translate X="5" Y="4" />
+		<rotate angle="50" X="1" Y="0" Z="1" />
+		<models>
+ 			<model file="planeta20.3d" />
+ 			<model file="planeta21.3d" />
+ 			<model file="planeta22.3d" />
+ 			<model file="planeta23.3d" />
+ 			<model file="planeta24.3d" />
+ 			<model file="planeta25.3d" />
+ 		</models>
+ 		<group>
+ 			<translate Z="1" />
+ 			<models>
+ 				<model file="planeta26.3d" />
+ 				<model file="planeta27.3d" />
+ 				<model file="planeta28.3d" />
+ 				<model file="planeta29.3d" />
+ 				<model file="planeta30.3d" />
+ 				<model file="planeta31.3d" />
+ 			</models>
+ 		</group>
+	</group>
+</scene>

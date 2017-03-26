@@ -1,0 +1,86 @@
+<scene>
+	<group name="1">
+		<translate X="1" />
+		<models>
+			<model file="1"/>
+		</models>
+	</group>
+
+	<group name="2">
+		<models>
+			<model file="2"/>
+		</models>
+	</group>
+
+	<olalixo/>
+
+	<group name="3">
+		<translate Z="3" />
+		<models>
+			<model file="3"/>
+		</models>
+		<group name="4">
+			<models>
+				<model file="4"/>
+			</models>
+			<group name="5">
+				<translate X="5" />
+				<models>
+					<model file="5"/>
+				</models>
+			</group>
+		</group>
+	</group>
+	
+	<olamundo>
+		<group name="6">
+			<models>
+				<model file="6"/>
+			</models>
+		</group>
+	</olamundo>
+
+	<group name="9">
+		<scale X="1"/>
+		<group name="7">
+			<scale Y="2"/>
+			<models>
+				<model file="7"/>
+			</models>
+		</group>
+		<group name="8">
+			<scale Z="3"/>
+			<models>
+				<model file="8"/>
+			</models>
+		</group>
+		<models>
+			<model file="9"/>
+		</models>
+	</group>
+
+	<group name="10,11,12">
+		<translate X="10" />
+		<models>
+			<model file="10"/>
+			<model file="11"/>
+			<model file="12"/>
+		</models>
+		<group name="13">
+			<models>
+				<model file="13"/>
+			</models>
+		</group>
+		<group name="14">
+			<models>
+				<model file="14"/>
+			</models>
+		</group>
+		<group name="15">
+			<models>
+				<model file="15"/>
+			</models>
+		</group>
+	</group>
+
+</scene>

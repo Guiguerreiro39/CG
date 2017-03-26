@@ -3,13 +3,13 @@
 Shape::Shape(){
 }
 
-Shape::Shape(int i, vector<Vertex*> list){
-	id = i;
+Shape::Shape(string i, vector<Vertex*> list){
+	name = i;
 	vertex_list = list;
 }
 
-int Shape::getID(){
-	return id;
+string Shape::getName(){
+	return name;
 }
 
 vector<Vertex*> Shape::getVertexList(){

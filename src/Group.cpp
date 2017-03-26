@@ -7,7 +7,7 @@ Group::Group(int n){
 	id = n;
 }
 
-Group::Group(vector<string> shape_list, vector<Group*> group_list, Translation* t, Rotation* r, Scale* s){
+Group::Group(vector<Shape*> shape_list, vector<Group*> group_list, Translation* t, Rotation* r, Scale* s){
 	group_shapes = shape_list;
 	group_childs = group_list;
 	translation = t;
@@ -19,7 +19,7 @@ int Group::getID(){
 	return id;
 }
 
-vector<string> Group::getShapes(){
+vector<Shape*> Group::getShapes(){
 	return group_shapes;
 }
 
@@ -39,7 +39,7 @@ Scale* Group::getScale(){
 	return scale;
 }
 
-void Group::setShapes(vector<string> shape_list){
+void Group::setShapes(vector<Shape*> shape_list){
 	group_shapes = shape_list;
 }
 
@@ -80,8 +80,8 @@ void Group::print(){
 
 	cout << "Tamanho: " << group_shapes.size() << endl;
 	cout << "Models: ";
-	for(vector<string>::iterator it_lista = group_shapes.begin(); it_lista != group_shapes.end(); ++it_lista){
-			cout << *it_lista << "; ";
+	for(vector<Shape*>::iterator it_lista = group_shapes.begin(); it_lista != group_shapes.end(); ++it_lista){
+			cout << (*it_lista)->getName() << "; ";
 	}
 	cout << endl;
 

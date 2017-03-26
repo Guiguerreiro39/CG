@@ -9,15 +9,13 @@
 #include <math.h>
 #include <GL/glut.h>
 
-#include "headers/Vertex.h"
-#include "headers/Shape.h"
+#include "headers/Parser.h"
 
 using namespace std;
 using namespace tinyxml2;
 
+vector<Group*> group_list;
 
-vector<Shape*> shapes_list;
-int total_shapes = 0;
 float angleX = 1.0, angleY = 1.0;
 int linha = GL_LINE;
 
@@ -47,55 +45,6 @@ void printHelp(){
 	cout << "|                                                                |" << endl;	
 	cout << "| - o: Fill up the figure                                        |" << endl;														
 	cout << "#________________________________________________________________#" << endl;        
-}
-
-vector<Vertex*> readFile(string file_name){
-
-	vector<Vertex*> vertex_list;
-	vector<string> tokens;
-	string buf;
-	string line;
-	int index = 0;
-
-	ifstream file (file_name);
-	if(file.is_open()){
-		while(getline(file,line)){ // percorrer as linhas do ficheiro
-			stringstream ss(line); 
-			while(ss >> buf) 
-				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
-			vertex_list.push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
-			index+=3; // incrementar o índice
-		}
-		file.close();
-	}
-	else cout << "Unable to open file." << endl;
-	return vertex_list;
-}
-
-vector<string> lookupFiles(char* file_name){
-
-	vector<string> file_list;
-	XMLDocument doc;
-	XMLElement* element;
-	XMLError error;
-	string file;
-
-	error = doc.LoadFile(file_name);
-	if(error == 0){
-		element = doc.FirstChildElement("scene")->FirstChildElement("model");
-		for(;element;element=element->NextSiblingElement()){
-			if(!strcmp(element->Name(),"model")){
-				file = element->Attribute("file");
-				file_list.push_back(file);
-				cout << file << endl;
-			}
-		}
-	}
-	else
-		cout << "Could not load XML file: " << file_name << "." << endl;
-
-	return file_list;
-
 }
 
 void changeSize(int w, int h) {
@@ -148,17 +97,31 @@ void renderScene(void) {
 
 	glColor3f(255,255,255);
 
-	for (vector<Shape*>::iterator shape_it = shapes_list.begin(); shape_it != shapes_list.end(); ++shape_it){
-		vector<Vertex*> lista = (*shape_it)->getVertexList();
-		glBegin(GL_TRIANGLES);
-		for(vector<Vertex*>::iterator vertex_it = lista.begin(); vertex_it != lista.end(); ++vertex_it){
-			x = (*vertex_it)->getX();
-			y = (*vertex_it)->getY();
-			z = (*vertex_it)->getZ();
-			glVertex3f(x,y,z);
-			i++;
+	for(vector<Group*>::iterator group_it = group_list.begin(); group_it != group_list.end(); ++group_it){
+		glPushMatrix();
+		Translation* translation = (*group_it)->getTranslation();
+		Rotation* rotation = (*group_it)->getRotation();
+		if(translation)
+			glTranslatef(translation->getX(),translation->getY(),translation->getZ());
+		if(rotation)
+			glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
+
+		for(vector<Shape*>::iterator shape_it = (*group_it)->getShapes().begin(); shape_it != (*group_it)->getShapes().end(); ++shape_it){
+			glBegin(GL_TRIANGLES);
+			Shape* shape = (*shape_it);
+			cout << shape->getName() << endl;
+			for(vector<Vertex*>::const_iterator vertex_it = shape->getVertexList().begin(); vertex_it != shape->getVertexList().end(); ++vertex_it){					
+				cout << "passei aqui 3" << endl;
+				x = (*vertex_it)->getX();
+				y = (*vertex_it)->getY();
+				z = (*vertex_it)->getZ();
+				glVertex3f(x,y,z);
+				cout << "fim" << endl;
+			}
+
+			glEnd();
 		}
-		glEnd();
+		glPopMatrix();
 	}
 	
 	// End of frame
@@ -203,15 +166,46 @@ int main(int argc, char** argv){
 	}
 	else{
 
-		file_list = lookupFiles(argv[1]);
-		if(file_list.size()){
-			for(vector<string>::const_iterator i = file_list.begin(); i != file_list.end(); ++i){
-				vector<Vertex*> aux = readFile(*i);
-				shapes_list.push_back(new Shape(total_shapes,aux));
-				total_shapes++;
+		group_list = parseXML(argv[1]);
+		group_list.erase(group_list.begin());
+
+		for(vector<Group*>::iterator group_it = group_list.begin(); group_it != group_list.end(); ++group_it){
+
+			cout << "################# Grupo " << (*group_it)->getID() << " #################" << endl;
+
+			if((*group_it)->getTranslation()){
+				Translation* translation=(*group_it)->getTranslation();
+				cout << "Translation: " << translation->getX() << " | " << translation->getY() << " | " << translation->getZ()  << endl;
 			}
-		}
-		else return 0;
+
+			if((*group_it)->getRotation()){
+				Rotation* rotation=(*group_it)->getRotation();
+				cout << "Rotation: " << rotation->getAngle() << " | " << rotation->getX() << " | " << rotation->getY() << " | " << rotation->getZ()  << endl;
+			}
+			
+			if((*group_it)->getScale()){
+				Scale* scale=(*group_it)->getScale();
+				cout << "Scale: " << scale->getX() << " | " << scale->getY() << " | " << scale->getZ()  << endl;
+			}
+
+			cout << "Tamanho: " << (*group_it)->getShapes().size() << endl;
+			cout << "Models: ";
+			for(vector<Shape*>::iterator it_lista = (*group_it)->getShapes().begin(); it_lista != (*group_it)->getShapes().end(); ++it_lista){
+					cout << (*it_lista)->getName() << "; ";
+			}
+			cout << endl;
+
+			cout << "Childs: ";
+			for(vector<Group*>::iterator it = (*group_it)->getChilds().begin(); it != (*group_it)->getChilds().end(); ++it){
+				cout << (*it)->getID() << "; ";
+			}
+			cout << endl;
+
+			cout << "#################################################" <<endl;
+		}	
+
+		//return 1;
+
 	} 
 
 	// put GLUT init here

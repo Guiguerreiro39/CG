@@ -14,7 +14,7 @@ using namespace std;
 class Group{
 
 	int id;
-	vector<string> group_shapes;
+	vector<Shape*> group_shapes;
 	vector<Group*> group_childs;
 	Translation* translation;
 	Rotation* rotation;
@@ -23,14 +23,14 @@ class Group{
 	public:
 		Group();
 		Group(int);
-		Group(vector<string>, vector<Group*>, Translation*, Rotation*, Scale*);
+		Group(vector<Shape*>, vector<Group*>, Translation*, Rotation*, Scale*);
 		int getID();
-		vector<string> getShapes();
+		vector<Shape*> getShapes();
 		vector<Group*> getChilds();
 		Translation* getTranslation();
 		Rotation* getRotation();
 		Scale* getScale();
-		void setShapes(vector<string>);
+		void setShapes(vector<Shape*>);
 		void setChilds(vector<Group*>);
 		void setTranslation(Translation*);
 		void setRotation(Rotation*);

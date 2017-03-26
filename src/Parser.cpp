@@ -1,13 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <sstream>
-#include "headers/tinyxml2.h"
-#include "headers/Group.h"
-
-using namespace std;
-using namespace tinyxml2;
+#include "headers/Parser.h"
 
 Group* hereditaryChild(Group* father, vector<Group*>* group_list){
 
@@ -69,14 +60,22 @@ void updateScale(XMLElement* element, Group* group){
 		scale->setZ(stof(element->Attribute("Z")));
 }
 
-vector<string> exploreModels(XMLElement* element){
+vector<Shape*> exploreModels(XMLElement* element){
 
-	vector<string> models_list;
+	vector<Shape*> models_list;
+	string file_model;
 
 	element = element->FirstChildElement();
 	for(;element;element=element->NextSiblingElement())
-		if(!strcmp(element->Name(),"model"))
-			models_list.push_back(element->Attribute("file"));
+		if(!strcmp(element->Name(),"model")){
+			vector<Vertex*> vertex_list = readFile(element->Attribute("file"));
+			if(vertex_list.size()){
+				Shape* shape = new Shape(element->Attribute("file"),vertex_list);
+				models_list.push_back(shape);
+			}
+			else return models_list;
+			
+		}
 		
 	return models_list;
 }
@@ -86,11 +85,6 @@ void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_lis
 	// NOTA: Cada grupo só pode ter um grupo MODELS e um
 	// grupo para cada transformação, tenho de verificar
 	// essa porra!!!!!!!!!!!!!
-
-	/**for(int i=0; i<group_list.size(); i++){
-		group_list[i]->print();
-	}
-	cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl; **/
 
 	XMLElement* initial = element;
 
@@ -108,8 +102,9 @@ void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_lis
 	}
 
 	else if(!strcmp(element->Name(),"models")){
-		vector<string> models_list = exploreModels(element);
-		group->setShapes(models_list);
+		vector<Shape*> models_list = exploreModels(element);
+		if(models_list.size())
+			group->setShapes(models_list);
 	}
 
 	// Percorrer os filhos
@@ -120,6 +115,7 @@ void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_lis
 		if(element){
 			exploreElement(element,child_group,group_list);		
 		}
+
 	}
 
 	// Percorrer os irmãos
@@ -129,6 +125,29 @@ void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_lis
 		exploreElement(initial,group,group_list);
 		//group_list.push_back(new_group);
 	} 
+}
+
+vector<Vertex*> readFile(string file_name){
+
+	vector<Vertex*> vertex_list;
+	vector<string> tokens;
+	string buf;
+	string line;
+	int index = 0;
+
+	ifstream file (file_name);
+	if(file.is_open()){
+		while(getline(file,line)){ // percorrer as linhas do ficheiro
+			stringstream ss(line); 
+			while(ss >> buf) 
+				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+			vertex_list.push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			index+=3; // incrementar o índice
+		}
+		file.close();
+	}
+	else cout << "Unable to open file." << endl;
+	return vertex_list;
 }
 
 vector<Group*> parseXML(char* file_name){
@@ -152,15 +171,4 @@ vector<Group*> parseXML(char* file_name){
 
 	return group_list;
 
-}
-
-int main(int argc, char** argv){
-
-	vector<Group*> group_list = parseXML(argv[1]);
-
-	for(int i=0; i<group_list.size(); i++){
-		group_list[i]->print();
-	}
-
-	return 0;
 }

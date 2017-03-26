@@ -1,0 +1,46 @@
+<scene>
+	<group>
+		<translate Z="5" />
+		<rotate angle="15" X="4" Y="2" Z="8" />
+		<models>
+ 			<model file="sphere1.3d" />
+ 		</models>
+ 		<group>
+ 			<translate X="0" Y="3" />
+ 			<models>
+ 				<model file="cone.3d" />
+ 			</models>
+ 		</group>
+	</group>
+	<group>
+		<translate Y="4" />
+		<rotate X="1" Y="0" Z="1" />
+		<models>
+ 			<model file="planeta.3d" />
+ 			<model file="planeta2.3d" />
+ 		</models>
+ 		<group>
+ 			<translate Z="5" />
+ 			<rotate angle="12" />
+ 			<models>
+ 				<model file="planeta3.3d" />
+ 			</models>
+ 		</group>
+	</group>
+	<group>
+		<translate X="5" />
+		<rotate Y="2" />
+		<models>
+ 			<model file="planeta4.3d" />
+ 			<model file="planeta5.3d" />
+ 		</models>
+ 		<group>
+ 			<translate Y="1" Z="5" />
+ 			<rotate angle="15" X="1" Y="33" Z="2" />
+ 			<scale X="1" Y="2" Z="3" />
+ 			<models>
+ 				<model file="planeta6.3d" />
+ 			</models>
+ 		</group>
+	</group>
+</scene>
