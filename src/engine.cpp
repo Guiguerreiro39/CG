@@ -106,11 +106,18 @@ void renderScene(void) {
 		if(rotation)
 			glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
 
-		for(vector<Shape*>::iterator shape_it = (*group_it)->getShapes().begin(); shape_it != (*group_it)->getShapes().end(); ++shape_it){
+		//adicionei isto
+		vector<Shape*> aux = (*group_it)->getShapes();
+
+		for(vector<Shape*>::iterator shape_it = aux.begin(); shape_it != aux.end(); ++shape_it){
 			glBegin(GL_TRIANGLES);
 			Shape* shape = (*shape_it);
 			cout << shape->getName() << endl;
-			for(vector<Vertex*>::const_iterator vertex_it = shape->getVertexList().begin(); vertex_it != shape->getVertexList().end(); ++vertex_it){					
+
+			//adicionei isto
+			vector<Vertex*> aux2 = shape->getVertexList();
+
+			for(vector<Vertex*>::const_iterator vertex_it = aux2.begin(); vertex_it != aux2.end(); ++vertex_it){					
 				cout << "passei aqui 3" << endl;
 				x = (*vertex_it)->getX();
 				y = (*vertex_it)->getY();
