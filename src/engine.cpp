@@ -83,7 +83,6 @@ void renderGroup(Group* group){
 	if(translation)
 		glTranslatef(translation->getX(),translation->getY(),translation->getZ());
 	
-
 	Rotation* rotation=group->getRotation();
 	if(rotation)
 		glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
@@ -94,28 +93,22 @@ void renderGroup(Group* group){
 
 	Colour* colour=group->getColour();
 	if(colour)
-		glColor3f(colour->getR(),colour->getG(),colour->getB());
+		glColor3f(colour->getR()/255,colour->getG()/255,colour->getB()/255);
 
 	vector<Shape*> shape_list = group->getShapes();
-
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
-
 		glBegin(GL_TRIANGLES);
-
 		Shape* shape = (*shape_it);
 
 		vector<Vertex*> vertex_list = shape->getVertexList();
-
 		for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
 			x = (*vertex_it)->getX();
 			y = (*vertex_it)->getY();
 			z = (*vertex_it)->getZ();
 			glVertex3f(x,y,z);
 		}
-
 		glEnd();
 	}
-
 	glColor3f(255,255,255);
 
 	vector<Group*>  childs = group->getChilds();
@@ -153,39 +146,6 @@ void renderScene(void) {
 
 	renderGroup(scene);
 
-	/**for(vector<Group*>::iterator group_it = group_list.begin(); group_it != group_list.end(); ++group_it){
-		glPushMatrix();
-		Translation* translation = (*group_it)->getTranslation();
-		Rotation* rotation = (*group_it)->getRotation();
-		Scale* scale = (*group_it)->getScale();
-
-		if(translation)
-			glTranslatef(translation->getX(),translation->getY(),translation->getZ());
-		if(rotation)
-			glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
-		if(scale)
-			glScalef(scale->getX(),scale->getY(),scale->getZ());
-
-		vector<Shape*> shape_list = (*group_it)->getShapes();
-
-		for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
-			glBegin(GL_TRIANGLES);
-			Shape* shape = (*shape_it);
-			
-			vector<Vertex*> vertex_list = shape->getVertexList();
-
-			for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
-				x = (*vertex_it)->getX();
-				y = (*vertex_it)->getY();
-				z = (*vertex_it)->getZ();
-				glVertex3f(x,y,z);
-			}
-
-			glEnd();
-		}
-		glPopMatrix();
-	} **/
-	
 	// End of frame
 	glutSwapBuffers();
 } 
