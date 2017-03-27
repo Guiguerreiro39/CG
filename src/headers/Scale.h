@@ -16,7 +16,7 @@ class Scale{
 		void setX(float);
 		void setY(float);
 		void setZ(float);
-		Scale* clone();
+		Scale* clone() const;
 		virtual ~Scale();
 };
 

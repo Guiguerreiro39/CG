@@ -17,7 +17,7 @@ class Rotation{
 		void setX(float);
 		void setY(float);
 		void setZ(float);
-		Rotation* clone();
+		Rotation* clone() const;
 		virtual ~Rotation();
 };
 

@@ -1,23 +1,15 @@
 #include "headers/Parser.h"
 
-Group* hereditaryChild(Group* father, vector<Group*>* group_list){
+int total_groups = 0;
 
-	Group* son = new Group(group_list->size());
+Group* hereditaryChild(Group* father){
+
+	Group* son = new Group(total_groups++);
 	father->addChild(son);
 
 	son->setTranslation(new Translation(0,0,0));
 	son->setRotation(new Rotation(0,0,0,0));
 	son->setScale(new Scale(1,1,1));
-
-	if(father->getTranslation())
-		son->setTranslation(father->getTranslation()->clone());
-	
-	if(father->getRotation())
-		son->setRotation(father->getRotation()->clone());
-
-	if(father->getScale())
-		son->setScale(father->getScale()->clone());
-
 	return son;
 }
 
@@ -80,7 +72,7 @@ vector<Shape*> exploreModels(XMLElement* element){
 	return models_list;
 }
 
-void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_list){
+void exploreElement(XMLElement* element, Group* group){
 
 	// NOTA: Cada grupo só pode ter um grupo MODELS e um
 	// grupo para cada transformação, tenho de verificar
@@ -109,11 +101,10 @@ void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_lis
 
 	// Percorrer os filhos
 	else if(!strcmp(element->Name(),"group")){	
-		Group* child_group = hereditaryChild(group,group_list);
-		group_list->push_back(child_group);
+		Group* child_group = hereditaryChild(group);
 		element=element->FirstChildElement();
 		if(element){
-			exploreElement(element,child_group,group_list);		
+			exploreElement(element,child_group);		
 		}
 
 	}
@@ -121,9 +112,7 @@ void exploreElement(XMLElement* element, Group* group, vector<Group*>* group_lis
 	// Percorrer os irmãos
 	initial=initial->NextSiblingElement();
 	if(initial){
-		//Group* new_group = new Group(n_groups++);
-		exploreElement(initial,group,group_list);
-		//group_list.push_back(new_group);
+		exploreElement(initial,group);
 	} 
 }
 
@@ -150,25 +139,26 @@ vector<Vertex*> readFile(string file_name){
 	return vertex_list;
 }
 
-vector<Group*> parseXML(char* file_name){
+Group* parseXML(char* file_name){
 
 	XMLDocument doc;
 	XMLElement* element;
 	XMLError error;
-	vector<Group*> group_list;
 
-	Group* group = new Group(group_list.size()); // Este é o grupo 0 -> corresponde à 'Scene'.
-	group_list.push_back(group);
+	Group* group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
+	group->setTranslation(new Translation(0,0,0));
+	group->setRotation(new Rotation(0,0,0,0));
+	group->setScale(new Scale(1,1,1));
 
 	error = doc.LoadFile(file_name);
 	if(error == 0){
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
-		exploreElement(element,group,&group_list);
+		exploreElement(element,group);
 	}
 	else
 		cout << "Could not load XML file: " << file_name << "." << endl;
 
 
-	return group_list;
+	return group;
 
 }

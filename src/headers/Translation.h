@@ -16,7 +16,7 @@ class Translation{
 		void setX(float);
 		void setY(float);
 		void setZ(float);
-		Translation* clone();
+		Translation* clone() const;
 		virtual ~Translation();
 };
 

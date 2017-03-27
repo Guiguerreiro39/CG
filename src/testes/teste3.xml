@@ -19,4 +19,24 @@
  			</group>
  		</group>
 	</group>
+	<group>
+		<translate X="30" />
+		<models>
+ 			<model file="./CG/src/testes/esfera.3d" />
+ 		</models>
+ 		<group>
+ 			<translate Y="10" />
+ 			<models>
+ 				<model file="./CG/src/testes/esfera.3d" />
+ 			</models>
+ 			<group>
+ 				<translate Z="30" />
+ 				<rotate angle="500" X="10" Y="0" Z="10" />
+ 				<scale X="20" Y="0.5" />
+ 				<models>
+ 					<model file="./CG/src/testes/esfera.3d" />
+ 				</models>
+ 			</group>
+ 		</group>
+	</group>
 </scene>

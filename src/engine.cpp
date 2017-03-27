@@ -14,7 +14,7 @@
 using namespace std;
 using namespace tinyxml2;
 
-vector<Group*> group_list;
+Group* scene;
 
 float angleX = 1.0, angleY = 1.0;
 int linha = GL_LINE;
@@ -47,6 +47,7 @@ void printHelp(){
 	cout << "#________________________________________________________________#" << endl;        
 }
 
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -70,6 +71,53 @@ void changeSize(int w, int h) {
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
+} 
+
+void renderGroup(Group* group){
+
+	float x,y,z;
+
+	glPushMatrix();
+
+	Translation* translation=group->getTranslation();
+	if(translation)
+		glTranslatef(translation->getX(),translation->getY(),translation->getZ());
+	
+
+	Rotation* rotation=group->getRotation();
+	if(rotation)
+		glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
+
+	Scale* scale=group->getScale();
+	if(scale)
+		glScalef(scale->getX(),scale->getY(),scale->getZ());
+
+	vector<Shape*> shape_list = group->getShapes();
+
+	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
+
+		glBegin(GL_TRIANGLES);
+
+		Shape* shape = (*shape_it);
+
+		vector<Vertex*> vertex_list = shape->getVertexList();
+
+		for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
+			x = (*vertex_it)->getX();
+			y = (*vertex_it)->getY();
+			z = (*vertex_it)->getZ();
+			glVertex3f(x,y,z);
+		}
+
+		glEnd();
+	}
+
+	vector<Group*>  childs = group->getChilds();
+	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
+		renderGroup(*group_it);
+
+	glPopMatrix();
+
 }
 
 
@@ -97,7 +145,9 @@ void renderScene(void) {
 
 	glColor3f(255,255,255);
 
-	for(vector<Group*>::iterator group_it = group_list.begin(); group_it != group_list.end(); ++group_it){
+	renderGroup(scene);
+
+	/**for(vector<Group*>::iterator group_it = group_list.begin(); group_it != group_list.end(); ++group_it){
 		glPushMatrix();
 		Translation* translation = (*group_it)->getTranslation();
 		Rotation* rotation = (*group_it)->getRotation();
@@ -128,7 +178,7 @@ void renderScene(void) {
 			glEnd();
 		}
 		glPopMatrix();
-	}
+	} **/
 	
 	// End of frame
 	glutSwapBuffers();
@@ -153,7 +203,8 @@ void keyboard (unsigned char key, int x, int y){
 				  break;
 	}
 	glutPostRedisplay();
-}
+} 
+
 
 int main(int argc, char** argv){
 
@@ -172,43 +223,10 @@ int main(int argc, char** argv){
 	}
 	else{
 
-		group_list = parseXML(argv[1]);
-		group_list.erase(group_list.begin());
+		scene = parseXML(argv[1]);
+		//renderGroup(group_list[0]);
+		// group_list.erase(group_list.begin());
 
-		for(vector<Group*>::iterator group_it = group_list.begin(); group_it != group_list.end(); ++group_it){
-
-			cout << "################# Grupo " << (*group_it)->getID() << " #################" << endl;
-
-			if((*group_it)->getTranslation()){
-				Translation* translation=(*group_it)->getTranslation();
-				cout << "Translation: " << translation->getX() << " | " << translation->getY() << " | " << translation->getZ()  << endl;
-			}
-
-			if((*group_it)->getRotation()){
-				Rotation* rotation=(*group_it)->getRotation();
-				cout << "Rotation: " << rotation->getAngle() << " | " << rotation->getX() << " | " << rotation->getY() << " | " << rotation->getZ()  << endl;
-			}
-			
-			if((*group_it)->getScale()){
-				Scale* scale=(*group_it)->getScale();
-				cout << "Scale: " << scale->getX() << " | " << scale->getY() << " | " << scale->getZ()  << endl;
-			}
-
-			cout << "Tamanho: " << (*group_it)->getShapes().size() << endl;
-			cout << "Models: ";
-			for(vector<Shape*>::iterator it_lista = (*group_it)->getShapes().begin(); it_lista != (*group_it)->getShapes().end(); ++it_lista){
-					cout << (*it_lista)->getName() << "; ";
-			}
-			cout << endl;
-
-			cout << "Childs: ";
-			for(vector<Group*>::iterator it = (*group_it)->getChilds().begin(); it != (*group_it)->getChilds().end(); ++it){
-				cout << (*it)->getID() << "; ";
-			}
-			cout << endl;
-
-			cout << "#################################################" <<endl;
-		}	
 
 		//return 1;
 
@@ -232,8 +250,10 @@ int main(int argc, char** argv){
 	glEnable(GL_CULL_FACE);
 
 	// enter GLUT's main loop
-	glutMainLoop();
+	glutMainLoop(); 
 
 	return 0;
 }
+
+
 

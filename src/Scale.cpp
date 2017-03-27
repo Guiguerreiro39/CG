@@ -33,7 +33,7 @@ void Scale::setZ(float c){
 	z = c;
 }
 
-Scale* Scale::clone(){
+Scale* Scale::clone() const{
 	return new Scale(x,y,z);
 }
 

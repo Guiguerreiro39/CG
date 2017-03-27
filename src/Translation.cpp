@@ -33,7 +33,7 @@ void Translation::setZ(float c){
 	z = c;
 }
 
-Translation* Translation::clone(){
+Translation* Translation::clone() const{
 	return new Translation(x,y,z);
 }
 

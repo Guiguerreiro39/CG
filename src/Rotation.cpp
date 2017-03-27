@@ -42,7 +42,7 @@ void Rotation::setZ(float c){
 	z = c;
 }
 
-Rotation* Rotation::clone(){
+Rotation* Rotation::clone() const{
 	return new Rotation(angle,x,y,z);
 }
 

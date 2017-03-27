@@ -17,10 +17,11 @@ using namespace tinyxml2;
 void updateTranslation(XMLElement*, Group*);
 void updateRotation(XMLElement*, Group* );
 void updateScale(XMLElement*, Group* );
-void exploreElement(XMLElement*, Group* , vector<Group*>*);
-Group* hereditaryChild(Group*, vector<Group*>*);
+void exploreElement(XMLElement*, Group*);
 vector<Shape*> exploreModels(XMLElement* );
-vector<Group*> parseXML(char*);
 vector<Vertex*> readFile(string);
+Group* hereditaryChild(Group*);
+Group* parseXML(char*);
+
 
 #endif
