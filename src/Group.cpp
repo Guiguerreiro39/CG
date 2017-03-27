@@ -7,12 +7,13 @@ Group::Group(int n){
 	id = n;
 }
 
-Group::Group(vector<Shape*> shape_list, vector<Group*> group_list, Translation* t, Rotation* r, Scale* s){
+Group::Group(vector<Shape*> shape_list, vector<Group*> group_list, Translation* t, Rotation* r, Scale* s, Colour* c){
 	group_shapes = shape_list;
 	group_childs = group_list;
 	translation = t;
 	rotation = r;
 	scale = s;
+	colour = c;
 }
 
 int Group::getID(){
@@ -39,6 +40,10 @@ Scale* Group::getScale(){
 	return scale;
 }
 
+Colour* Group::getColour(){
+	return colour;
+}
+
 void Group::setShapes(vector<Shape*> shape_list){
 	group_shapes = shape_list;
 }
@@ -57,6 +62,10 @@ void Group::setRotation(Rotation* r){
 
 void Group::setScale(Scale* s){
 	scale = s;
+}
+
+void Group::setColour(Colour* c){
+	colour = c;
 }
 
 void Group::addChild(Group* child){

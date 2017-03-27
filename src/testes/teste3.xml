@@ -1,11 +1,13 @@
 <scene>
 	<group>
 		<translate X="3" />
+		<colour R="50" G="50" B="50" />
 		<models>
  			<model file="./CG/src/testes/esfera.3d" />
  		</models>
  		<group>
  			<translate Y="1" />
+ 			<colour R="50" G="150" B="250" />
  			<models>
  				<model file="./CG/src/testes/esfera.3d" />
  			</models>
@@ -13,6 +15,7 @@
  				<translate Z="3" />
  				<rotate angle="50" X="1" Y="0" Z="1" />
  				<scale X="2" Y="0.5" />
+ 				<colour R="250" G="50" B="0" />
  				<models>
  					<model file="./CG/src/testes/esfera.3d" />
  				</models>
@@ -21,11 +24,13 @@
 	</group>
 	<group>
 		<translate X="30" />
+		<colour R="02" G="100" B="50" />
 		<models>
  			<model file="./CG/src/testes/esfera.3d" />
  		</models>
  		<group>
  			<translate Y="10" />
+ 			<colour R="85" G="0" B="85" />
  			<models>
  				<model file="./CG/src/testes/esfera.3d" />
  			</models>

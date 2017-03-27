@@ -10,9 +10,10 @@ Group* hereditaryChild(Group* father){
 	son->setTranslation(new Translation(0,0,0));
 	son->setRotation(new Rotation(0,0,0,0));
 	son->setScale(new Scale(1,1,1));
+	son->setColour(new Colour(255,255,255));
+
 	return son;
 }
-
 
 void updateTranslation(XMLElement* element, Group* group){
 
@@ -52,6 +53,18 @@ void updateScale(XMLElement* element, Group* group){
 		scale->setZ(stof(element->Attribute("Z")));
 }
 
+void updateColour(XMLElement* element, Group* group){
+
+	Colour* colour = group->getColour();
+
+	if(element->Attribute("R")) 
+		colour->setR(stof(element->Attribute("R")));
+	if(element->Attribute("G")) 
+		colour->setG(stof(element->Attribute("G")));
+	if(element->Attribute("B")) 
+		colour->setB(stof(element->Attribute("B")));
+}
+
 vector<Shape*> exploreModels(XMLElement* element){
 
 	vector<Shape*> models_list;
@@ -81,17 +94,17 @@ void exploreElement(XMLElement* element, Group* group){
 	XMLElement* initial = element;
 
 
-	if(!strcmp(element->Name(),"translate")){
+	if(!strcmp(element->Name(),"translate"))
 		updateTranslation(element,group);
-	}
-
-	else if(!strcmp(element->Name(),"rotate")){
+	
+	else if(!strcmp(element->Name(),"rotate"))
 		updateRotation(element,group);
-	}
 
-	else if(!strcmp(element->Name(),"scale")){
+	else if(!strcmp(element->Name(),"scale"))
 		updateScale(element,group);
-	}
+
+	else if(!strcmp(element->Name(),"colour"))
+		updateColour(element,group);
 
 	else if(!strcmp(element->Name(),"models")){
 		vector<Shape*> models_list = exploreModels(element);
@@ -111,9 +124,8 @@ void exploreElement(XMLElement* element, Group* group){
 
 	// Percorrer os irmãos
 	initial=initial->NextSiblingElement();
-	if(initial){
+	if(initial)
 		exploreElement(initial,group);
-	} 
 }
 
 vector<Vertex*> readFile(string file_name){

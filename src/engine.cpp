@@ -92,6 +92,10 @@ void renderGroup(Group* group){
 	if(scale)
 		glScalef(scale->getX(),scale->getY(),scale->getZ());
 
+	Colour* colour=group->getColour();
+	if(colour)
+		glColor3f(colour->getR(),colour->getG(),colour->getB());
+
 	vector<Shape*> shape_list = group->getShapes();
 
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
@@ -221,16 +225,9 @@ int main(int argc, char** argv){
 		cout << "Invalid input. Use -h if you need some help." << endl;
 		return 0;
 	}
-	else{
-
+	else
 		scene = parseXML(argv[1]);
-		//renderGroup(group_list[0]);
-		// group_list.erase(group_list.begin());
-
-
-		//return 1;
-
-	} 
+ 
 
 	// put GLUT init here
 	glutInit(&argc, argv);
