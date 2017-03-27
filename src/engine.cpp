@@ -101,29 +101,28 @@ void renderScene(void) {
 		glPushMatrix();
 		Translation* translation = (*group_it)->getTranslation();
 		Rotation* rotation = (*group_it)->getRotation();
+		Scale* scale = (*group_it)->getScale();
+
 		if(translation)
 			glTranslatef(translation->getX(),translation->getY(),translation->getZ());
 		if(rotation)
 			glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
+		if(scale)
+			glScalef(scale->getX(),scale->getY(),scale->getZ());
 
-		//adicionei isto
-		vector<Shape*> aux = (*group_it)->getShapes();
+		vector<Shape*> shape_list = (*group_it)->getShapes();
 
-		for(vector<Shape*>::iterator shape_it = aux.begin(); shape_it != aux.end(); ++shape_it){
+		for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
 			glBegin(GL_TRIANGLES);
 			Shape* shape = (*shape_it);
-			cout << shape->getName() << endl;
+			
+			vector<Vertex*> vertex_list = shape->getVertexList();
 
-			//adicionei isto
-			vector<Vertex*> aux2 = shape->getVertexList();
-
-			for(vector<Vertex*>::const_iterator vertex_it = aux2.begin(); vertex_it != aux2.end(); ++vertex_it){					
-				cout << "passei aqui 3" << endl;
+			for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
 				x = (*vertex_it)->getX();
 				y = (*vertex_it)->getY();
 				z = (*vertex_it)->getZ();
 				glVertex3f(x,y,z);
-				cout << "fim" << endl;
 			}
 
 			glEnd();

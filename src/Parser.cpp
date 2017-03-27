@@ -7,7 +7,7 @@ Group* hereditaryChild(Group* father, vector<Group*>* group_list){
 
 	son->setTranslation(new Translation(0,0,0));
 	son->setRotation(new Rotation(0,0,0,0));
-	son->setScale(new Scale(0,0,0));
+	son->setScale(new Scale(1,1,1));
 
 	if(father->getTranslation())
 		son->setTranslation(father->getTranslation()->clone());

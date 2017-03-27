@@ -1,11 +1,7 @@
 <scene>
 	<group>
- 		<translate X="40" Y="2" Z="60" />
- 		<rotate angle="78" X="0" Y="1" Z="0" />
  		<models>
- 			<model file="esferaa.a" />
- 			<model file="esferab.a" />
- 			<model file="esferac.a" />	
+ 			<model file="./CG/src/testes/esfera.3d" />
  		</models>
  	</group>
 </scene>
