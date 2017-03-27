@@ -116,6 +116,8 @@ void renderGroup(Group* group){
 		glEnd();
 	}
 
+	glColor3f(255,255,255);
+
 	vector<Group*>  childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
 		renderGroup(*group_it);
