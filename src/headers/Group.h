@@ -1,7 +1,7 @@
+
 #ifndef __GROUP_H__
 #define __GROUP_H__
 
-#include <iostream> // TENHO DE TIRAR ISTO DAQUI !!!!! NÃO HÁ IO NESTA CLASSE!!!!
 #include <string>
 #include <vector>
 #include "Shape.h"
@@ -40,8 +40,8 @@ class Group{
 		void setScale(Scale*);
 		void setColour(Colour*);
 		void addChild(Group*);
-		void print(); // TIRAR ISTO DAQUI 
 		virtual ~Group();
 };
 
 #endif
+

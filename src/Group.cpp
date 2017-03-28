@@ -72,38 +72,5 @@ void Group::addChild(Group* child){
 	group_childs.push_back(child);
 }
 
-void Group::print(){
-	cout << "################# Grupo " << id << " #################" << endl;
-
-	if(translation){
-		cout << "Translation: " << translation->getX() << " | " << translation->getY() << " | " << translation->getZ()  << endl;
-	}
-
-	if(rotation){
-		cout << "Rotation: " << rotation->getAngle() << " | " << rotation->getX() << " | " << rotation->getY() << " | " << rotation->getZ()  << endl;
-	}
-	
-	if(scale){
-		cout << "Scale: " << scale->getX() << " | " << scale->getY() << " | " << scale->getZ()  << endl;
-	}
-
-	cout << "Tamanho: " << group_shapes.size() << endl;
-	cout << "Models: ";
-	for(vector<Shape*>::iterator it_lista = group_shapes.begin(); it_lista != group_shapes.end(); ++it_lista){
-			cout << (*it_lista)->getName() << "; ";
-	}
-	cout << endl;
-
-	cout << "Childs: ";
-	for(vector<Group*>::iterator it = group_childs.begin(); it != group_childs.end(); ++it){
-		cout << (*it)->getID() << "; ";
-	}
-	cout << endl;
-
-	cout << "#################################################" <<endl;
-
-
-} 
-
 Group::~Group(){
 }
