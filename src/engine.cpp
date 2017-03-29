@@ -19,7 +19,7 @@ Group* scene;
 float angleX = 1.0, angleY = 1.0;
 float camX = 5.0, camY = 5.0, camZ = 5.0;
 float raio = 10.0f;
-float xp = 0, yp = 0, zp = 0, xr = 0, yr = 0, angle = 0.0;
+float xp = 40, yp = 10, zp = 100, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
 
 void printHelp(){
@@ -143,10 +143,6 @@ void renderScene(void) {
 	glTranslatef(0.0f, 0.0f, -raio);
 	glRotatef(xr,1.0,0.0,0.0);
 
-	//objecto a seguir
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glutSolidCube(1);
-
 	glRotatef(yr,0.0,1.0,0.0); 
 	glTranslated(-xp,-yp,-zp);
 
@@ -162,14 +158,6 @@ void keyboard (unsigned char key, int x, int y) {
 	float xrotrad, yrotrad;
 
 	switch(key){
-    	case 'q':	xr += 3;
-    				break;
-    	case 'z':	xr -= 3;
-    				break;
-    	case 'e':	yr += 3;
-    				break;
-    	case 'c':	yr -= 3;
-    				break;
     	case 'w':	yrotrad = (yr / 180 * M_PI);
     				xrotrad = (xr / 180 * M_PI); 
     				xp += float(sin(yrotrad)) * 2;
@@ -197,6 +185,19 @@ void keyboard (unsigned char key, int x, int y) {
     	case 'o':	linha = GL_FILL;
     				break;
     }
+}
+
+void keyboardArrows (int key_code, int x , int y){
+	switch(key_code){
+		case GLUT_KEY_UP: 	xr+=3;
+						 	break;
+		case GLUT_KEY_DOWN:	xr-=3;
+							break;
+		case GLUT_KEY_LEFT: yr-=3;
+							break;
+		case GLUT_KEY_RIGHT:yr+=3; 
+							break;
+	}
 }
 
 
@@ -231,6 +232,7 @@ int main(int argc, char** argv){
 
 	// put here the registration of the keyboard callbacks
 	glutKeyboardFunc(keyboard);
+	glutSpecialFunc(keyboardArrows);
 
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
