@@ -271,3 +271,44 @@ vector<Vertex*> createCylinder(float radius, float height, int slice, int stack)
 	}
 	return vertex_list;
 }
+
+vector<Vertex*> createTorus(float radiusIn, float radiusOut, int sides, int rings){
+
+	vector<Vertex*> vertex_list;
+
+	float dimSide = (2*M_PI)/sides;
+	float dimRing = (2*M_PI)/rings;
+
+	for (int i = 0; i < rings; i++) {		
+		double a0 = i*dimRing;
+		double a1 = a0 + dimRing;
+
+		float x0 = cos(a0);
+		float y0 = sin(a0);
+		float x1 = cos(a1);
+		float y1 = sin(a1);
+
+		for (int j = 0; j < sides+1; j++){
+
+			//pontos actuais
+			float c = cos(j*dimSide);
+			float r = radiusIn * c + radiusOut;
+			float z = radiusIn * sin(j*dimSide);
+			
+			//proximos pontos
+			float nc = cos((j+1)*dimSide);
+			float nr = radiusIn * nc + radiusOut;
+			float nz = radiusIn * sin((j+1)*dimSide);
+
+			vertex_list.push_back(new Vertex(x0*r,y0*r,z));
+			vertex_list.push_back(new Vertex(x1*r,y1*r,z));
+			vertex_list.push_back(new Vertex(x0*nr,y0*nr,nz));
+
+			vertex_list.push_back(new Vertex(x0*nr,y0*nr,nz));
+			vertex_list.push_back(new Vertex(x1*r,y1*r,z));
+			vertex_list.push_back(new Vertex(x1*nr,y1*nr,nz));		
+		}
+	}
+		
+	return vertex_list;
+}

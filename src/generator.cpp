@@ -68,6 +68,9 @@ int main(int argc, char** argv){
 	else if(!strcmp(argv[1],"cylinder") && argc == 7)
 		v = createCylinder(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]));
 
+	else if(!strcmp(argv[1],"torus") && argc == 7)
+		v = createTorus(atof(argv[2]),atof(argv[3]),atoi(argv[4]),atoi(argv[5]));
+
 	else if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help"))
 		printHelp();	
 

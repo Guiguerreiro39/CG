@@ -17,6 +17,9 @@ using namespace tinyxml2;
 Group* scene;
 
 float angleX = 1.0, angleY = 1.0;
+float camX = 5.0, camY = 5.0, camZ = 5.0;
+float raio = 10.0f;
+float xp = 0, yp = 0, zp = 0, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
 
 void printHelp(){
@@ -58,16 +61,15 @@ void changeSize(int w, int h) {
 	// compute window's aspect ratio 
 	float ratio = w * 1.0 / h;
 
+	// Set the viewport to be the entire window
+	glViewport(0, 0,(GLsizei)w, (GLsizei)h);
 	// Set the projection matrix as current
 	glMatrixMode(GL_PROJECTION);
 	// Load Identity Matrix
 	glLoadIdentity();
 	
-	// Set the viewport to be the entire window
-	glViewport(0, 0, w, h);
-
 	// Set perspective
-	gluPerspective(45.0f ,ratio, 1.0f ,1000.0f);
+	gluPerspective(45.0f ,ratio, 0.1f ,1000.0f);
 
 	// return to the model view matrix mode
 	glMatrixMode(GL_MODELVIEW);
@@ -124,52 +126,78 @@ void renderGroup(Group* group){
 void renderScene(void) {
 
 	int i = 0;
-	float x,y,z;
 
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// set the camera
 	glLoadIdentity();
-	gluLookAt(5.0,5.0,5.0, 
-		      0.0,0.0,0.0,
-			  0.0f,1.0f,0.0f);
+	//gluLookAt(camX,camY,camZ, 
+	//	      0.0,0.0,0.0,
+	//		  0.0f,1.0f,0.0f);
 
 	// put drawing instructions here
 	glEnable(GL_CULL_FACE);
-	glPolygonMode(GL_FRONT_AND_BACK, linha);
-	
-	glRotatef(angleX,0,1,0);
-	glRotatef(angleY,0,0,1);
+	glPolygonMode(GL_FRONT_AND_BACK,linha);
 
-	glColor3f(255,255,255);
+	glTranslatef(0.0f, 0.0f, -raio);
+	glRotatef(xr,1.0,0.0,0.0);
+
+	//objecto a seguir
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glutSolidCube(1);
+
+	glRotatef(yr,0.0,1.0,0.0); 
+	glTranslated(-xp,-yp,-zp);
 
 	renderGroup(scene);
 
 	// End of frame
 	glutSwapBuffers();
+	angle++;
 } 
 
-void keyboard (unsigned char key, int x, int y){
+void keyboard (unsigned char key, int x, int y) {
 	
+	float xrotrad, yrotrad;
+
 	switch(key){
-		case 'a': angleX+=3.0;
-				  break;
-		case 'd': angleX-=3.0;
-				  break;
-		case 'w': angleY+=3.0;
-				  break;
-		case 's': angleY-=3.0;
-				  break;
-		case 'p': linha = GL_POINT;
-				  break;
-		case 'l': linha = GL_LINE; 
-				  break;
-		case 'o': linha = GL_FILL;
-				  break;
-	}
-	glutPostRedisplay();
-} 
+    	case 'q':	xr += 3;
+    				break;
+    	case 'z':	xr -= 3;
+    				break;
+    	case 'e':	yr += 3;
+    				break;
+    	case 'c':	yr -= 3;
+    				break;
+    	case 'w':	yrotrad = (yr / 180 * M_PI);
+    				xrotrad = (xr / 180 * M_PI); 
+    				xp += float(sin(yrotrad)) * 2;
+    				zp -= float(cos(yrotrad)) * 2;
+    				yp -= float(sin(xrotrad)) * 2;
+    				break;
+    	case 's':	yrotrad = (yr / 180 * M_PI);
+    				xrotrad = (xr / 180 * M_PI); 
+    				xp -= float(sin(yrotrad)) * 2;
+    				zp += float(cos(yrotrad)) * 2;
+    				yp += float(sin(xrotrad)) * 2;
+    				break;
+    	case 'd':	yrotrad = (yr / 180 * M_PI);
+    				xp += float(cos(yrotrad)) * 2;
+    				zp += float(sin(yrotrad)) * 2;
+    				break;
+    	case 'a':	yrotrad = (yr / 180 * M_PI);
+    				xp -= float(cos(yrotrad)) * 2;
+    				zp -= float(sin(yrotrad)) * 2;
+    				break;
+    	case 'p':	linha = GL_POINT;
+    				break;
+    	case 'l':	linha = GL_LINE;
+    				break;
+    	case 'o':	linha = GL_FILL;
+    				break;
+    }
+}
 
 
 int main(int argc, char** argv){
@@ -177,7 +205,6 @@ int main(int argc, char** argv){
 	vector<string> file_list;
 	string line;
 	int r;
-
 
 	if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help")){
 		printHelp();
@@ -190,7 +217,6 @@ int main(int argc, char** argv){
 	else
 		scene = parseXML(argv[1]);
  
-
 	// put GLUT init here
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
@@ -200,10 +226,12 @@ int main(int argc, char** argv){
 
 	// put callback registration here
 	glutDisplayFunc(renderScene);
+	glutIdleFunc(renderScene);
 	glutReshapeFunc(changeSize);
 
 	// put here the registration of the keyboard callbacks
 	glutKeyboardFunc(keyboard);
+
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
