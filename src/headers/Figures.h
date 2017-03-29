@@ -16,5 +16,4 @@ vector<Vertex*> createSphere(float radius, int slice, int stack);
 vector<Vertex*> createCylinder(float radius, float height, int slice, int stack);
 vector<Vertex*> createTorus(float radiusIn, float radiusOut, int sides, int rings);
 
-
 #endif
