@@ -41,6 +41,9 @@ void printHelp(){
 	cout << "|      Creates a cone with the radius, height, number of slices  |" << endl;
 	cout << "|      and stacks given.                                         |" << endl;
 	cout << "|                                                                |" << endl;
+	cout << "| - torus [INNER RADIUS] [OUTER RADIUS] [SIDES] [RINGS]          |" << endl;
+	cout << "|      Creates a torus with the inner and outer radius, sides    |" << endl;
+	cout << "|      and rings given.                                          |" << endl;
 	cout << "|                                                                |" << endl;													        
 	cout << "|   FILE:                                                        |" << endl;														    
 	cout << "| In the file section you can specify any file in which you wish |" << endl;
