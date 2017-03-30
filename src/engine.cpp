@@ -41,13 +41,13 @@ void printHelp(){
 	cout << "|                                                                |" << endl;
 	cout << "| - d: Move your position to the right                           |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - UpArrow: Rotate your view up                                 |" << endl;
+	cout << "| - ↑ : Rotate your view up                                      |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - DownArrow: Rotate your view down                             |" << endl;
+	cout << "| - ↓ : Rotate your view down                                    |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - LeftArrow: Rotate your view to the left                      |" << endl;
+	cout << "| - ← : Rotate your view to the left                             |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - RightArrow: Rotate your view to the right                    |" << endl;
+	cout << "| - → : Rotate your view to the right                            |" << endl;
 	cout << "|                                                                |" << endl;
 	cout << "|   FORMAT:                                                      |" << endl;													        
 	cout << "| - p: Change the figure format into points                      |" << endl;														    
@@ -57,7 +57,6 @@ void printHelp(){
 	cout << "| - o: Fill up the figure                                        |" << endl;														
 	cout << "#________________________________________________________________#" << endl;        
 }
-
 
 void changeSize(int w, int h) {
 
