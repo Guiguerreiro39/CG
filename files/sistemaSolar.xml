@@ -71,7 +71,7 @@
 			</group>
 			<!--SATELITE N.-->
 			<group>
-				<translate X="0" Y="0" Z="4.050" />
+				<translate X="2.025" Y="0" Z="3.5074" />
 				<colour R="255" G="255" B="255" />
 				<scale X="0.035" Y="0.035" Z="0.035" />
 				<models>
@@ -80,7 +80,7 @@
 			</group>
 			<!--SATELITE N.-->
 			<group>
-				<translate X="0" Y="0" Z="4.95" />
+				<translate X="-4.025" Y="0" Z="2.4646" />
 				<colour R="255" G="255" B="255" />
 				<scale X="0.1" Y="0.1" Z="0.1" />
 				<models>
@@ -89,7 +89,7 @@
 			</group>
 			<!--SATELITE N.-->
 			<group>
-				<translate X="0" Y="0" Z="6.025" />
+				<translate X="4.525" Y="0" Z="0" />
 				<colour R="255" G="255" B="255" />
 				<scale X="0.11" Y="0.11" Z="0.11" />
 				<models>

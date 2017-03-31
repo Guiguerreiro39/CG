@@ -49,6 +49,8 @@ void printHelp(){
 	cout << "|                                                                |" << endl;
 	cout << "| - → : Rotate your view to the right                            |" << endl;
 	cout << "|                                                                |" << endl;
+	cout << "| - r : Reset the camera to the initial position                 |" << endl;
+	cout << "|                                                                |" << endl;
 	cout << "|   FORMAT:                                                      |" << endl;													        
 	cout << "| - p: Change the figure format into points                      |" << endl;														    
 	cout << "|                                                                |" << endl;
