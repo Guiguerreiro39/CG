@@ -141,10 +141,7 @@ void renderScene(void) {
 
 	// set the camera
 	glLoadIdentity();
-	//gluLookAt(camX,camY,camZ, 
-	//	      0.0,0.0,0.0,
-	//		  0.0f,1.0f,0.0f);
-
+	
 	// put drawing instructions here
 	glEnable(GL_CULL_FACE);
 	glPolygonMode(GL_FRONT_AND_BACK,linha);

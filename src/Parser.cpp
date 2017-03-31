@@ -87,10 +87,6 @@ vector<Shape*> exploreModels(XMLElement* element){
 
 void exploreElement(XMLElement* element, Group* group){
 
-	// NOTA: Cada grupo só pode ter um grupo MODELS e um
-	// grupo para cada transformação, tenho de verificar
-	// essa porra!!!!!!!!!!!!!
-
 	XMLElement* initial = element;
 
 
