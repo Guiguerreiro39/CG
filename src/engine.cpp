@@ -7,20 +7,24 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <GL/glut.h>
 
 #include "headers/Parser.h"
 
 using namespace std;
 using namespace tinyxml2;
 
+// Geral
 Group* scene;
 
+// Mouse and Keyboard interaction
 float angleX = 1.0, angleY = 1.0;
 float camX = 5.0, camY = 5.0, camZ = 5.0;
 float raio = 10.0f;
 float xp = 40, yp = 10, zp = 100, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
+
+// Frames Per Second
+int timebase = 0, frame = 0;
 
 void printHelp(){
 	cout << "#_____________________________ HELP _____________________________#" << endl;
@@ -58,6 +62,21 @@ void printHelp(){
 	cout << "|                                                                |" << endl;	
 	cout << "| - o: Fill up the figure                                        |" << endl;														
 	cout << "#________________________________________________________________#" << endl;        
+}
+
+void displayFPS() {
+	int time;
+	char title[20];
+
+	frame++;
+	time = glutGet(GLUT_ELAPSED_TIME);
+	if (time - timebase > 1000) {
+		float fps = frame * 1000.0/(time - timebase);
+		timebase = time;
+		frame = 0;
+		sprintf(title,"Engine  |  %.2f FPS",fps);
+		glutSetWindowTitle(title);
+  }
 }
 
 void changeSize(int w, int h) {
@@ -108,17 +127,8 @@ void renderGroup(Group* group){
 
 	vector<Shape*> shape_list = group->getShapes();
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
-		glBegin(GL_TRIANGLES);
 		Shape* shape = (*shape_it);
-
-		vector<Vertex*> vertex_list = shape->getVertexList();
-		for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
-			x = (*vertex_it)->getX();
-			y = (*vertex_it)->getY();
-			z = (*vertex_it)->getZ();
-			glVertex3f(x,y,z);
-		}
-		glEnd();
+		shape->draw();
 	}
 	glColor3f(255,255,255);
 
@@ -127,9 +137,7 @@ void renderGroup(Group* group){
 		renderGroup(*group_it);
 
 	glPopMatrix();
-
 }
-
 
 
 void renderScene(void) {
@@ -143,7 +151,6 @@ void renderScene(void) {
 	glLoadIdentity();
 	
 	// put drawing instructions here
-	glEnable(GL_CULL_FACE);
 	glPolygonMode(GL_FRONT_AND_BACK,linha);
 
 	glTranslatef(0.0f, 0.0f, -raio);
@@ -153,6 +160,7 @@ void renderScene(void) {
 	glTranslated(-xp,-yp,-zp);
 
 	renderGroup(scene);
+	displayFPS();
 
 	// End of frame
 	glutSwapBuffers();
@@ -206,6 +214,30 @@ void keyboardArrows (int key_code, int x , int y){
 	}
 }
 
+void initGroup(Group* group){
+
+	vector<Shape*> shape_list = group->getShapes();
+	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
+		Shape* shape = (*shape_it);
+		shape->prepare();
+	}
+
+	vector<Group*> childs = group->getChilds();
+	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
+		initGroup(*group_it);
+}
+
+void initGL(){
+
+	// OpenGL settings 
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+	// recursive init
+	initGroup(scene);
+}
 
 int main(int argc, char** argv){
 
@@ -213,12 +245,12 @@ int main(int argc, char** argv){
 	string line;
 	int r;
 
-	if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help")){
-		printHelp();
+	if(argc < 2){
+		cout << "Invalid input. Use -h if you need some help." << endl;
 		return 0;
 	}
-	else if(argc != 2){
-		cout << "Invalid input. Use -h if you need some help." << endl;
+	else if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help")){
+		printHelp();
 		return 0;
 	}
 	else
@@ -240,9 +272,7 @@ int main(int argc, char** argv){
 	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(keyboardArrows);
 
-	// OpenGL settings 
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
+	initGL();
 
 	// enter GLUT's main loop
 	glutMainLoop(); 
