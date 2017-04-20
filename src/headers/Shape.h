@@ -2,7 +2,6 @@
 #define __SHAPE_H__
 #include <string>
 #include <vector>
-#include <iostream>
 #include <GL/glut.h>
 
 #include "Vertex.h"
