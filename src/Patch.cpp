@@ -3,14 +3,9 @@
 Patch::Patch(){
 }
 
-Patch::Patch(int n, vector<int> i, vector<Vertex*> v){
-	number_points = n;
+Patch::Patch(vector<int> i, vector<Vertex*> v){
 	indexes = i;
 	control_points = v;
-}
-
-int Patch::getNumberPoints(){
-	return number_points;
 }
 
 vector<int> Patch::getIndexes(){
@@ -21,16 +16,33 @@ vector<Vertex*> Patch::getControlPoints(){
 	return control_points;
 }
 
-void Patch::setNumberPoints(int n){
-	number_points = n;
-}
-
 void Patch::setIndexes(vector<int> i){
 	indexes = i;
 }
 
 void Patch::setControlPoints(vector<Vertex*> v){
 	control_points = v;
+}
+
+void Patch::addIndex(int n){
+	indexes.push_back(n);
+}
+
+void Patch::addVertex(Vertex* v){
+	control_points.push_back(v);
+}
+
+void Patch::print(){
+	cout << "____________________" << endl;
+	cout << "Índices: ";
+	for(int i=0; i<indexes.size(); i++) cout << indexes[i] << " , ";
+	cout << endl;
+	cout << "____________________" << endl;
+	for(int i=0; i<control_points.size(); i++){
+		Vertex* v = control_points[i];
+		cout << v->getX() << " | " << v->getY() << " | " << v->getZ() << endl;
+	}
+	cout << "____________________" << endl;
 }
 
 Patch::~Patch(){

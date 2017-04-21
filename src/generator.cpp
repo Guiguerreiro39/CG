@@ -1,8 +1,11 @@
-#include <string.h>
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
 #include "headers/Figures.h"
-#include "headers/Vertex.h"
+#include "headers/Patch.h"
 
 using namespace std; 
 
@@ -17,7 +20,80 @@ void printFile(vector<Vertex*> v, string file_name){
 			file << (*it)->print() << endl;
 		file.close();
 	}
-	else cout << "Unable to open file." << endl;
+	else cout << "Unable to open file: " << file_name << "." << endl;
+}
+
+void parsePatchFile(int tessellation, string file_name){
+
+	string line, token, line_cpy;
+	int n_patches, n_points, position;
+	float index, value;
+	float vertex_coords[3];
+
+	vector<Patch*> patches_list;
+
+	ifstream file;
+	file.open(file_name);
+
+	if(file.is_open()){
+
+		// Number of patches
+		getline(file,line);
+		n_patches = atoi(line.c_str());
+
+		// Parsing indexes
+		for(int i=0; i<n_patches; i++){
+
+			getline(file,line);
+
+			Patch* patch = new Patch();
+			patches_list.push_back(patch);
+
+			for(int j=0; j<16; j++){
+
+				position = line.find(",");
+				token = line.substr(0, position);
+				index = atof(token.c_str());
+				line.erase(0, position + 1);
+				patch->addIndex(index);
+
+			}
+		}
+
+		// Number of Control Points
+		getline(file,line);
+		n_points = atoi(line.c_str());
+
+		// Parsing Control Points
+		for(int i=0; i<n_points; i++){
+
+			getline(file,line);
+			line_cpy = line;
+
+			for(vector<Patch*>::iterator patch_it = patches_list.begin(); patch_it != patches_list.end(); ++patch_it){
+				vector<int> path_indexes = (*patch_it)->getIndexes();
+				if(find(path_indexes.begin(), path_indexes.end(), i) != path_indexes.end()){
+					
+					for(int j=0; j<3; j++){
+						position = line.find(",");
+						token = line.substr(0, position);
+						vertex_coords[j] = atof(token.c_str());
+						line.erase(0, position + 1);
+					}
+					line = line_cpy;
+					(*patch_it)->addVertex(new Vertex(vertex_coords[0],vertex_coords[1],vertex_coords[2]));
+				}
+			}
+		}
+
+		/** cout << "##################################################################################################" << endl;
+		for(vector<Patch*>::iterator patch_it = patches_list.begin(); patch_it != patches_list.end(); ++patch_it){
+			(*patch_it)->print();
+			cout << "##################################################################################################" << endl;
+		} **/
+
+	}
+	else cout << "Unable to open patch file: " << file_name << "." << endl;
 }
 
 void printHelp(){
@@ -52,9 +128,12 @@ void printHelp(){
 	cout << "#________________________________________________________________#" << endl;        
 }
 
+
+
 int main(int argc, char** argv){
 
 	vector<Vertex*> v;
+	//vector<Patch*> p;
 
 	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]));
@@ -73,6 +152,10 @@ int main(int argc, char** argv){
 
 	else if(!strcmp(argv[1],"torus") && argc == 7)
 		v = createTorus(atof(argv[2]),atof(argv[3]),atoi(argv[4]),atoi(argv[5]));
+
+	else if(!strcmp(argv[1],"patch") && argc == 4){
+		parsePatchFile(atoi(argv[2]),argv[3]);
+	}
 
 	else if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help"))
 		printHelp();	

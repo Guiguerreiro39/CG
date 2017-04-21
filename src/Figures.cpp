@@ -312,3 +312,21 @@ vector<Vertex*> createTorus(float radiusIn, float radiusOut, int sides, int ring
 		
 	return vertex_list;
 }
+
+Vertex* evalBezierPatch(float t, float *p1, float *p2, float *p3, float *p4) {
+
+	float res[3];
+
+	float it = 1.0 - t;
+
+	float b0 = it * it * it;
+	float b1 = 3 * t * it * it;
+	float b2 = 3 * t * t * it;
+	float b3 = t * t * t;
+
+	res[0] = b0*p1[0] + b1*p2[0] + b2*p3[0] + b3*p4[0];
+	res[1] = b0*p1[1] + b1*p2[1] + b2*p3[1] + b3*p4[1];
+	res[2] = b0*p1[2] + b1*p2[2] + b2*p3[2] + b3*p4[2];
+
+	return new Vertex(res[0], res[1], res[2]);
+}
