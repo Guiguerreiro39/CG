@@ -313,9 +313,9 @@ vector<Vertex*> createTorus(float radiusIn, float radiusOut, int sides, int ring
 	return vertex_list;
 }
 
-Vertex* evalBezierPatch(float t, float *p1, float *p2, float *p3, float *p4) {
+Vertex* evalBezierCurve(float t, Vertex* p1, Vertex* p2, Vertex* p3, Vertex* p4) {
 
-	float res[3];
+	float result_point[3];
 
 	float it = 1.0 - t;
 
@@ -324,9 +324,55 @@ Vertex* evalBezierPatch(float t, float *p1, float *p2, float *p3, float *p4) {
 	float b2 = 3 * t * t * it;
 	float b3 = t * t * t;
 
-	res[0] = b0*p1[0] + b1*p2[0] + b2*p3[0] + b3*p4[0];
-	res[1] = b0*p1[1] + b1*p2[1] + b2*p3[1] + b3*p4[1];
-	res[2] = b0*p1[2] + b1*p2[2] + b2*p3[2] + b3*p4[2];
+	result_point[0] = b0*p1->getX() + b1*p2->getX() + b2*p3->getX() + b3*p4->getX();
+	result_point[1] = b0*p1->getY() + b1*p2->getY() + b2*p3->getY() + b3*p4->getY();
+	result_point[2] = b0*p1->getZ() + b1*p2->getZ() + b2*p3->getZ() + b3*p4->getZ();
 
-	return new Vertex(res[0], res[1], res[2]);
+	Vertex* new_point = new Vertex(result_point[0], result_point[1], result_point[2]);
+	return new_point;
 }
+ 
+Vertex* evalBezierPatch(float u, float v, vector<Vertex*> control_points){
+
+	Vertex* points[4];
+
+	for(int i=0,j=0; i<16; i+=4,j++)
+		points[j] = evalBezierCurve(u, control_points[i], control_points[i+1], control_points[i+2], control_points[i+3]);
+	
+	return evalBezierCurve(v, points[0], points[1], points[2], points[3]);
+}
+
+vector<Vertex*> renderBezierPatch(int divs, vector<Patch*> patch_list){
+
+	vector<Vertex*> result_list;
+	float u, u2, v, v2;
+
+	for(int n_patches = 0; n_patches < patch_list.size(); n_patches++){
+
+		vector<Vertex*> control_points = patch_list[n_patches]->getControlPoints();
+
+		for(int j=0; j <= divs ; j++){
+			for(int i=0; i <= divs; i++){
+
+				u = i/(float) divs;
+				v = j/(float) divs;
+				u2 = (i+1)/(float) divs;
+				v2 = (j+1)/(float) divs;
+
+				result_list.push_back(evalBezierPatch(u, v, control_points));
+				result_list.push_back(evalBezierPatch(u, v2, control_points));
+				result_list.push_back(evalBezierPatch(u2, v2, control_points));
+
+				result_list.push_back(evalBezierPatch(u, v, control_points));
+				result_list.push_back(evalBezierPatch(u2, v2, control_points));
+				result_list.push_back(evalBezierPatch(u, v2, control_points));
+			}
+		}
+	}
+
+	return result_list;
+}
+
+
+
+
