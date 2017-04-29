@@ -3,8 +3,9 @@
 Rotation::Rotation(){
 }
 
-Rotation::Rotation(float ang, float a, float b, float c){
+Rotation::Rotation(float ang, float t, float a, float b, float c){
 	angle = ang;
+	time = t;
 	x = a;
 	y = b;
 	z = c;
@@ -12,6 +13,10 @@ Rotation::Rotation(float ang, float a, float b, float c){
 
 float Rotation::getAngle(){
 	return angle;
+}
+
+float Rotation::getTime(){
+	return time;
 }
 
 float Rotation::getX(){
@@ -30,6 +35,10 @@ void Rotation::setAngle(float ang){
 	angle = ang;
 }
 
+void Rotation::setTime(float t){
+	time = t;
+}
+
 void Rotation::setX(float a){
 	x = a;
 }
@@ -43,7 +52,7 @@ void Rotation::setZ(float c){
 }
 
 Rotation* Rotation::clone() const{
-	return new Rotation(angle,x,y,z);
+	return new Rotation(angle,time,x,y,z);
 }
 
 Rotation::~Rotation(){

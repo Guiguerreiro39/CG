@@ -21,6 +21,14 @@ float Translation::getZ(){
 	return z;
 }
 
+float Translation::getTime(){
+	return time;
+}
+
+vector<Vertex*> Translation::getPoints(){
+	return points_list;
+}
+
 void Translation::setX(float a){
 	x = a;
 }
@@ -31,6 +39,18 @@ void Translation::setY(float b){
 
 void Translation::setZ(float c){
 	z = c;
+}
+
+void Translation::setTime(float t){
+	time = t;
+}
+
+void Translation::setPoints(vector<Vertex*> v){
+	points_list = v;
+}
+
+void Translation::addPoint(Vertex* v){
+	points_list.push_back(v);
 }
 
 Translation* Translation::clone() const{

@@ -76,7 +76,7 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 				index = atoi(token.c_str());
 				line.erase(0, position + 1);
 
-				patch->addIndex(index); // retirar isto
+				//patch->addIndex(index); // retirar isto
 
 				n_line = getLineNumber(file_name, n_patches + 3 + index);
 				line_cpy = n_line;
@@ -100,7 +100,6 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 		} **/
 
 		printFile(renderBezierPatch(tessellation,patches_list),output_file);
-
 
 		file.close();
 	}

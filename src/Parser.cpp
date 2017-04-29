@@ -8,7 +8,7 @@ Group* hereditaryChild(Group* father){
 	father->addChild(son);
 
 	son->setTranslation(new Translation(0,0,0));
-	son->setRotation(new Rotation(0,0,0,0));
+	son->setRotation(new Rotation(0,0,0,0,0));
 	son->setScale(new Scale(1,1,1));
 	son->setColour(new Colour(255,255,255));
 
@@ -19,12 +19,36 @@ void updateTranslation(XMLElement* element, Group* group){
 
 	Translation* translation = group->getTranslation();
 
+	if(element->Attribute("time"))
+		translation->setTime(stof(element->Attribute("time")));
+
 	if(element->Attribute("X")) 
 		translation->setX(stof(element->Attribute("X")));
+
 	if(element->Attribute("Y")) 
 		translation->setY(stof(element->Attribute("Y")));
+
 	if(element->Attribute("Z")) 
 		translation->setZ(stof(element->Attribute("Z")));
+
+	XMLElement* point_element = element->FirstChildElement();
+
+	for(;point_element;point_element=point_element->NextSiblingElement()){
+		float x=0, y=0, z=0;
+
+		if(point_element->Attribute("X")) 
+			x = stof(point_element->Attribute("X"));
+		if(point_element->Attribute("Y")) 
+			y = stof(point_element->Attribute("Y"));
+		if(point_element->Attribute("Z")) 
+			z = stof(point_element->Attribute("Z"));
+
+		Vertex* vertex = new Vertex(x,y,z);
+		translation->addPoint(vertex);
+
+		cout << point_element->Name() << endl;
+		cout << x << " | " << y << " | " << z << endl;
+	}
 }
 
 void updateRotation(XMLElement* element, Group* group){
@@ -33,6 +57,8 @@ void updateRotation(XMLElement* element, Group* group){
 
 	if(element->Attribute("angle"))
 		rotation->setAngle(stof(element->Attribute("angle")));
+	if(element->Attribute("time"))
+		rotation->setTime(stof(element->Attribute("time")));
 	if(element->Attribute("X"))
 		rotation->setX(stof(element->Attribute("X")));
 	if(element->Attribute("Y"))
@@ -155,7 +181,7 @@ Group* parseXML(char* file_name){
 
 	Group* group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
 	group->setTranslation(new Translation(0,0,0));
-	group->setRotation(new Rotation(0,0,0,0));
+	group->setRotation(new Rotation(0,0,0,0,0));
 	group->setScale(new Scale(1,1,1));
 
 	error = doc.LoadFile(file_name);
