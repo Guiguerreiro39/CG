@@ -7,7 +7,7 @@ Group* hereditaryChild(Group* father){
 	Group* son = new Group(total_groups++);
 	father->addChild(son);
 
-	son->setTranslation(new Translation(0,0,0));
+	son->setTranslation(new Translation(0,0,0,0));
 	son->setRotation(new Rotation(0,0,0,0,0));
 	son->setScale(new Scale(1,1,1));
 	son->setColour(new Colour(255,255,255));
@@ -180,7 +180,7 @@ Group* parseXML(char* file_name){
 	XMLError error;
 
 	Group* group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
-	group->setTranslation(new Translation(0,0,0));
+	group->setTranslation(new Translation(0,0,0,0));
 	group->setRotation(new Rotation(0,0,0,0,0));
 	group->setScale(new Scale(1,1,1));
 

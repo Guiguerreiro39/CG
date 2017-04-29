@@ -2,6 +2,7 @@
 #define __TRANSLATION_H__
 
 #include <vector>
+#include <math.h>
 
 #include "Vertex.h"
 
@@ -15,15 +16,19 @@ class Translation{
 
 	float time;
 	vector<Vertex*> points_list;
+	vector<Vertex*> points_curv;
 
 	public:
 		Translation();
-		Translation(float,float,float);
+		Translation(float,float,float,float);
 		float getX();
 		float getY();
 		float getZ();
 		float getTime();
 		vector<Vertex*> getPoints();
+		vector<Vertex*> getPointsCurv();
+		void genPointsCurv(vector<Vertex*>);
+		void getGlobalCatmullRomPoint(float, float*, vector<Vertex*>);
 		void setX(float);
 		void setY(float);
 		void setZ(float);

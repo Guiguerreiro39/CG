@@ -79,6 +79,20 @@ void displayFPS() {
   }
 }
 
+void renderCatmullRomCurve(vector<Vertex*> pontos) {
+	int tam = pontos.size();
+	float p[3];
+
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i < tam; i++) {
+		p[0] = pontos[i]->getX(); 
+		p[1] = pontos[i]->getY(); 
+		p[2] = pontos[i]->getZ();
+		glVertex3fv(p);
+	}
+	glEnd();
+}
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -106,12 +120,26 @@ void changeSize(int w, int h) {
 void renderGroup(Group* group){
 
 	float x,y,z;
+	float te, gt, r, gr;
+	float res[3];
 
 	glPushMatrix();
 
 	Translation* translation=group->getTranslation();
-	if(translation)
-		glTranslatef(translation->getX(),translation->getY(),translation->getZ());
+	if(translation){
+		if(translation->getTime()!=0){
+			te = glutGet(GLUT_ELAPSED_TIME) % (int)(translation->getTime() * 1000);
+			gt = te / (translation->getTime() * 1000);
+			vector<Vertex*> vp = translation->getPoints();
+			renderCatmullRomCurve(translation->getPointsCurv());
+			translation->getGlobalCatmullRomPoint(gt, res, vp);
+			vp.clear();
+			glTranslatef(res[0], res[1], res[2]);
+		}
+		else {
+			glTranslatef(translation->getX(),translation->getY(),translation->getZ());
+		}
+	}
 	
 	Rotation* rotation=group->getRotation();
 	if(rotation)
