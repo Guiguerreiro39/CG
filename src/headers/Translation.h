@@ -18,7 +18,7 @@ class Translation{
 
 	public:
 		Translation();
-		Translation(float,float,float);
+		Translation(float,float,float,float);
 		float getX();
 		float getY();
 		float getZ();

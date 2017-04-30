@@ -3,10 +3,11 @@
 Translation::Translation(){
 }
 
-Translation::Translation(float a, float b, float c){
+Translation::Translation(float a, float b, float c, float t){
 	x = a;
 	y = b;
 	z = c;
+	time = t;
 }
 
 float Translation::getX(){
@@ -54,7 +55,7 @@ void Translation::addPoint(Vertex* v){
 }
 
 Translation* Translation::clone() const{
-	return new Translation(x,y,z);
+	return new Translation(x,y,z,time);
 }
 
 Translation::~Translation(){

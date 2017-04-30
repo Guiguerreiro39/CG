@@ -76,8 +76,6 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 				index = atoi(token.c_str());
 				line.erase(0, position + 1);
 
-				//patch->addIndex(index); // retirar isto
-
 				n_line = getLineNumber(file_name, n_patches + 3 + index);
 				line_cpy = n_line;
 
@@ -92,12 +90,6 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 				patch->addVertex(new Vertex(vertex_coords[0],vertex_coords[1],vertex_coords[2]));
 			}
 		}
-
-		/**cout << "##################################################################################################" << endl;
-		for(vector<Patch*>::iterator patch_it = patches_list.begin(); patch_it != patches_list.end(); ++patch_it){
-			(*patch_it)->print();
-			cout << "##################################################################################################" << endl;
-		} **/
 
 		printFile(renderBezierPatch(tessellation,patches_list),output_file);
 
@@ -145,7 +137,6 @@ void printHelp(){
 int main(int argc, char** argv){
 
 	vector<Vertex*> v;
-	//vector<Patch*> p;
 
 	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]));
