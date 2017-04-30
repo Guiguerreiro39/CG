@@ -10,7 +10,17 @@
  		</group>
  		<!--MERCURIO-->
  		<group>
- 			<translate X="29.8775" Y="0" Z="0" />
+ 			<translate time="60"> 
+ 				<point X="29.8775" Y="0" Z="0"/>
+ 				<point X="21.1266" Y="0" Z="21.1266"/>
+ 				<point X="0" Y="0" Z="29.8775"/>
+ 				<point X="-21.1266" Y="0" Z="21.1266"/>
+ 				<point X="-29.8775" Y="0" Z="0"/>
+ 				<point X="-21.1266" Y="0" Z="-21.1266"/>
+ 				<point X="0" Y="0" Z="-29.8775"/>
+ 				<point X="21.1266" Y="0" Z="-21.1266"/>
+ 			</translate>
+ 			<rotate time="10" X="0" Y="1" Z="0"/>
  			<colour R="219" G="170" B="0" />
  			<scale X="0.3525" Y="0.3525" Z="0.3525" />
  			<models>
@@ -19,7 +29,17 @@
  		</group>
  		<!--VENUS-->
   		<group>
-  			<translate X="33.9233" Y="0" Z="9.0897" />
+  			<translate time="90"> 
+  				<point X="33.9233" Y="0" Z="0"/>
+  				<point X="23.98740" Y="0" Z="23.98740"/>
+ 				<point X="0" Y="0" Z="33.9233"/>
+ 				<point X="-23.98740" Y="0" Z="23.98740"/>
+ 				<point X="-33.9233" Y="0" Z="0"/>
+ 				<point X="-23.98740" Y="0" Z="-23.98740"/>
+ 				<point X="0" Y="0" Z="-33.9233"/>
+ 				<point X="23.98740" Y="0" Z="-23.98740"/>
+  			</translate>
+  			<rotate time="15" X="0" Y="-1" Z="0"/>
  			<colour R="254" G="198" B="115" />
  			<scale X="0.8790" Y="0.8790" Z="0.8790" />
  			<models>
@@ -28,7 +48,17 @@
  		</group>
  		<!--TERRA-->
  		<group>
- 			<translate X="36.8061" Y="0" Z="21.25" />
+ 			<translate time="120">
+ 				<point X="44.8061" Y="0" Z="0"/>
+ 				<point X="31.68270" Y="0" Z="31.68270"/>
+ 				<point X="0" Y="0" Z="44.8061"/>
+ 				<point X="-31.68270" Y="0" Z="31.68270"/>
+ 				<point X="-44.8061" Y="0" Z="0"/>
+ 				<point X="-31.68270" Y="0" Z="-31.68270"/>
+ 				<point X="0" Y="0" Z="-44.8061"/>
+ 				<point X="31.68270" Y="0" Z="-31.68270"/>
+ 			</translate>
+ 			<rotate time="22" X="0" Y="1" Z="0.5"/>
  			<colour R="0" G="0" B="220" />
  			<scale X="0.8865" Y="0.8865" Z="0.8865" />
  			<models>
@@ -36,6 +66,7 @@
  			</models>
  			<group>
  				<translate X="0" Y="0.25" Z="3"/>
+ 				<rotate time="22" X="0" Y="1" Z="0"/>
  				<colour R="255" G="255" B="255" />
 				<scale X="0.30" Y="0.30" Z="0.30" />
 				<models>
@@ -45,7 +76,17 @@
  		</group>
  		<!--MARTE-->
  		<group>
- 			<translate X="47.9523" Y="0" Z="15.5806" />
+ 			<translate time="170"> 
+ 				<point X="67.9523" Y="0" Z="0"/>
+ 				<point X="48.04953" Y="0" Z="48.04953"/>
+ 				<point X="0" Y="0" Z="67.9523"/>
+ 				<point X="-48.04953" Y="0" Z="48.04953"/>
+ 				<point X="-67.9523" Y="0" Z="0"/>
+ 				<point X="-48.04953" Y="0" Z="-48.04953"/>
+ 				<point X="0" Y="0" Z="-67.9523"/>
+ 				<point X="48.04953" Y="0" Z="-48.04953"/>
+ 			</translate>
+ 			<rotate time="28" X="0" Y="1" Z="0"/>
  			<colour R="254" G="135" B="1" />
  			<scale X="0.3720" Y="0.3720" Z="0.3720" />
  			<models>
@@ -54,7 +95,17 @@
  		</group>
  		<!--JUPITER-->
  		<group>
- 			<translate X="51.12987" Y="0" Z="37.1480" />
+ 			<translate time="240"> 
+ 				<point X="82.12987" Y="0" Z="0"/>
+ 				<point X="58.07459" Y="0" Z="58.07459"/>
+ 				<point X="0" Y="0" Z="82.12987"/>
+ 				<point X="-58.07459" Y="0" Z="58.07459"/>
+ 				<point X="-82.12987" Y="0" Z="0"/>
+ 				<point X="-58.07459" Y="0" Z="-58.07459"/>
+ 				<point X="0" Y="0" Z="-82.12987"/>
+ 				<point X="58.07459" Y="0" Z="-58.07459"/>
+ 			</translate>
+ 			<rotate time="33" X="0" Y="1" Z="0"/>
  			<colour R="231" G="232" B="197" />
  			<scale X="2.25" Y="2.25" Z="2.25" />
  			<models>
@@ -63,6 +114,7 @@
  			<!--SATELITE N.-->
  			<group>
 				<translate X="0" Y="0" Z="3.375" />
+				<rotate time="33" X="0" Y="1" Z="0"/>
 				<colour R="255" G="255" B="255" />
 				<scale X="0.05" Y="0.05" Z="0.05" />
 				<models>
@@ -72,6 +124,7 @@
 			<!--SATELITE N.-->
 			<group>
 				<translate X="2.025" Y="0" Z="3.5074" />
+				<rotate time="34" X="0" Y="1" Z="0"/>
 				<colour R="255" G="255" B="255" />
 				<scale X="0.035" Y="0.035" Z="0.035" />
 				<models>
@@ -81,6 +134,7 @@
 			<!--SATELITE N.-->
 			<group>
 				<translate X="-4.025" Y="0" Z="2.4646" />
+				<rotate time="35" X="0" Y="1" Z="0"/>
 				<colour R="255" G="255" B="255" />
 				<scale X="0.1" Y="0.1" Z="0.1" />
 				<models>
@@ -90,6 +144,7 @@
 			<!--SATELITE N.-->
 			<group>
 				<translate X="4.525" Y="0" Z="0" />
+				<rotate time="36" X="0" Y="1" Z="0"/>
 				<colour R="255" G="255" B="255" />
 				<scale X="0.11" Y="0.11" Z="0.11" />
 				<models>
@@ -100,7 +155,18 @@
  		<!--SATRUNO-->
  		<group>
  			<rotate angle="30" X="0" Y="1" Z="1"/>
-			<translate X="79.5005" Y="0" Z="-21.3021" />
+ 			<translate time="300"> 
+ 				<point X="105.5005" Y="0" Z="0"/>
+ 				<point X="74.60012" Y="0" Z="74.60012"/>
+ 				<point X="0" Y="0" Z="105.5005"/>
+ 				<point X="-74.60012" Y="0" Z="74.60012"/>
+ 				<point X="-105.5005" Y="0" Z="0"/>
+ 				<point X="-74.60012" Y="0" Z="-74.60012"/>
+ 				<point X="0" Y="0" Z="-105.5005"/>
+ 				<point X="74.60012" Y="0" Z="-74.60012"/>
+ 			</translate>
+ 			<group>
+ 			<rotate time="39" X="0" Y="1" Z="0"/>
 			<colour R="255" G="223" B="161" />
 			<scale X="1.995" Y="1.995" Z="1.995" />
 			<models>
@@ -109,6 +175,7 @@
 			<!--SATELITE N.-->
 			<group>
 				<translate X="0" Y="1.2" Z="3.375" />
+				<rotate time="39" X="0" Y="1" Z="0"/>
 				<colour R="255" G="255" B="255" />
 				<scale X="0.15" Y="0.15" Z="0.15" />
 				<models>
@@ -124,10 +191,21 @@
 					<model file="torus.3d" />
 				</models>
 			</group>
+			</group>
 		</group>
 		<!--URANO-->
 		<group>
-			<translate X="88.0747"  Y="0" Z="50.85" />
+			<translate time="375"> 
+				<point X="122.0747" Y="0" Z="0"/>
+				<point X="86.31985" Y="0" Z="86.31985"/>
+				<point X="0" Y="0" Z="122.0747"/>
+				<point X="-86.31985" Y="0" Z="86.31985"/>
+				<point X="-122.0747" Y="0" Z="0"/>
+				<point X="-86.31985" Y="0" Z="-86.31985"/>
+				<point X="0" Y="0" Z="-122.0747"/>
+				<point X="86.31985" Y="0" Z="-86.31985"/>
+			</translate>
+			<rotate time="48" X="0" Y="1" Z="0"/>
 			<colour R="148" G="193" B="255" />
 			<scale X="1.290" Y="1.290" Z="1.290" />
 			<models>
@@ -136,7 +214,17 @@
 		</group>
 		<!--NEPTUNO-->
 		<group>
-			<translate X="112.35529" Y="0" Z="46.53908" />
+			<translate time="450">
+				<point X="150.35529" Y="0" Z="0"/>
+				<point X="106.31725" Y="0" Z="106.31725"/>
+				<point X="0" Y="0" Z="150.35529"/>
+				<point X="-106.31725" Y="0" Z="106.31725"/>
+				<point X="-150.35529" Y="0" Z="0"/>
+				<point X="-106.31725" Y="0" Z="-106.31725"/>
+				<point X="0" Y="0" Z="-150.35529"/>
+				<point X="106.31725" Y="0" Z="-106.31725"/>
+			</translate>
+			<rotate time="60" X="0" Y="1" Z="0"/>
 			<colour R="0" G="83" B="255" />
 			<scale X="1.275" Y="1.275" Z="1.275" />
 			<models>
@@ -145,6 +233,7 @@
 			<!--SATELITE N.-->
 			<group>
 				<translate X="0" Y="1" Z="3.75" />
+				<rotate time="60" X="0" Y="1" Z="0"/>
 				<colour R="255" G="255" B="255" />
 				<scale X="0.15" Y="0.15" Z="0.15" />
 				<models>

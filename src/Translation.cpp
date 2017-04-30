@@ -14,8 +14,9 @@ vector<Vertex*> Translation::getPointsCurv(){
 	return points_curv;
 }
 
-void getCatmullRomPoint(float t, int *indices, float *res, vector<Vertex*> pontos) {
+void getCatmullRomPoint(float t, int *indices, float *res, float *deriv, vector<Vertex*> pontos) {
 	float res_aux[4];
+	float deriv_aux[4];
 
 	float m[4][4] = { 
 	{ -0.5f, 1.5f, -1.5f, 0.5f },
@@ -27,6 +28,10 @@ void getCatmullRomPoint(float t, int *indices, float *res, vector<Vertex*> ponto
 	res[0] = 0.0; 
 	res[1] = 0.0; 
 	res[2] = 0.0;
+	deriv[0] = 0.0;
+	deriv[1] = 0.0;
+	deriv[2] = 0.0;
+
 	float t3 = t*t*t, t2 = t*t;
 
 	//T*M
@@ -34,6 +39,11 @@ void getCatmullRomPoint(float t, int *indices, float *res, vector<Vertex*> ponto
 	res_aux[1] = t3*m[0][1] + t2*m[1][1] + t*m[2][1] + m[3][1];
 	res_aux[2] = t3*m[0][2] + t2*m[1][2] + t*m[2][2] + m[3][2];
 	res_aux[3] = t3*m[0][3] + t2*m[1][3] + t*m[2][3] + m[3][3];
+
+	deriv_aux[0] = (3*t2)*m[0][0] + (2*t)*m[1][0] + m[2][0];
+	deriv_aux[1] = (3*t2)*m[0][1] + (2*t)*m[1][1] + m[2][1];
+	deriv_aux[2] = (3*t2)*m[0][2] + (2*t)*m[1][2] + m[2][2];
+	deriv_aux[3] = (3*t2)*m[0][3] + (2*t)*m[1][3] + m[2][3];
 
 	int i0 = indices[0]; 
 	Vertex* p0 = pontos[i0];
@@ -48,10 +58,14 @@ void getCatmullRomPoint(float t, int *indices, float *res, vector<Vertex*> ponto
 	res[0] = res_aux[0] * p0->getX() + res_aux[1] * p1->getX() + res_aux[2] * p2->getX() + res_aux[3] * p3->getX();
 	res[1] = res_aux[0] * p0->getY() + res_aux[1] * p1->getY() + res_aux[2] * p2->getY() + res_aux[3] * p3->getY();
 	res[2] = res_aux[0] * p0->getZ() + res_aux[1] * p1->getZ() + res_aux[2] * p2->getZ() + res_aux[3] * p3->getZ();
+
+	deriv[0] = deriv_aux[0] * p0->getX() + deriv_aux[1] * p1->getX() + deriv_aux[2] * p2->getX() + deriv_aux[3] * p3->getX();
+	deriv[1] = deriv_aux[0] * p0->getY() + deriv_aux[1] * p1->getY() + deriv_aux[2] * p2->getY() + deriv_aux[3] * p3->getY();
+	deriv[2] = deriv_aux[0] * p0->getZ() + deriv_aux[1] * p1->getZ() + deriv_aux[2] * p2->getZ() + deriv_aux[3] * p3->getZ();
 }
 
-void Translation::getGlobalCatmullRomPoint(float gt, float *res, vector<Vertex*> deriv) {
-	int tam = deriv.size();
+void Translation::getGlobalCatmullRomPoint(float gt, float *res,float *deriv, vector<Vertex*> pontos) {
+	int tam = pontos.size();
 
 	float t = gt * tam; // this is the real global t
 	int index = floor(t);  // which segment
@@ -64,19 +78,21 @@ void Translation::getGlobalCatmullRomPoint(float gt, float *res, vector<Vertex*>
 	indices[2] = (indices[1]+1)%tam; 
 	indices[3] = (indices[2]+1)%tam;
 
-	getCatmullRomPoint(t, indices, res, deriv);
+	getCatmullRomPoint(t, indices, res, deriv, pontos);
 }
 
-void Translation::genPointsCurv(vector<Vertex*> v){
+vector<Vertex*> Translation::genPointsCurv(){
 	float res[3];
+	float deriv[3];
 
 	for (float t = 0; t<1; t += 0.01){
-		getGlobalCatmullRomPoint(t, res, points_list);
+		getGlobalCatmullRomPoint(t, res, deriv, points_list);
 
 		Vertex* v = new Vertex(res[0], res[1], res[2]);
 		points_curv.push_back(v);
 	}
-}
+	return points_curv;
+}	
 
 float Translation::getX(){
 	return x;

@@ -22,6 +22,7 @@ float camX = 5.0, camY = 5.0, camZ = 5.0;
 float raio = 10.0f;
 float xp = 40, yp = 10, zp = 100, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
+float up[3];
 
 // Frames Per Second
 int timebase = 0, frame = 0;
@@ -93,6 +94,41 @@ void renderCatmullRomCurve(vector<Vertex*> pontos) {
 	glEnd();
 }
 
+void normalize(float *a) {
+
+	float l = sqrt(a[0]*a[0] + a[1] * a[1] + a[2] * a[2]);
+	a[0] = a[0]/l;
+	a[1] = a[1]/l;
+	a[2] = a[2]/l;
+}
+
+void cross(float *a, float *b, float *res) {
+
+	res[0] = a[1]*b[2] - a[2]*b[1];
+	res[1] = a[2]*b[0] - a[0]*b[2];
+	res[2] = a[0]*b[1] - a[1]*b[0];
+}
+
+
+void curveRotation(float *der, float *up){
+
+	float left[3];
+
+	cross(der,up,left);
+	cross(left, der, up);
+	
+	normalize(der);
+	normalize(up);
+	normalize(left);
+	
+	float m[4][4] = { {der[0], der[1], der[2], 0}, 
+					  {up[0], up[1], up[2], 0}, 
+					  {left[0], left[1], left[2], 0},
+					  {0.0f,0.0f,0.0f, 1}
+					};
+	glMultMatrixf((float*)m);
+}
+
 void changeSize(int w, int h) {
 
 	// Prevent a divide by zero, when window is too short
@@ -122,6 +158,7 @@ void renderGroup(Group* group){
 	float x,y,z;
 	float te, gt, r, gr;
 	float res[3];
+	float deriv[3];
 
 	glPushMatrix();
 
@@ -131,10 +168,12 @@ void renderGroup(Group* group){
 			te = glutGet(GLUT_ELAPSED_TIME) % (int)(translation->getTime() * 1000);
 			gt = te / (translation->getTime() * 1000);
 			vector<Vertex*> vp = translation->getPoints();
-			renderCatmullRomCurve(translation->getPointsCurv());
-			translation->getGlobalCatmullRomPoint(gt, res, vp);
+			renderCatmullRomCurve(translation->genPointsCurv());
+			translation->getGlobalCatmullRomPoint(gt,res,deriv,vp);
 			vp.clear();
 			glTranslatef(res[0], res[1], res[2]);
+
+			//curveRotation(deriv,up);
 		}
 		else {
 			glTranslatef(translation->getX(),translation->getY(),translation->getZ());
@@ -142,8 +181,14 @@ void renderGroup(Group* group){
 	}
 	
 	Rotation* rotation=group->getRotation();
-	if(rotation)
-		glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
+	if(rotation){
+		if(rotation->getTime()!=0){
+			r = glutGet(GLUT_ELAPSED_TIME) % (int)(rotation->getTime() * 1000);
+			gr = (r*360) / (rotation->getTime() * 1000);
+			glRotatef(gr,rotation->getX(),rotation->getY(),rotation->getZ());
+		}
+		else glRotatef(rotation->getAngle(),rotation->getX(),rotation->getY(),rotation->getZ());
+	}
 
 	Scale* scale=group->getScale();
 	if(scale)

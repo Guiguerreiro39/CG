@@ -45,9 +45,6 @@ void updateTranslation(XMLElement* element, Group* group){
 
 		Vertex* vertex = new Vertex(x,y,z);
 		translation->addPoint(vertex);
-
-		cout << point_element->Name() << endl;
-		cout << x << " | " << y << " | " << z << endl;
 	}
 }
 

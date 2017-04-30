@@ -27,8 +27,8 @@ class Translation{
 		float getTime();
 		vector<Vertex*> getPoints();
 		vector<Vertex*> getPointsCurv();
-		void genPointsCurv(vector<Vertex*>);
-		void getGlobalCatmullRomPoint(float, float*, vector<Vertex*>);
+		vector<Vertex*> genPointsCurv();
+		void getGlobalCatmullRomPoint(float, float*,float*, vector<Vertex*>);
 		void setX(float);
 		void setY(float);
 		void setZ(float);
