@@ -45,9 +45,6 @@ void updateTranslation(XMLElement* element, Group* group){
 
 		Vertex* vertex = new Vertex(x,y,z);
 		translation->addPoint(vertex);
-
-		cout << point_element->Name() << endl;
-		cout << x << " | " << y << " | " << z << endl;
 	}
 }
 
@@ -141,7 +138,6 @@ void exploreElement(XMLElement* element, Group* group){
 		if(element){
 			exploreElement(element,child_group);		
 		}
-
 	}
 
 	// Percorrer os irmãos
@@ -169,7 +165,7 @@ vector<Vertex*> readFile(string file_name){
 		}
 		file.close();
 	}
-	else cout << "Unable to open file." << endl;
+	else cout << "Unable to open file: " << file_name << "." << endl;
 	return vertex_list;
 }
 
