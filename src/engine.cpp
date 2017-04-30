@@ -22,7 +22,7 @@ float camX = 5.0, camY = 5.0, camZ = 5.0;
 float raio = 10.0f;
 float xp = 40, yp = 10, zp = 100, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
-float up[3];
+float up[3] = {0,1,0};
 
 // Frames Per Second
 int timebase = 0, frame = 0;
@@ -168,12 +168,14 @@ void renderGroup(Group* group){
 			te = glutGet(GLUT_ELAPSED_TIME) % (int)(translation->getTime() * 1000);
 			gt = te / (translation->getTime() * 1000);
 			vector<Vertex*> vp = translation->getPoints();
-			renderCatmullRomCurve(translation->genPointsCurv());
+			vector<Vertex*> vp2 = translation->genPointsCurv();
+			renderCatmullRomCurve(vp2);
 			translation->getGlobalCatmullRomPoint(gt,res,deriv,vp);
 			vp.clear();
+			vp2.clear();
 			glTranslatef(res[0], res[1], res[2]);
 
-			//curveRotation(deriv,up);
+			curveRotation(deriv,up);
 		}
 		else {
 			glTranslatef(translation->getX(),translation->getY(),translation->getZ());
