@@ -241,5 +241,26 @@
 				</models>
 			</group>
 		</group>
+		<!--COMETA -->
+		<group>
+			<translate time="200">
+				<point X="26" Y="0" Z="0"/>
+				<point X="19.38478" Y="0" Z="19.38478"/>
+				<point X="0" Y="0" Z="20.242"/>
+				<point X="-19.38478" Y="0" Z="19.38478"/>
+				<point X="-90.232" Y="0" Z="18.38478"/>
+				<point X="-100.232" Y="0" Z="0"/>
+				<point X="-90.232" Y="0" Z="-18.38478"/>
+				<point X="-19.38478" Y="0" Z="-19.38478"/>
+				<point X="0" Y="0" Z="-20.242"/>
+				<point X="19.38478" Y="0" Z="-19.38478"/>
+			</translate>
+	    	<rotate angle="90" X="0" Y="1" Z="0"/>
+	    	<scale X="0.075" Y="0.075" Z="0.075" />
+			<colour R="255" G="255" B="255"/>
+			<models>
+				<model file="sphere.3d" />
+			</models>
+		</group>
 	</group>
 </scene>
