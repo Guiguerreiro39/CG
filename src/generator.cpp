@@ -103,7 +103,7 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 void printHelp(){
 	cout << "#_____________________________ HELP _____________________________# " << endl;
 	cout << "|                                                                |" << endl;
-	cout << "|   Usage: ./generator {COMMAND} ... {FILE}                      |" << endl;
+	cout << "|   Usage: ./generator {COMMAND} ... {OUTPUT FILE}               |" << endl;
 	cout << "|                      [-h]                                      |" << endl;
 	cout << "|                                                                |" << endl;
 	cout << "|   COMMANDS:                                                    |" << endl;
@@ -128,7 +128,7 @@ void printHelp(){
 	cout << "| - patch [TESSELLATION LEVEL] [INPUT FILE]                      |" << endl;
 	cout << "|      Creates a new type of model based on Bezier patches.      |" << endl;
 	cout << "|                                                                |" << endl;													        
-	cout << "|   FILE:                                                        |" << endl;														    
+	cout << "|   OUTPUT FILE:                                                 |" << endl;														    
 	cout << "| In the file section you can specify any file in which you wish |" << endl;
 	cout << "| to save the coordinates generated with the previous commands.  |" << endl;
 	cout << "|                                                                |" << endl;															
