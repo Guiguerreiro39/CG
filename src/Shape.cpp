@@ -58,7 +58,7 @@ void Shape::drawVertex3f(){ // Just for performance tests purposes
 void Shape::draw(){
 	glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
-	glDrawArrays(GL_TRIANGLES, 0, vertex_list.size()*3); // experimentar sem o *3 
+	glDrawArrays(GL_TRIANGLES, 0, vertex_list.size()*3); 
 }
 
 Shape::~Shape(void){
