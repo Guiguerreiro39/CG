@@ -124,6 +124,9 @@ void printHelp(){
 	cout << "| - torus [INNER RADIUS] [OUTER RADIUS] [SIDES] [RINGS]          |" << endl;
 	cout << "|      Creates a torus with the inner and outer radius, sides    |" << endl;
 	cout << "|      and rings given.                                          |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - patch [TESSELLATION LEVEL] [INPUT FILE]                      |" << endl;
+	cout << "|      Creates a new type of model based on Bezier patches.      |" << endl;
 	cout << "|                                                                |" << endl;													        
 	cout << "|   FILE:                                                        |" << endl;														    
 	cout << "| In the file section you can specify any file in which you wish |" << endl;
