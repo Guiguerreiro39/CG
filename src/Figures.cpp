@@ -315,7 +315,7 @@ vector<Vertex*> createTorus(float radiusIn, float radiusOut, int sides, int ring
 
 Vertex* evalBezierCurve(float t, Vertex* p1, Vertex* p2, Vertex* p3, Vertex* p4) {
 
-	float result_point[3];
+	float x, y, z;
 
 	float it = 1.0 - t;
 
@@ -324,28 +324,51 @@ Vertex* evalBezierCurve(float t, Vertex* p1, Vertex* p2, Vertex* p3, Vertex* p4)
 	float b2 = 3 * t * t * it;
 	float b3 = t * t * t;
 
-	result_point[0] = b0*p1->getX() + b1*p2->getX() + b2*p3->getX() + b3*p4->getX();
-	result_point[1] = b0*p1->getY() + b1*p2->getY() + b2*p3->getY() + b3*p4->getY();
-	result_point[2] = b0*p1->getZ() + b1*p2->getZ() + b2*p3->getZ() + b3*p4->getZ();
+	x = b0*p1->getX() + b1*p2->getX() + b2*p3->getX() + b3*p4->getX();
+	y = b0*p1->getY() + b1*p2->getY() + b2*p3->getY() + b3*p4->getY();
+	z = b0*p1->getZ() + b1*p2->getZ() + b2*p3->getZ() + b3*p4->getZ();
 
-	Vertex* new_point = new Vertex(result_point[0], result_point[1], result_point[2]);
+	Vertex* new_point = new Vertex(x, y, z);
 	return new_point;
 }
- 
-Vertex* evalBezierPatch(float u, float v, vector<Vertex*> control_points){
 
-	Vertex* points[4];
+Vertex* evalBezierPatch(float u, float v, vector<Vertex*> control_points) {
+	float matrix[4][3], result_matrix[4][3];
+	int i, j = 0, k=0;
 
-	for(int i=0,j=0; i<16; i+=4,j++)
-		points[j] = evalBezierCurve(u, control_points[i], control_points[i+1], control_points[i+2], control_points[i+3]);
-	
-	return evalBezierCurve(v, points[0], points[1], points[2], points[3]);
+	for (i = 0; i < 16; i ++) {
+		matrix[j][0] = control_points[i]->getX();
+		matrix[j][1] = control_points[i]->getY();
+		matrix[j][2] = control_points[i]->getZ();
+
+		j++;
+
+		if (j % 4 == 0) {
+			Vertex* point = evalBezierCurve(u, 	new Vertex(matrix[0][0],matrix[0][1],matrix[0][2]),
+											new Vertex(matrix[1][0],matrix[1][1],matrix[1][2]),
+											new Vertex(matrix[2][0],matrix[2][1],matrix[2][2]),
+											new Vertex(matrix[3][0],matrix[3][1],matrix[3][2]));
+
+			result_matrix[k][0] = point->getX();
+			result_matrix[k][1] = point->getY();
+			result_matrix[k][2] = point->getZ();
+			
+			k++;
+			j = 0;
+		}
+	} 
+	return evalBezierCurve(v, 	new Vertex(result_matrix[0][0],result_matrix[0][1],result_matrix[0][2]),
+							  	new Vertex(result_matrix[1][0],result_matrix[1][1],result_matrix[1][2]),
+			    				new Vertex(result_matrix[2][0],result_matrix[2][1],result_matrix[2][2]),
+								new Vertex(result_matrix[3][0],result_matrix[3][1],result_matrix[3][2]));
 }
+
 
 vector<Vertex*> renderBezierPatch(int divs, vector<Patch*> patch_list){
 
 	vector<Vertex*> result_list;
 	float u, u2, v, v2;
+	float inc = 1.0 / divs;
 
 	for(int n_patches = 0; n_patches < patch_list.size(); n_patches++){
 
@@ -354,25 +377,26 @@ vector<Vertex*> renderBezierPatch(int divs, vector<Patch*> patch_list){
 		for(int j=0; j <= divs ; j++){
 			for(int i=0; i <= divs; i++){
 
-				u = i/(float) divs;
-				v = j/(float) divs;
-				u2 = (i+1)/(float) divs;
-				v2 = (j+1)/(float) divs;
+				u = i * inc;
+				v = j * inc;
+				u2 = (i+1) * inc;
+				v2 = (j+1) * inc;
 
-				result_list.push_back(evalBezierPatch(u, v, control_points));
-				result_list.push_back(evalBezierPatch(u, v2, control_points));
-				result_list.push_back(evalBezierPatch(u2, v2, control_points));
+				Vertex* p0 = evalBezierPatch(u, v, control_points);
+				Vertex* p1 = evalBezierPatch(u, v2, control_points);
+				Vertex* p2 = evalBezierPatch(u2, v, control_points);
+				Vertex* p3 = evalBezierPatch(u2, v2, control_points);
 
-				result_list.push_back(evalBezierPatch(u, v, control_points));
-				result_list.push_back(evalBezierPatch(u2, v2, control_points));
-				result_list.push_back(evalBezierPatch(u, v2, control_points));
+				result_list.push_back(p0);
+				result_list.push_back(p2);
+				result_list.push_back(p3);
+
+				result_list.push_back(p0);
+				result_list.push_back(p3);
+				result_list.push_back(p1); 	
 			}
 		}
 	}
 
 	return result_list;
 }
-
-
-
-

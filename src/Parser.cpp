@@ -138,7 +138,6 @@ void exploreElement(XMLElement* element, Group* group){
 		if(element){
 			exploreElement(element,child_group);		
 		}
-
 	}
 
 	// Percorrer os irmãos
@@ -166,7 +165,7 @@ vector<Vertex*> readFile(string file_name){
 		}
 		file.close();
 	}
-	else cout << "Unable to open file." << endl;
+	else cout << "Unable to open file: " << file_name << "." << endl;
 	return vertex_list;
 }
 

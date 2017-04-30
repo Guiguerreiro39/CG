@@ -76,8 +76,6 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 				index = atoi(token.c_str());
 				line.erase(0, position + 1);
 
-				//patch->addIndex(index); // retirar isto
-
 				n_line = getLineNumber(file_name, n_patches + 3 + index);
 				line_cpy = n_line;
 
@@ -93,12 +91,6 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 			}
 		}
 
-		/**cout << "##################################################################################################" << endl;
-		for(vector<Patch*>::iterator patch_it = patches_list.begin(); patch_it != patches_list.end(); ++patch_it){
-			(*patch_it)->print();
-			cout << "##################################################################################################" << endl;
-		} **/
-
 		printFile(renderBezierPatch(tessellation,patches_list),output_file);
 
 		file.close();
@@ -111,7 +103,7 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 void printHelp(){
 	cout << "#_____________________________ HELP _____________________________# " << endl;
 	cout << "|                                                                |" << endl;
-	cout << "|   Usage: ./generator {COMMAND} ... {FILE}                      |" << endl;
+	cout << "|   Usage: ./generator {COMMAND} ... {OUTPUT FILE}               |" << endl;
 	cout << "|                      [-h]                                      |" << endl;
 	cout << "|                                                                |" << endl;
 	cout << "|   COMMANDS:                                                    |" << endl;
@@ -132,8 +124,11 @@ void printHelp(){
 	cout << "| - torus [INNER RADIUS] [OUTER RADIUS] [SIDES] [RINGS]          |" << endl;
 	cout << "|      Creates a torus with the inner and outer radius, sides    |" << endl;
 	cout << "|      and rings given.                                          |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "| - patch [TESSELLATION LEVEL] [INPUT FILE]                      |" << endl;
+	cout << "|      Creates a new type of model based on Bezier patches.      |" << endl;
 	cout << "|                                                                |" << endl;													        
-	cout << "|   FILE:                                                        |" << endl;														    
+	cout << "|   OUTPUT FILE:                                                 |" << endl;														    
 	cout << "| In the file section you can specify any file in which you wish |" << endl;
 	cout << "| to save the coordinates generated with the previous commands.  |" << endl;
 	cout << "|                                                                |" << endl;															
@@ -145,7 +140,6 @@ void printHelp(){
 int main(int argc, char** argv){
 
 	vector<Vertex*> v;
-	//vector<Patch*> p;
 
 	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]));
