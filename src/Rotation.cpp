@@ -11,6 +11,17 @@ Rotation::Rotation(float ang, float t, float a, float b, float c){
 	z = c;
 }
 
+void Rotation::apply(){
+	float r, gr;
+
+	if(time!=0){
+		r = glutGet(GLUT_ELAPSED_TIME) % (int)(time * 1000);
+		gr = (r*360) / (time * 1000);
+		glRotatef(gr,x,y,z);
+	}
+	else glRotatef(angle,x,y,z);
+}
+
 float Rotation::getAngle(){
 	return angle;
 }

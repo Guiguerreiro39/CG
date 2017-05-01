@@ -1,6 +1,8 @@
 #ifndef __ROTATION_H__
 #define __ROTATION_H__
 
+#include <GL/glut.h>
+
 class Rotation{
 
 	float angle;
@@ -20,6 +22,7 @@ class Rotation{
 		void setX(float);
 		void setY(float);
 		void setZ(float);
+		void apply();
 		Rotation* clone() const;
 		virtual ~Rotation();
 };

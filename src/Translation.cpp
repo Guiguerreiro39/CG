@@ -8,6 +8,9 @@ Translation::Translation(float a, float b, float c,float t){
 	y = b;
 	z = c;
 	time = t;
+	up[0] = 0;
+	up[1] = 1;
+	up[2] = 0;
 }
 
 vector<Vertex*> Translation::getPointsCurv(){
@@ -92,6 +95,55 @@ vector<Vertex*> Translation::genPointsCurv(){
 		points_curv.push_back(v);
 	}
 	return points_curv;
+}
+
+void renderCatmullRomCurve(vector<Vertex*> pontos) {
+	int tam = pontos.size();
+	float p[3];
+
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i < tam; i++) {
+		p[0] = pontos[i]->getX(); 
+		p[1] = pontos[i]->getY(); 
+		p[2] = pontos[i]->getZ();
+		glVertex3fv(p);
+	}
+	glEnd();
+}
+
+void normalize(float *a) {
+
+	float l = sqrt(a[0]*a[0] + a[1] * a[1] + a[2] * a[2]);
+	a[0] = a[0]/l;
+	a[1] = a[1]/l;
+	a[2] = a[2]/l;
+}
+
+void cross(float *a, float *b, float *res) {
+
+	res[0] = a[1]*b[2] - a[2]*b[1];
+	res[1] = a[2]*b[0] - a[0]*b[2];
+	res[2] = a[0]*b[1] - a[1]*b[0];
+}
+
+
+void curveRotation(float *der, float *up){
+
+	float left[3];
+
+	cross(der,up,left);
+	cross(left, der, up);
+	
+	normalize(der);
+	normalize(up);
+	normalize(left);
+	
+	float m[4][4] = { {der[0], der[1], der[2], 0}, 
+					  {up[0], up[1], up[2], 0}, 
+					  {left[0], left[1], left[2], 0},
+					  {0.0f,0.0f,0.0f, 1}
+					};
+	glMultMatrixf((float*)m);
 }	
 
 float Translation::getX(){
@@ -140,6 +192,26 @@ void Translation::addPoint(Vertex* v){
 
 Translation* Translation::clone() const{
 	return new Translation(x,y,z,time);
+}
+
+void Translation::apply(){
+	float te, gt;
+	float res[3];
+	float deriv[3];
+
+	if(time!=0){
+		te = glutGet(GLUT_ELAPSED_TIME) % (int)(time * 1000);
+		gt = te / (time * 1000);
+		vector<Vertex*> vp2 = genPointsCurv();
+		renderCatmullRomCurve(vp2);
+		getGlobalCatmullRomPoint(gt,res,deriv,points_list);
+		points_curv.clear();
+		glTranslatef(res[0], res[1], res[2]);
+		curveRotation(deriv,up);
+	}
+	else {
+		glTranslatef(x,y,z);
+	}
 }
 
 Translation::~Translation(){

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <math.h>
+#include <GL/glut.h>
 
 #include "Vertex.h"
 
@@ -15,6 +16,7 @@ class Translation{
 	float z; 
 
 	float time;
+	float up[3];
 	vector<Vertex*> points_list;
 	vector<Vertex*> points_curv;
 
@@ -35,6 +37,7 @@ class Translation{
 		void setTime(float);
 		void setPoints(vector<Vertex*>);
 		void addPoint(Vertex*);
+		void apply();
 		Translation* clone() const;
 		virtual ~Translation();
 };
