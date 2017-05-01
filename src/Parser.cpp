@@ -173,22 +173,21 @@ Group* parseXML(char* file_name){
 
 	XMLDocument doc;
 	XMLElement* element;
+	Group* group;
 	XMLError error;
-
-	Group* group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
-	group->setTranslation(new Translation(0,0,0,0));
-	group->setRotation(new Rotation(0,0,0,0,0));
-	group->setScale(new Scale(1,1,1));
 
 	error = doc.LoadFile(file_name);
 	if(error == 0){
+		group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
+		group->setTranslation(new Translation(0,0,0,0));
+		group->setRotation(new Rotation(0,0,0,0,0));
+		group->setScale(new Scale(1,1,1));
+
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
 		exploreElement(element,group);
 	}
 	else
 		cout << "Could not load XML file: " << file_name << "." << endl;
 
-
 	return group;
-
 }

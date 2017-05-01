@@ -261,26 +261,28 @@ int main(int argc, char** argv){
 	else
 		scene = parseXML(argv[1]);
  
-	// put GLUT init here
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
-	glutInitWindowPosition(100,100);
-	glutInitWindowSize(800,800);
-	glutCreateWindow("CG_Trabalho");
+ 	if(scene){
+		// put GLUT init here
+		glutInit(&argc, argv);
+		glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
+		glutInitWindowPosition(100,100);
+		glutInitWindowSize(800,800);
+		glutCreateWindow("CG_Trabalho");
 
-	// put callback registration here
-	glutDisplayFunc(renderScene);
-	glutIdleFunc(renderScene);
-	glutReshapeFunc(changeSize);
+		// put callback registration here
+		glutDisplayFunc(renderScene);
+		glutIdleFunc(renderScene);
+		glutReshapeFunc(changeSize);
 
-	// put here the registration of the keyboard callbacks
-	glutKeyboardFunc(keyboard);
-	glutSpecialFunc(keyboardArrows);
+		// put here the registration of the keyboard callbacks
+		glutKeyboardFunc(keyboard);
+		glutSpecialFunc(keyboardArrows);
 
-	initGL();
+		initGL();
 
-	// enter GLUT's main loop
-	glutMainLoop(); 
+		// enter GLUT's main loop
+		glutMainLoop(); 
+	}
 
 	return 0;
 }
