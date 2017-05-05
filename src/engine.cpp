@@ -105,11 +105,6 @@ void changeSize(int w, int h) {
 
 void renderGroup(Group* group){
 
-	float x,y,z;
-	float te, gt, r, gr;
-	float res[3];
-	float deriv[3];
-
 	glPushMatrix();
 
 	Rotation* rotation=group->getRotation();
@@ -123,14 +118,13 @@ void renderGroup(Group* group){
 	Scale* scale=group->getScale();
 	if(scale)
 		scale->apply();
-		glScalef(scale->getX(),scale->getY(),scale->getZ());
 
 	vector<Shape*> shape_list = group->getShapes();
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
 		Shape* shape = (*shape_it);
 		shape->draw();
 	}
-	glColor3f(255,255,255);
+	//glColor3f(255,255,255);
 
 	vector<Group*>  childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
@@ -141,8 +135,6 @@ void renderGroup(Group* group){
 
 
 void renderScene(void) {
-
-	int i = 0;
 
 	// clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -242,10 +234,6 @@ void initGL(){
 }
 
 int main(int argc, char** argv){
-
-	vector<string> file_list;
-	string line;
-	int r;
 
 	if(argc < 2){
 		cout << "Invalid input. Use -h if you need some help." << endl;

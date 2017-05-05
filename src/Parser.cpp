@@ -84,40 +84,40 @@ void updateColourComponent(XMLElement* element, Shape* shape){
 	float shininess = 0;
 
 	// Diffuse
-	if(element->Attribute("diffR"))
-		diffuse->setR(stof(element->Attribute("diffR")));
-	if(element->Attribute("diffG"))
-		diffuse->setG(stof(element->Attribute("diffG")));
-	if(element->Attribute("diffB"))
-		diffuse->setB(stof(element->Attribute("diffB")));
+	if(element->Attribute("diffX"))
+		diffuse->setR(stof(element->Attribute("diffX")));
+	if(element->Attribute("diffY"))
+		diffuse->setG(stof(element->Attribute("diffY")));
+	if(element->Attribute("diffZ"))
+		diffuse->setB(stof(element->Attribute("diffZ")));
 
 	// Ambient
-	if(element->Attribute("ambR"))
-		ambient->setR(stof(element->Attribute("ambR")));
-	if(element->Attribute("ambG"))
-		ambient->setG(stof(element->Attribute("ambG")));
-	if(element->Attribute("ambB"))
-		ambient->setB(stof(element->Attribute("ambB")));
+	if(element->Attribute("ambX"))
+		ambient->setR(stof(element->Attribute("ambX")));
+	if(element->Attribute("ambY"))
+		ambient->setG(stof(element->Attribute("ambY")));
+	if(element->Attribute("ambZ"))
+		ambient->setB(stof(element->Attribute("ambZ")));
 
 	// Specular
-	if(element->Attribute("specR"))
-		specular->setR(stof(element->Attribute("specR")));
-	if(element->Attribute("specG"))
-		specular->setG(stof(element->Attribute("specG")));
-	if(element->Attribute("specB"))
-		specular->setB(stof(element->Attribute("specB")));
+	if(element->Attribute("specX"))
+		specular->setR(stof(element->Attribute("specX")));
+	if(element->Attribute("specY"))
+		specular->setG(stof(element->Attribute("specY")));
+	if(element->Attribute("specZ"))
+		specular->setB(stof(element->Attribute("specZ")));
 
 	// Emission
-	if(element->Attribute("emiR"))
-		emission->setR(stof(element->Attribute("emiR")));
-	if(element->Attribute("emiG"))
-		emission->setG(stof(element->Attribute("emiG")));
-	if(element->Attribute("emicB"))
-		emission->setB(stof(element->Attribute("emiB")));
+	if(element->Attribute("emiX"))
+		emission->setR(stof(element->Attribute("emiX")));
+	if(element->Attribute("emiY"))
+		emission->setG(stof(element->Attribute("emiY")));
+	if(element->Attribute("emiZ"))
+		emission->setB(stof(element->Attribute("emiZ")));
 
 	// Shininess
-	if(element->Attribute("shininess"))
-		shininess = stof(element->Attribute("shininess"));
+	if(element->Attribute("shini"))
+		shininess = stof(element->Attribute("shini"));
 
 	Material* colour_component = new Material(diffuse, ambient, specular, emission, shininess);
 	shape->setColourComponent(colour_component);
@@ -152,7 +152,6 @@ void exploreModels(XMLElement* element, Group* group){
 void exploreElement(XMLElement* element, Group* group){
 
 	XMLElement* initial = element;
-
 
 	if(!strcmp(element->Name(),"translate"))
 		updateTranslation(element,group);
