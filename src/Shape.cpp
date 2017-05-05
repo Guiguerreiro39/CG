@@ -124,6 +124,8 @@ void Shape::draw(){
 
 	colour_component->draw();
 
+	//glBindTexture(GL_TEXTURE_2D, textureID);
+
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
@@ -131,7 +133,7 @@ void Shape::draw(){
 	glNormalPointer(GL_FLOAT, 0, 0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-	glTexCoordPointer(2, GL_FLOAT, 0, 0);
+	glTexCoordPointer(2, GL_FLOAT, 0, 0); 
 
 	glDrawArrays(GL_TRIANGLES, 0, vertex_list.size()*3); 
 }

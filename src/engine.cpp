@@ -228,8 +228,18 @@ void initGL(){
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+	// Light
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
+
+	// Refresh normals after scale
+	glEnable(GL_NORMALIZE);
+
+	// Textures
+	glEnable(GL_TEXTURE_2D);
 	
-	// recursive init
+	// Recursive init
 	initGroup(scene);
 }
 

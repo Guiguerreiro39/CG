@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <GL/glut.h>
+#include <iostream> // retirar
 
 #include "Vertex.h"
 #include "Material.h"

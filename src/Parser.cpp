@@ -135,6 +135,7 @@ void exploreModels(XMLElement* element, Group* group){
 			vector<Vertex*> vertex_list; 
 			vector<Vertex*> normal_list;
 			vector<Vertex*> texture_list;
+
 			readFile(element->Attribute("file"), &vertex_list, &normal_list, &texture_list);
 
 			if(vertex_list.size()){
@@ -198,34 +199,49 @@ void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* n
 	if(file.is_open()){
 
 		index = 0;
-		int n_vertex = getline(file, line);
+		getline(file, line);
+		int n_vertex = atoi(line.c_str());
+		cout << n_vertex << endl;
+
 		for(int i=0; i < n_vertex; i++){
 			getline(file,line);
 			stringstream ss(line); 
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+			
+			cout << tokens[index] << tokens[index+1] << tokens[index+2] << endl;
 			vertex_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
 
 		index = 0;
-		int n_normal = getline(file, line);
+		getline(file, line);
+		int n_normal = atoi(line.c_str());
+		cout << n_normal << endl;
+
 		for(int i=0; i < n_normal; i++){
 			getline(file,line);
 			stringstream ss(line); 
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+
+			cout << tokens[index] << tokens[index+1] << tokens[index+2] << endl;
 			normal_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
 		
 		index = 0;
-		int n_texture = getline(file, line);
+		getline(file, line);
+		int n_texture = atoi(line.c_str());
+		cout << n_texture << endl;
+
 		for(int i=0; i < n_texture; i++){
 			getline(file,line);
 			stringstream ss(line); 
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+			
+			cout << tokens[index] << tokens[index+1] << tokens[index+2] << endl;
 			texture_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
