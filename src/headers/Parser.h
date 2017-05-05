@@ -6,20 +6,20 @@
 #include <string>
 #include <vector>
 #include <sstream>
+
 #include "tinyxml2.h"
-#include "Shape.h"
 #include "Group.h"
-#include "Vertex.h"
 
 using namespace std;
 using namespace tinyxml2;
 
 void updateTranslation(XMLElement*, Group*);
-void updateRotation(XMLElement*, Group* );
-void updateScale(XMLElement*, Group* );
+void updateRotation(XMLElement*, Group*);
+void updateScale(XMLElement*, Group*);
+void updateColour(XMLElement*, Shape*);
 void exploreElement(XMLElement*, Group*);
 vector<Shape*> exploreModels(XMLElement* );
-vector<Vertex*> readFile(string);
+void readFile(string, vector<Vertex*>*, vector<Vertex*>*, vector<Vertex*>*);
 Group* hereditaryChild(Group*);
 Group* parseXML(char*);
 

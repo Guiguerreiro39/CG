@@ -33,6 +33,10 @@ void Scale::setZ(float c){
 	z = c;
 }
 
+void Scale::apply(){
+	glScalef(x,y,z);
+}
+
 Scale* Scale::clone() const{
 	return new Scale(x,y,z);
 }

@@ -3,15 +3,40 @@
 vector<Vertex*> createPlane(float size){
 
 	vector<Vertex*> vertex_list;
+	vector<Vertex*> normal_list;
+	vector<Vertex*> texture_list;
+
+
 	float h = size/2; // para o plano ficar centrado na origem do referencial.
+	float texV = 1 / (float) size;
+	float texH = 1 / (float) size;
 
 	vertex_list.push_back(new Vertex(h,0,h));
+	normal_list.push_back(new Vertex(0,1,0));
+
+
 	vertex_list.push_back(new Vertex(h,0,-h));
-	vertex_list.push_back(new Vertex(-h,0,h));
+	normal_list.push_back(new Vertex(0,1,0));
 
 	vertex_list.push_back(new Vertex(-h,0,h));
+	normal_list.push_back(new Vertex(0,1,0));
+
+
+	vertex_list.push_back(new Vertex(-h,0,h));
+	normal_list.push_back(new Vertex(0,1,0));
+
 	vertex_list.push_back(new Vertex(h,0,-h));
+	normal_list.push_back(new Vertex(0,1,0));
+
 	vertex_list.push_back(new Vertex(-h,0,-h));
+	normal_list.push_back(new Vertex(0,1,0));
+
+	// print vertex_list.size();
+
+
+
+
+
 
 	return vertex_list;
 

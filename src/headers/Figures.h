@@ -5,6 +5,7 @@
 
 #include <math.h>
 #include <vector>
+#include <iostream>
 
 #include "Patch.h"
 #include "Vertex.h"

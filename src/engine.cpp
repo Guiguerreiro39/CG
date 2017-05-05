@@ -112,23 +112,18 @@ void renderGroup(Group* group){
 
 	glPushMatrix();
 
-	Translation* translation=group->getTranslation();
-	if(translation){
-		translation->apply();
-	}
-
 	Rotation* rotation=group->getRotation();
-	if(rotation){
+	if(rotation)
 		rotation->apply();
-	}
+
+	Translation* translation=group->getTranslation();
+	if(translation)
+		translation->apply();
 
 	Scale* scale=group->getScale();
 	if(scale)
+		scale->apply();
 		glScalef(scale->getX(),scale->getY(),scale->getZ());
-
-	Colour* colour=group->getColour();
-	if(colour)
-		glColor3f(colour->getR()/255,colour->getG()/255,colour->getB()/255);
 
 	vector<Shape*> shape_list = group->getShapes();
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
@@ -239,7 +234,9 @@ void initGL(){
 	glEnable(GL_CULL_FACE);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	
 	// recursive init
 	initGroup(scene);
 }

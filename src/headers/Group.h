@@ -4,11 +4,11 @@
 
 #include <string>
 #include <vector>
+
 #include "Shape.h"
 #include "Translation.h"
 #include "Rotation.h"
 #include "Scale.h"
-#include "Colour.h"
 
 using namespace std;
 
@@ -20,25 +20,22 @@ class Group{
 	Translation* translation;
 	Rotation* rotation;
 	Scale* scale;
-	Colour* colour;
 
 	public:
 		Group();
 		Group(int);
-		Group(vector<Shape*>, vector<Group*>, Translation*, Rotation*, Scale*, Colour*);
+		Group(vector<Shape*>, vector<Group*>, Translation*, Rotation*, Scale*);
 		int getID();
 		vector<Shape*> getShapes();
 		vector<Group*> getChilds();
 		Translation* getTranslation();
 		Rotation* getRotation();
 		Scale* getScale();
-		Colour* getColour();
 		void setShapes(vector<Shape*>);
 		void setChilds(vector<Group*>);
 		void setTranslation(Translation*);
 		void setRotation(Rotation*);
 		void setScale(Scale*);
-		void setColour(Colour*);
 		void addChild(Group*);
 		virtual ~Group();
 };

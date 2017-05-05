@@ -1,6 +1,8 @@
 #ifndef __SCALE_H__
 #define __SCALE_H__
 
+#include <GL/glut.h>
+
 class Scale{
 
 	float x;
@@ -16,6 +18,7 @@ class Scale{
 		void setX(float);
 		void setY(float);
 		void setZ(float);
+		void apply();
 		Scale* clone() const;
 		virtual ~Scale();
 };

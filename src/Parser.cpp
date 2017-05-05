@@ -10,7 +10,6 @@ Group* hereditaryChild(Group* father){
 	son->setTranslation(new Translation(0,0,0,0));
 	son->setRotation(new Rotation(0,0,0,0,0));
 	son->setScale(new Scale(1,1,1));
-	son->setColour(new Colour(255,255,255));
 
 	return son;
 }
@@ -76,19 +75,55 @@ void updateScale(XMLElement* element, Group* group){
 		scale->setZ(stof(element->Attribute("Z")));
 }
 
-void updateColour(XMLElement* element, Group* group){
+void updateColourComponent(XMLElement* element, Shape* shape){
 
-	Colour* colour = group->getColour();
+	Colour* diffuse = new Colour(0.8, 0.8, 0.8);
+	Colour* ambient = new Colour(0.2, 0.2, 0.2);
+	Colour* specular = new Colour(0, 0, 0);
+	Colour* emission = new Colour(0, 0, 0);
+	float shininess = 0;
 
-	if(element->Attribute("R")) 
-		colour->setR(stof(element->Attribute("R")));
-	if(element->Attribute("G")) 
-		colour->setG(stof(element->Attribute("G")));
-	if(element->Attribute("B")) 
-		colour->setB(stof(element->Attribute("B")));
+	// Diffuse
+	if(element->Attribute("diffR"))
+		diffuse->setR(stof(element->Attribute("diffR")));
+	if(element->Attribute("diffG"))
+		diffuse->setG(stof(element->Attribute("diffG")));
+	if(element->Attribute("diffB"))
+		diffuse->setB(stof(element->Attribute("diffB")));
+
+	// Ambient
+	if(element->Attribute("ambR"))
+		ambient->setR(stof(element->Attribute("ambR")));
+	if(element->Attribute("ambG"))
+		ambient->setG(stof(element->Attribute("ambG")));
+	if(element->Attribute("ambB"))
+		ambient->setB(stof(element->Attribute("ambB")));
+
+	// Specular
+	if(element->Attribute("specR"))
+		specular->setR(stof(element->Attribute("specR")));
+	if(element->Attribute("specG"))
+		specular->setG(stof(element->Attribute("specG")));
+	if(element->Attribute("specB"))
+		specular->setB(stof(element->Attribute("specB")));
+
+	// Emission
+	if(element->Attribute("emiR"))
+		emission->setR(stof(element->Attribute("emiR")));
+	if(element->Attribute("emiG"))
+		emission->setG(stof(element->Attribute("emiG")));
+	if(element->Attribute("emicB"))
+		emission->setB(stof(element->Attribute("emiB")));
+
+	// Shininess
+	if(element->Attribute("shininess"))
+		shininess = stof(element->Attribute("shininess"));
+
+	Material* colour_component = new Material(diffuse, ambient, specular, emission, shininess);
+	shape->setColourComponent(colour_component);
 }
 
-vector<Shape*> exploreModels(XMLElement* element){
+void exploreModels(XMLElement* element, Group* group){
 
 	vector<Shape*> models_list;
 	string file_model;
@@ -96,16 +131,22 @@ vector<Shape*> exploreModels(XMLElement* element){
 	element = element->FirstChildElement();
 	for(;element;element=element->NextSiblingElement())
 		if(!strcmp(element->Name(),"model")){
-			vector<Vertex*> vertex_list = readFile(element->Attribute("file"));
+
+			vector<Vertex*> vertex_list; 
+			vector<Vertex*> normal_list;
+			vector<Vertex*> texture_list;
+			readFile(element->Attribute("file"), &vertex_list, &normal_list, &texture_list);
+
 			if(vertex_list.size()){
-				Shape* shape = new Shape(element->Attribute("file"),vertex_list);
+
+				Shape* shape = new Shape(element->Attribute("file"), vertex_list, normal_list, texture_list);
+				updateColourComponent(element, shape);
 				models_list.push_back(shape);
 			}
-			else return models_list;
-			
 		}
 		
-	return models_list;
+	if(models_list.size())
+		group->setShapes(models_list);
 }
 
 void exploreElement(XMLElement* element, Group* group){
@@ -122,51 +163,77 @@ void exploreElement(XMLElement* element, Group* group){
 	else if(!strcmp(element->Name(),"scale"))
 		updateScale(element,group);
 
-	else if(!strcmp(element->Name(),"colour"))
-		updateColour(element,group);
+	/** else if(!strcmp(element->Name(),"colour"))
+		updateColour(element,group); **/
 
-	else if(!strcmp(element->Name(),"models")){
-		vector<Shape*> models_list = exploreModels(element);
-		if(models_list.size())
-			group->setShapes(models_list);
+	else if(!strcmp(element->Name(),"models"))
+		exploreModels(element, group);
+	
+	else if(!strcmp(element->Name(),"lights")){
+		// trabalhar com luzes
 	}
 
 	// Percorrer os filhos
 	else if(!strcmp(element->Name(),"group")){	
 		Group* child_group = hereditaryChild(group);
 		element=element->FirstChildElement();
-		if(element){
+		if(element)
 			exploreElement(element,child_group);		
-		}
 	}
 
 	// Percorrer os irmãos
 	initial=initial->NextSiblingElement();
 	if(initial)
 		exploreElement(initial,group);
+
 }
 
-vector<Vertex*> readFile(string file_name){
+void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* normal_list, vector<Vertex*>* texture_list){
 
-	vector<Vertex*> vertex_list;
 	vector<string> tokens;
 	string buf;
 	string line;
-	int index = 0;
+	int index;
 
 	ifstream file (file_name);
 	if(file.is_open()){
-		while(getline(file,line)){ // percorrer as linhas do ficheiro
+
+		index = 0;
+		int n_vertex = getline(file, line);
+		for(int i=0; i < n_vertex; i++){
+			getline(file,line);
 			stringstream ss(line); 
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
-			vertex_list.push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			vertex_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
+
+		index = 0;
+		int n_normal = getline(file, line);
+		for(int i=0; i < n_normal; i++){
+			getline(file,line);
+			stringstream ss(line); 
+			while(ss >> buf) 
+				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+			normal_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			index+=3; // incrementar o índice
+		}
+		
+		index = 0;
+		int n_texture = getline(file, line);
+		for(int i=0; i < n_texture; i++){
+			getline(file,line);
+			stringstream ss(line); 
+			while(ss >> buf) 
+				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+			texture_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			index+=3; // incrementar o índice
+		}
+
 		file.close();
 	}
 	else cout << "Unable to open file: " << file_name << "." << endl;
-	return vertex_list;
 }
 
 Group* parseXML(char* file_name){
