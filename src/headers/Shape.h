@@ -12,36 +12,24 @@ using namespace std;
 
 class Shape{
 
-	string texture_file; // remove it later (just for debugging purposes)
+	int buffers_size[3];
 	GLuint buffers[3];
 	GLuint texture;
 	Material* colour_component;
-
-	vector<Point*> vertex_list;
-	vector<Point*> normal_list;
-	vector<Point*> texture_list;
 
 	public:
 		Shape();
 		Shape(vector<Point*>,vector<Point*>,vector<Point*>); 
 		Shape(string,vector<Point*>,vector<Point*>,vector<Point*>);
-		string getTextureFile();
+
 		GLuint* getBuffers();
 		GLuint getTexture();
 		Material* getColourComponent();
-		vector<Point*> getVertexList();
-		vector<Point*> getNormalList();
-		vector<Point*> getTextureList();
-		void setTextureFile(string);
 		void setTexture(GLuint);
 		void setColourComponent(Material*);
-		void setVertexList(vector<Point*>);
-		void setNormalList(vector<Point*>);
-		void setTextureList(vector<Point*>);
 		
-		void prepare();
-		void loadTexture();
-		void drawVertex3f(); // just for performance tests purposes
+		void prepare(vector<Point*>, vector<Point*>, vector<Point*>);
+		void loadTexture(string);
 		void draw();
 		virtual ~Shape();
 };

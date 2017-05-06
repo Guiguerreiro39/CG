@@ -210,19 +210,6 @@ void keyboardArrows (int key_code, int x , int y){
 	}
 }
 
-void initGroup(Group* group){
-
-	vector<Shape*> shape_list = group->getShapes();
-	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
-		Shape* shape = (*shape_it);
-		shape->prepare();
-	}
-
-	vector<Group*> childs = group->getChilds();
-	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
-		initGroup(*group_it);
-}
-
 void initGL(){
 
 	// OpenGL settings 
@@ -242,15 +229,21 @@ void initGL(){
 
 	// Textures
 	glEnable(GL_TEXTURE_2D);
-	ilInit();
+	//ilInit();
 	ilEnable(IL_ORIGIN_SET);
 	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 	
-	// Recursive init
-	initGroup(scene);
 }
 
 int main(int argc, char** argv){
+
+	// put GLUT init here
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
+	glutInitWindowPosition(100,100);
+	glutInitWindowSize(800,800);
+	glutCreateWindow("CG_Trabalho");
+	ilInit();
 
 	if(argc < 2){
 		cout << "Invalid input. Use -h if you need some help." << endl;
@@ -264,12 +257,6 @@ int main(int argc, char** argv){
 		scene = parseXML(argv[1]);
  
  	if(scene){
-		// put GLUT init here
-		glutInit(&argc, argv);
-		glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
-		glutInitWindowPosition(100,100);
-		glutInitWindowSize(800,800);
-		glutCreateWindow("CG_Trabalho");
 
 		// put callback registration here
 		glutDisplayFunc(renderScene);
