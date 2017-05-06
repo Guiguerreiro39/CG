@@ -124,7 +124,6 @@ void renderGroup(Group* group){
 		Shape* shape = (*shape_it);
 		shape->draw();
 	}
-	//glColor3f(255,255,255);
 
 	vector<Group*>  childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
@@ -150,6 +149,8 @@ void renderScene(void) {
 
 	glRotatef(yr,0.0,1.0,0.0); 
 	glTranslated(-xp,-yp,-zp);
+
+	glColor3f(255,255,255);
 
 	renderGroup(scene);
 	displayFPS();

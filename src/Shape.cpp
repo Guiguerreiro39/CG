@@ -60,7 +60,7 @@ void Shape::prepare(){
 	int index = 0;
 	float* vertex_array = (float*) malloc(sizeof(float) * vertex_list.size() * 3);
 	float* normal_array = (float*) malloc(sizeof(float) * normal_list.size() * 3);
-	float* texture_array = (float*) malloc(sizeof(float) * texture_list.size() * 2);
+	float* texture_array = (float*) malloc(sizeof(float) * texture_list.size() * 3);
 
 	for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
 		vertex_array[index] = (*vertex_it)->getX();
@@ -91,7 +91,7 @@ void Shape::prepare(){
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * normal_list.size() * 3, normal_array, GL_STATIC_DRAW);
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * texture_list.size() * 2, texture_array, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * texture_list.size() * 3, texture_array, GL_STATIC_DRAW);
 
 	free(vertex_array);
 	free(normal_array);
