@@ -107,22 +107,25 @@ void renderGroup(Group* group){
 
 	glPushMatrix();
 
-	Translation* translation=group->getTranslation();
+	Translation* translation = group->getTranslation();
 	if(translation)
 		translation->apply();
 
-	Rotation* rotation=group->getRotation();
+	Rotation* rotation = group->getRotation();
 	if(rotation)
 		rotation->apply();
 
-	Scale* scale=group->getScale();
+	Scale* scale = group->getScale();
 	if(scale)
 		scale->apply();
 
+	vector<Light*> lights = group->getLights();
+	for(vector<Light*>::iterator light_it = lights.begin(); light_it != lights.end(); ++light_it)
+		(*light_it)->draw();
+
 	vector<Shape*> shape_list = group->getShapes();
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
-		Shape* shape = (*shape_it);
-		shape->draw();
+		(*shape_it)->draw();
 	}
 
 	vector<Group*>  childs = group->getChilds();

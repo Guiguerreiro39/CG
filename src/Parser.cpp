@@ -125,6 +125,30 @@ void updateColourComponent(XMLElement* element, Shape* shape){
 
 void updateLights(XMLElement* element, Group* group){
 
+	vector<Light*> lights_list;
+	bool isPoint;
+	Light* light;
+	float x=0, y=0, z=0;
+
+	element = element->FirstChildElement();
+	for(;element; element=element->NextSiblingElement())
+		if(!strcmp(element->Name(),"light")){
+			if(element->Attribute("type") && !strcmp(element->Attribute("type"),"POINT")) 
+				isPoint = true;
+			else isPoint = false;
+
+			if(element->Attribute("X"))
+				x = stof(element->Attribute("X"));
+			if(element->Attribute("Y"))
+				y = stof(element->Attribute("Y"));
+			if(element->Attribute("Z"))
+				z = stof(element->Attribute("Z"));
+
+			light = new Light(isPoint, new Point(x,y,z));
+			lights_list.push_back(light);
+		}
+
+	group->setLights(lights_list);
 }
 
 
