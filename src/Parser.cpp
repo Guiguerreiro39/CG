@@ -42,8 +42,8 @@ void updateTranslation(XMLElement* element, Group* group){
 		if(point_element->Attribute("Z")) 
 			z = stof(point_element->Attribute("Z"));
 
-		Vertex* vertex = new Vertex(x,y,z);
-		translation->addPoint(vertex);
+		Point* point = new Point(x,y,z);
+		translation->addPoint(point);
 	}
 }
 
@@ -123,6 +123,11 @@ void updateColourComponent(XMLElement* element, Shape* shape){
 	shape->setColourComponent(colour_component);
 }
 
+void updateLights(XMLElement* element, Group* group){
+
+}
+
+
 void exploreModels(XMLElement* element, Group* group){
 
 	vector<Shape*> models_list;
@@ -132,15 +137,19 @@ void exploreModels(XMLElement* element, Group* group){
 	for(;element;element=element->NextSiblingElement())
 		if(!strcmp(element->Name(),"model")){
 
-			vector<Vertex*> vertex_list; 
-			vector<Vertex*> normal_list;
-			vector<Vertex*> texture_list;
+			vector<Point*> vertex_list; 
+			vector<Point*> normal_list;
+			vector<Point*> texture_list;
 
 			readFile(element->Attribute("file"), &vertex_list, &normal_list, &texture_list);
 
 			if(vertex_list.size()){
+				Shape* shape;
+				if(element->Attribute("texture"))
+					shape = new Shape(element->Attribute("texture"), vertex_list, normal_list, texture_list);
+				else 
+					shape = new Shape(vertex_list, normal_list, texture_list);
 
-				Shape* shape = new Shape(element->Attribute("file"), vertex_list, normal_list, texture_list);
 				updateColourComponent(element, shape);
 				models_list.push_back(shape);
 			}
@@ -163,15 +172,11 @@ void exploreElement(XMLElement* element, Group* group){
 	else if(!strcmp(element->Name(),"scale"))
 		updateScale(element,group);
 
-	/** else if(!strcmp(element->Name(),"colour"))
-		updateColour(element,group); **/
+	else if(!strcmp(element->Name(),"lights"))
+		updateLights(element, group);
 
 	else if(!strcmp(element->Name(),"models"))
 		exploreModels(element, group);
-	
-	else if(!strcmp(element->Name(),"lights")){
-		// trabalhar com luzes
-	}
 
 	// Percorrer os filhos
 	else if(!strcmp(element->Name(),"group")){	
@@ -188,7 +193,7 @@ void exploreElement(XMLElement* element, Group* group){
 
 }
 
-void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* normal_list, vector<Vertex*>* texture_list){
+void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* normal_list, vector<Point*>* texture_list){
 
 	vector<string> tokens;
 	string buf;
@@ -201,7 +206,6 @@ void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* n
 		index = 0;
 		getline(file, line);
 		int n_vertex = atoi(line.c_str());
-		cout << n_vertex << endl;
 
 		for(int i=0; i < n_vertex; i++){
 			getline(file,line);
@@ -209,15 +213,13 @@ void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* n
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 			
-			cout << tokens[index] << tokens[index+1] << tokens[index+2] << endl;
-			vertex_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			vertex_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
 
 		index = 0;
 		getline(file, line);
 		int n_normal = atoi(line.c_str());
-		cout << n_normal << endl;
 
 		for(int i=0; i < n_normal; i++){
 			getline(file,line);
@@ -225,15 +227,13 @@ void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* n
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 
-			cout << tokens[index] << tokens[index+1] << tokens[index+2] << endl;
-			normal_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			normal_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
 		
 		index = 0;
 		getline(file, line);
 		int n_texture = atoi(line.c_str());
-		cout << n_texture << endl;
 
 		for(int i=0; i < n_texture; i++){
 			getline(file,line);
@@ -241,8 +241,7 @@ void readFile(string file_name, vector<Vertex*>* vertex_list, vector<Vertex*>* n
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 			
-			cout << tokens[index] << tokens[index+1] << tokens[index+2] << endl;
-			texture_list->push_back(new Vertex(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			texture_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
 

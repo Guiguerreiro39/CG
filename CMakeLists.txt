@@ -16,10 +16,14 @@ find_package(OpenGL REQUIRED)
 include_directories(${OpenGL_INCLUDE_DIRS})
 link_directories(${OpenGL_LIBRARY_DIRS})
 add_definitions(${OpenGL_DEFINITIONS})
+find_package(DevIL REQUIRED)
+link_libraries(${IL_LIBRARIES} )
+include_directories(ยง{IL_INCLUDE_DIR})
+
 if(NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif(NOT OPENGL_FOUND)
 
-add_executable(${PROJECT_NAME} ./src/engine.cpp ./src/Vertex.cpp ./src/Shape.cpp ./src/tinyxml2.cpp ./src/Group.cpp ./src/Parser.cpp ./src/Rotation.cpp ./src/Translation.cpp ./src/Scale.cpp ./src/Colour.cpp ./src/Material.cpp)
+add_executable(${PROJECT_NAME} ./src/engine.cpp ./src/Point.cpp ./src/Shape.cpp ./src/tinyxml2.cpp ./src/Group.cpp ./src/Parser.cpp ./src/Rotation.cpp ./src/Translation.cpp ./src/Scale.cpp ./src/Colour.cpp ./src/Material.cpp ./src/Light.cpp )
 
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )

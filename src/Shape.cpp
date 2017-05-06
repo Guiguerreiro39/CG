@@ -3,57 +3,71 @@
 Shape::Shape(){
 }
 
-Shape::Shape(string i, vector<Vertex*> v_list, vector<Vertex*> n_list, vector<Vertex*> t_list){
-	name = i;
+Shape::Shape(vector<Point*> v_list, vector<Point*> n_list, vector<Point*> t_list){
 	vertex_list = v_list;
 	normal_list = n_list;
 	texture_list = t_list;
 }
 
-string Shape::getName(){
-	return name;
+Shape::Shape(string t, vector<Point*> v_list, vector<Point*> n_list, vector<Point*> t_list){
+	texture_file = t;
+	vertex_list = v_list;
+	normal_list = n_list;
+	texture_list = t_list;
+	//loadTexture(texture);
+} 
+
+string Shape::getTextureFile(){
+	return texture_file;
 }
 
 GLuint* Shape::getBuffers(){
 	return buffers;
 }
 
+GLuint Shape::getTexture(){
+	return texture;
+}
+
 Material* Shape::getColourComponent(){
 	return colour_component;
 }
 
-vector<Vertex*> Shape::getVertexList(){
+vector<Point*> Shape::getVertexList(){
 	return vertex_list;
 }
 
-vector<Vertex*> Shape::getNormalList(){
+vector<Point*> Shape::getNormalList(){
 	return normal_list;
 }
 
-vector<Vertex*> Shape::getTextureList(){
+vector<Point*> Shape::getTextureList(){
 	return texture_list;
 }
 
-void Shape::setName(string t){
-	name = t;
+void Shape::setTextureFile(string t){
+	texture_file = t;
+}
+
+void Shape::setTexture(GLuint t){
+	texture = t;
 }
 
 void Shape::setColourComponent(Material* c){
 	colour_component = c;
 }
 
-void Shape::setVertexList(vector<Vertex*> v){
+void Shape::setVertexList(vector<Point*> v){
 	vertex_list = v;
 }
 
-void Shape::setNormalList(vector<Vertex*> v){
+void Shape::setNormalList(vector<Point*> v){
 	normal_list = v;
 }
 
-void Shape::setTextureList(vector<Vertex*> v){
+void Shape::setTextureList(vector<Point*> v){
 	texture_list = v;
 }
-
 
 void Shape::prepare(){
 
@@ -62,7 +76,7 @@ void Shape::prepare(){
 	float* normal_array = (float*) malloc(sizeof(float) * normal_list.size() * 3);
 	float* texture_array = (float*) malloc(sizeof(float) * texture_list.size() * 3);
 
-	for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
+	for(vector<Point*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
 		vertex_array[index] = (*vertex_it)->getX();
 		vertex_array[index+1] = (*vertex_it)->getY();
 		vertex_array[index+2] = (*vertex_it)->getZ();
@@ -70,7 +84,7 @@ void Shape::prepare(){
 	}
 
 	index = 0;
-	for(vector<Vertex*>::const_iterator normal_it = normal_list.begin(); normal_it != normal_list.end(); ++normal_it){					
+	for(vector<Point*>::const_iterator normal_it = normal_list.begin(); normal_it != normal_list.end(); ++normal_it){					
 		normal_array[index] = (*normal_it)->getX();
 		normal_array[index+1] = (*normal_it)->getY();
 		normal_array[index+2] = (*normal_it)->getZ();
@@ -78,7 +92,7 @@ void Shape::prepare(){
 	}
 
 	index = 0;
-	for(vector<Vertex*>::const_iterator texture_it = texture_list.begin(); texture_it != texture_list.end(); ++texture_it){					
+	for(vector<Point*>::const_iterator texture_it = texture_list.begin(); texture_it != texture_list.end(); ++texture_it){					
 		texture_array[index] = (*texture_it)->getX();
 		texture_array[index+1] = (*texture_it)->getY();
 		texture_array[index+2] = (*texture_it)->getZ();
@@ -97,10 +111,30 @@ void Shape::prepare(){
 	free(normal_array);
 	free(texture_array);
 
-	// makeTexture!!
+	loadTexture();
 }
 
-void Shape::createTexture(){
+void Shape::loadTexture(){
+
+	unsigned int t,tw,th;
+	unsigned char *texData;
+
+	ilGenImages(1, &t);
+	ilBindImage(t);
+	ilLoadImage((ILstring) texture_file.c_str());
+	tw = ilGetInteger(IL_IMAGE_WIDTH);
+	th = ilGetInteger(IL_IMAGE_HEIGHT);
+	ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+	texData = ilGetData(); 
+	
+	glGenTextures(1, &texture); 
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+	glBindTexture(GL_TEXTURE_2D, 0); 
 
 }
 
@@ -110,7 +144,7 @@ void Shape::drawVertex3f(){ // Just for performance tests purposes
 
 	glBegin(GL_TRIANGLES);
 
-	for(vector<Vertex*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
+	for(vector<Point*>::const_iterator vertex_it = vertex_list.begin(); vertex_it != vertex_list.end(); ++vertex_it){					
 		x = (*vertex_it)->getX();
 		y = (*vertex_it)->getY();
 		z = (*vertex_it)->getZ();
@@ -124,7 +158,7 @@ void Shape::draw(){
 
 	colour_component->draw();
 
-	//glBindTexture(GL_TEXTURE_2D, textureID);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
@@ -135,7 +169,9 @@ void Shape::draw(){
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
 	glTexCoordPointer(2, GL_FLOAT, 0, 0); 
 
-	glDrawArrays(GL_TRIANGLES, 0, vertex_list.size()*3); 
+	glDrawArrays(GL_TRIANGLES, 0, vertex_list.size()*3);
+	glBindTexture(GL_TEXTURE_2D, 0);
+ 
 }
 
 Shape::~Shape(void){

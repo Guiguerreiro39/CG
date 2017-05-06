@@ -1,14 +1,14 @@
+#define _USE_MATH_DEFINES
+
+#include <math.h>
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 #include <sstream>
-#include "headers/tinyxml2.h"
-
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 #include "headers/Parser.h"
+#include "headers/tinyxml2.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -107,13 +107,13 @@ void renderGroup(Group* group){
 
 	glPushMatrix();
 
-	Rotation* rotation=group->getRotation();
-	if(rotation)
-		rotation->apply();
-
 	Translation* translation=group->getTranslation();
 	if(translation)
 		translation->apply();
+
+	Rotation* rotation=group->getRotation();
+	if(rotation)
+		rotation->apply();
 
 	Scale* scale=group->getScale();
 	if(scale)
@@ -239,6 +239,9 @@ void initGL(){
 
 	// Textures
 	glEnable(GL_TEXTURE_2D);
+	ilInit();
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 	
 	// Recursive init
 	initGroup(scene);

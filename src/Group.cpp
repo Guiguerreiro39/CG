@@ -7,9 +7,10 @@ Group::Group(int n){
 	id = n;
 }
 
-Group::Group(vector<Shape*> shape_list, vector<Group*> group_list, Translation* t, Rotation* r, Scale* s){
+Group::Group(vector<Shape*> shape_list, vector<Group*> group_list, vector<Light*> light_list, Translation* t, Rotation* r, Scale* s){
 	group_shapes = shape_list;
 	group_childs = group_list;
+	group_lights = light_list;
 	translation = t;
 	rotation = r;
 	scale = s;
@@ -25,6 +26,10 @@ vector<Shape*> Group::getShapes(){
 
 vector<Group*> Group::getChilds(){
 	return group_childs;
+}
+
+vector<Light*> Group::getLights(){
+	return group_lights;
 }
 
 Translation* Group::getTranslation(){
@@ -45,6 +50,10 @@ void Group::setShapes(vector<Shape*> shape_list){
 
 void Group::setChilds(vector<Group*> group_list){
 	group_childs = group_list;
+}
+
+void Group::setLights(vector<Light*> light_list){
+	group_lights = light_list;
 }
 
 void Group::setTranslation(Translation* t){

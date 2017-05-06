@@ -3,20 +3,20 @@
 
 #include <vector>
 
-#include "Vertex.h"
+#include "Point.h"
 
 using namespace std;
 
 class Patch{
 
-	vector<Vertex*> control_points;
+	vector<Point*> control_points;
 
 	public:
 		Patch();
-		Patch(vector<Vertex*>);
-		vector<Vertex*> getControlPoints();
-		void setControlPoints(vector<Vertex*>);
-		void addVertex(Vertex*);
+		Patch(vector<Point*>);
+		vector<Point*> getControlPoints();
+		void setControlPoints(vector<Point*>);
+		void addVertex(Point*);
 		virtual ~Patch();
 
 };

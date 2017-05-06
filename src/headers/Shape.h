@@ -3,39 +3,44 @@
 #include <string>
 #include <vector>
 #include <GL/glut.h>
-#include <iostream> // retirar
+#include <IL/il.h>
 
-#include "Vertex.h"
+#include "Point.h"
 #include "Material.h"
 
 using namespace std;
 
 class Shape{
 
-	string name; // remove it later (just for debugging purposes)
+	string texture_file; // remove it later (just for debugging purposes)
 	GLuint buffers[3];
+	GLuint texture;
 	Material* colour_component;
 
-	vector<Vertex*> vertex_list;
-	vector<Vertex*> normal_list;
-	vector<Vertex*> texture_list;
+	vector<Point*> vertex_list;
+	vector<Point*> normal_list;
+	vector<Point*> texture_list;
 
 	public:
 		Shape();
-		Shape(string,vector<Vertex*>,vector<Vertex*>,vector<Vertex*>); 
-		string getName();
+		Shape(vector<Point*>,vector<Point*>,vector<Point*>); 
+		Shape(string,vector<Point*>,vector<Point*>,vector<Point*>);
+		string getTextureFile();
 		GLuint* getBuffers();
+		GLuint getTexture();
 		Material* getColourComponent();
-		vector<Vertex*> getVertexList();
-		vector<Vertex*> getNormalList();
-		vector<Vertex*> getTextureList();
-		void setName(string);
+		vector<Point*> getVertexList();
+		vector<Point*> getNormalList();
+		vector<Point*> getTextureList();
+		void setTextureFile(string);
+		void setTexture(GLuint);
 		void setColourComponent(Material*);
-		void setVertexList(vector<Vertex*>);
-		void setNormalList(vector<Vertex*>);
-		void setTextureList(vector<Vertex*>);
+		void setVertexList(vector<Point*>);
+		void setNormalList(vector<Point*>);
+		void setTextureList(vector<Point*>);
+		
 		void prepare();
-		void createTexture();
+		void loadTexture();
 		void drawVertex3f(); // just for performance tests purposes
 		void draw();
 		virtual ~Shape();

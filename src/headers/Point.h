@@ -1,22 +1,22 @@
-#ifndef __VERTEX_H__
-#define __VERTEX_H__
+#ifndef __POINT_H__
+#define __POINT_H__
 #include <string>
 using namespace std;
 
-class Vertex{
+class Point{
 
 	float x;
 	float y;
 	float z;
 
 	public:
-		Vertex();
-		Vertex(float,float,float);
+		Point();
+		Point(float,float,float);
 		float getX();
 		float getY();
 		float getZ();
 		string print();
-		virtual ~Vertex(void);
+		virtual ~Point(void);
 };
 
 #endif

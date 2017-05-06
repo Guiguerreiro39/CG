@@ -8,21 +8,21 @@
 #include <iostream>
 
 #include "Patch.h"
-#include "Vertex.h"
+#include "Point.h"
 
 using namespace std; 
 
 // Figures
-vector<Vertex*> createPlane(float size);
-vector<Vertex*> createBox(float x, float y, float z, int div);
-vector<Vertex*> createCone(float radius, float height, int slice, int stack);
-vector<Vertex*> createSphere(float radius, int slice, int stack);
-vector<Vertex*> createCylinder(float radius, float height, int slice, int stack);
-vector<Vertex*> createTorus(float radiusIn, float radiusOut, int sides, int rings);
+vector<Point*> createPlane(float size);
+vector<Point*> createBox(float x, float y, float z, int div);
+vector<Point*> createCone(float radius, float height, int slice, int stack);
+vector<Point*> createSphere(float radius, int slice, int stack);
+vector<Point*> createCylinder(float radius, float height, int slice, int stack);
+vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings);
 
 // Patches
-Vertex* evalBezierCurve(float t, Vertex* p1, Vertex* p2, Vertex* p3, Vertex* p4);
-Vertex* evalBezierPatch(float u, float v, vector<Vertex*> control_points);
-vector<Vertex*> renderBezierPatch(int divs, vector<Patch*> patch_list);
+Point* evalBezierCurve(float t, Point* p1, Point* p2, Point* p3, Point* p4);
+Point* evalBezierPatch(float u, float v, vector<Point*> control_points);
+vector<Point*> renderBezierPatch(int divs, vector<Patch*> patch_list);
 
 #endif

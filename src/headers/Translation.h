@@ -5,7 +5,7 @@
 #include <math.h>
 #include <GL/glut.h>
 
-#include "Vertex.h"
+#include "Point.h"
 
 using namespace std;
 
@@ -17,8 +17,8 @@ class Translation{
 
 	float time;
 	float up[3];
-	vector<Vertex*> points_list;
-	vector<Vertex*> points_curv;
+	vector<Point*> points_list;
+	vector<Point*> points_curv;
 
 	public:
 		Translation();
@@ -27,16 +27,16 @@ class Translation{
 		float getY();
 		float getZ();
 		float getTime();
-		vector<Vertex*> getPoints();
-		vector<Vertex*> getPointsCurv();
-		vector<Vertex*> genPointsCurv();
-		void getGlobalCatmullRomPoint(float, float*,float*, vector<Vertex*>);
+		vector<Point*> getPoints();
+		vector<Point*> getPointsCurv();
+		vector<Point*> genPointsCurv();
+		void getGlobalCatmullRomPoint(float, float*,float*, vector<Point*>);
 		void setX(float);
 		void setY(float);
 		void setZ(float);
 		void setTime(float);
-		void setPoints(vector<Vertex*>);
-		void addPoint(Vertex*);
+		void setPoints(vector<Point*>);
+		void addPoint(Point*);
 		void apply();
 		Translation* clone() const;
 		virtual ~Translation();

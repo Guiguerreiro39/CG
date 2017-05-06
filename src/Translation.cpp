@@ -13,11 +13,11 @@ Translation::Translation(float a, float b, float c,float t){
 	up[2] = 0;
 }
 
-vector<Vertex*> Translation::getPointsCurv(){
+vector<Point*> Translation::getPointsCurv(){
 	return points_curv;
 }
 
-void getCatmullRomPoint(float t, int *indices, float *res, float *deriv, vector<Vertex*> pontos) {
+void getCatmullRomPoint(float t, int *indices, float *res, float *deriv, vector<Point*> pontos) {
 	float res_aux[4];
 	float deriv_aux[4];
 
@@ -49,13 +49,13 @@ void getCatmullRomPoint(float t, int *indices, float *res, float *deriv, vector<
 	deriv_aux[3] = (3*t2)*m[0][3] + (2*t)*m[1][3] + m[2][3];
 
 	int i0 = indices[0]; 
-	Vertex* p0 = pontos[i0];
+	Point* p0 = pontos[i0];
 	int i1 = indices[1]; 
-	Vertex* p1 = pontos[i1];
+	Point* p1 = pontos[i1];
 	int i2 = indices[2]; 
-	Vertex* p2 = pontos[i2];
+	Point* p2 = pontos[i2];
 	int i3 = indices[3]; 
-	Vertex* p3 = pontos[i3];
+	Point* p3 = pontos[i3];
 
 	//T*M*P = res
 	res[0] = res_aux[0] * p0->getX() + res_aux[1] * p1->getX() + res_aux[2] * p2->getX() + res_aux[3] * p3->getX();
@@ -67,7 +67,7 @@ void getCatmullRomPoint(float t, int *indices, float *res, float *deriv, vector<
 	deriv[2] = deriv_aux[0] * p0->getZ() + deriv_aux[1] * p1->getZ() + deriv_aux[2] * p2->getZ() + deriv_aux[3] * p3->getZ();
 }
 
-void Translation::getGlobalCatmullRomPoint(float gt, float *res,float *deriv, vector<Vertex*> pontos) {
+void Translation::getGlobalCatmullRomPoint(float gt, float *res,float *deriv, vector<Point*> pontos) {
 	int tam = pontos.size();
 
 	float t = gt * tam; // this is the real global t
@@ -84,20 +84,20 @@ void Translation::getGlobalCatmullRomPoint(float gt, float *res,float *deriv, ve
 	getCatmullRomPoint(t, indices, res, deriv, pontos);
 }
 
-vector<Vertex*> Translation::genPointsCurv(){
+vector<Point*> Translation::genPointsCurv(){
 	float res[3];
 	float deriv[3];
 
 	for (float t = 0; t<1; t += 0.01){
 		getGlobalCatmullRomPoint(t, res, deriv, points_list);
 
-		Vertex* v = new Vertex(res[0], res[1], res[2]);
+		Point* v = new Point(res[0], res[1], res[2]);
 		points_curv.push_back(v);
 	}
 	return points_curv;
 }
 
-void renderCatmullRomCurve(vector<Vertex*> pontos) {
+void renderCatmullRomCurve(vector<Point*> pontos) {
 	int tam = pontos.size();
 	float p[3];
 
@@ -162,7 +162,7 @@ float Translation::getTime(){
 	return time;
 }
 
-vector<Vertex*> Translation::getPoints(){
+vector<Point*> Translation::getPoints(){
 	return points_list;
 }
 
@@ -182,11 +182,11 @@ void Translation::setTime(float t){
 	time = t;
 }
 
-void Translation::setPoints(vector<Vertex*> v){
+void Translation::setPoints(vector<Point*> v){
 	points_list = v;
 }
 
-void Translation::addPoint(Vertex* v){
+void Translation::addPoint(Point* v){
 	points_list.push_back(v);
 }
 
@@ -202,16 +202,15 @@ void Translation::apply(){
 	if(time!=0){
 		te = glutGet(GLUT_ELAPSED_TIME) % (int)(time * 1000);
 		gt = te / (time * 1000);
-		vector<Vertex*> vp2 = genPointsCurv();
+		vector<Point*> vp2 = genPointsCurv();
 		renderCatmullRomCurve(vp2);
 		getGlobalCatmullRomPoint(gt,res,deriv,points_list);
 		points_curv.clear();
 		glTranslatef(res[0], res[1], res[2]);
 		curveRotation(deriv,up);
 	}
-	else {
-		glTranslatef(x,y,z);
-	}
+	else glTranslatef(x,y,z);
+	
 }
 
 Translation::~Translation(){

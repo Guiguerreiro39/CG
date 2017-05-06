@@ -9,14 +9,14 @@
 
 using namespace std; 
 
-void printFile(vector<Vertex*> v, string file_name){
+void printFile(vector<Point*> v, string file_name){
 
 	system("mkdir -p ../files/ ");
 	string file_dir = "../files/" + file_name;
 
 	ofstream file (file_dir);
 	if(file.is_open()){
-		for (vector<Vertex*>::iterator it = v.begin() ; it != v.end(); ++it)
+		for (vector<Point*>::iterator it = v.begin() ; it != v.end(); ++it)
 			file << (*it)->print() << endl;
 		file.close();
 	}
@@ -87,7 +87,7 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 				}
 
 				n_line = line_cpy;
-				patch->addVertex(new Vertex(vertex_coords[0],vertex_coords[1],vertex_coords[2]));
+				patch->addVertex(new Point(vertex_coords[0],vertex_coords[1],vertex_coords[2]));
 			}
 		}
 
@@ -139,7 +139,7 @@ void printHelp(){
 
 int main(int argc, char** argv){
 
-	vector<Vertex*> v;
+	vector<Point*> v;
 
 	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]));

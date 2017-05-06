@@ -19,7 +19,7 @@ void updateScale(XMLElement*, Group*);
 void updateColour(XMLElement*, Shape*);
 void exploreElement(XMLElement*, Group*);
 vector<Shape*> exploreModels(XMLElement* );
-void readFile(string, vector<Vertex*>*, vector<Vertex*>*, vector<Vertex*>*);
+void readFile(string, vector<Point*>*, vector<Point*>*, vector<Point*>*);
 Group* hereditaryChild(Group*);
 Group* parseXML(char*);
 
