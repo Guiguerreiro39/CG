@@ -1,0 +1,30 @@
+<scene>
+
+  <group>
+    <scale X="15" Y="15" Z="15" />
+    <rotate time="50" X="0" Y="1" Z="0" />
+    <lights>
+      <light type="POINT" X="0" Y="0" Z="0"/>
+    </lights>
+    <models>
+      <model file="4th.3d" diffX="0" diffY="0" diffZ="0" emiX="1" emiY="1" emiZ="0.5"/>
+    </models>
+  </group>
+
+  <group>
+    <translate X="10" Y="0" Z="0"/>
+    <scale X="5" Y="5" Z="5" />
+    <models>
+      <model file="4th.3d" specX="1" specY="1" specZ="1" shini="100"/>
+    </models>
+  </group>
+
+  <group>
+    <translate X="-10" Y="0" Z="0" />
+    <scale X="5" Y="5" Z="5" />
+    <models>
+      <model file="4th.3d" specX="1" shini="5"/>
+    </models>
+  </group>
+
+</scene>
