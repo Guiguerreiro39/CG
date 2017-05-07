@@ -24,6 +24,6 @@ if(NOT OPENGL_FOUND)
     message(ERROR " OPENGL not found!")
 endif(NOT OPENGL_FOUND)
 
-add_executable(${PROJECT_NAME} ./src/engine.cpp ./src/Point.cpp ./src/Shape.cpp ./src/tinyxml2.cpp ./src/Group.cpp ./src/Parser.cpp ./src/Rotation.cpp ./src/Translation.cpp ./src/Scale.cpp ./src/Colour.cpp ./src/Material.cpp ./src/Light.cpp )
+add_executable(${PROJECT_NAME} ./src/engine.cpp ./src/Point.cpp ./src/Shape.cpp ./src/tinyxml2.cpp ./src/Group.cpp ./src/Parser.cpp ./src/Rotation.cpp ./src/Translation.cpp ./src/Scale.cpp ./src/Colour.cpp ./src/Material.cpp ./src/Light.cpp ./src/Operation.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} )

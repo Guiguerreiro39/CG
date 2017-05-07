@@ -7,72 +7,88 @@ Group* hereditaryChild(Group* father){
 	Group* son = new Group(total_groups++);
 	father->addChild(son);
 
-	son->setTranslation(new Translation(0,0,0,0));
+	/**son->setTranslation(new Translation(0,0,0,0));
 	son->setRotation(new Rotation(0,0,0,0,0));
-	son->setScale(new Scale(1,1,1));
+	son->setScale(new Scale(1,1,1));**/
 
 	return son;
 }
 
 void updateTranslation(XMLElement* element, Group* group){
 
-	Translation* translation = group->getTranslation();
+	float x=0, y=0, z=0, time=0;
+
+	//Translation* translation = group->getTranslation();
 
 	if(element->Attribute("time"))
-		translation->setTime(stof(element->Attribute("time")));
+		time = stof(element->Attribute("time"));
 
 	if(element->Attribute("X")) 
-		translation->setX(stof(element->Attribute("X")));
+		x = stof(element->Attribute("X"));
 
 	if(element->Attribute("Y")) 
-		translation->setY(stof(element->Attribute("Y")));
+		y = stof(element->Attribute("Y"));
 
 	if(element->Attribute("Z")) 
-		translation->setZ(stof(element->Attribute("Z")));
+		z = stof(element->Attribute("Z"));
+
+	Translation* translation = new Translation(x, y, z, time);
 
 	XMLElement* point_element = element->FirstChildElement();
 
 	for(;point_element;point_element=point_element->NextSiblingElement()){
-		float x=0, y=0, z=0;
+		float p_x=0, p_y=0, p_z=0;
 
 		if(point_element->Attribute("X")) 
-			x = stof(point_element->Attribute("X"));
+			p_x = stof(point_element->Attribute("X"));
 		if(point_element->Attribute("Y")) 
-			y = stof(point_element->Attribute("Y"));
+			p_y = stof(point_element->Attribute("Y"));
 		if(point_element->Attribute("Z")) 
-			z = stof(point_element->Attribute("Z"));
+			p_z = stof(point_element->Attribute("Z"));
 
-		Point* point = new Point(x,y,z);
+		Point* point = new Point(p_x, p_y, p_z);
 		translation->addPoint(point);
 	}
+
+	group->addOperation(translation);
 }
 
 void updateRotation(XMLElement* element, Group* group){
 
-	Rotation* rotation = group->getRotation();
+	float x=0, y=0, z=0, time=0, angle=0;
+
+	//Rotation* rotation = group->getRotation();
 
 	if(element->Attribute("angle"))
-		rotation->setAngle(stof(element->Attribute("angle")));
+		angle = stof(element->Attribute("angle"));
 	if(element->Attribute("time"))
-		rotation->setTime(stof(element->Attribute("time")));
+		time = stof(element->Attribute("time"));
 	if(element->Attribute("X"))
-		rotation->setX(stof(element->Attribute("X")));
+		x = stof(element->Attribute("X"));
 	if(element->Attribute("Y"))
-		rotation->setY(stof(element->Attribute("Y")));
+		y = stof(element->Attribute("Y"));
 	if(element->Attribute("Z"))
-		rotation->setZ(stof(element->Attribute("Z")));
+		z = stof(element->Attribute("Z"));
+
+	Rotation* rotation = new Rotation(angle, time, x, y, z);
+	group->addOperation(rotation);
 }
 
 void updateScale(XMLElement* element, Group* group){
 
-	Scale* scale = group->getScale();
+	float x=0, y=0, z=0;
+
+	//Scale* scale = group->getScale();
 
 	if(element->Attribute("X")) 
-		scale->setX(stof(element->Attribute("X")));
+		x = stof(element->Attribute("X"));
 	if(element->Attribute("Y")) 
-		scale->setY(stof(element->Attribute("Y")));
+		y = stof(element->Attribute("Y"));
 	if(element->Attribute("Z")) 
-		scale->setZ(stof(element->Attribute("Z")));
+		z = stof(element->Attribute("Z"));
+
+	Scale* scale = new Scale(x, y, z);
+	group->addOperation(scale);
 }
 
 void updateColourComponent(XMLElement* element, Shape* shape){
@@ -284,9 +300,9 @@ Group* parseXML(char* file_name){
 	error = doc.LoadFile(file_name);
 	if(error == 0){
 		group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
-		group->setTranslation(new Translation(0,0,0,0));
+		/**group->setTranslation(new Translation(0,0,0,0));
 		group->setRotation(new Rotation(0,0,0,0,0));
-		group->setScale(new Scale(1,1,1));
+		group->setScale(new Scale(1,1,1));**/
 
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
 		exploreElement(element,group);

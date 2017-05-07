@@ -6,14 +6,11 @@
 #include <GL/glut.h>
 
 #include "Point.h"
+#include "Operation.h"
 
 using namespace std;
 
-class Translation{
-
-	float x; 
-	float y; 
-	float z; 
+class Translation: public Operation{
 
 	float time;
 	float up[3];
@@ -21,24 +18,16 @@ class Translation{
 	vector<Point*> points_curv;
 
 	public:
-		Translation();
 		Translation(float,float,float,float);
-		float getX();
-		float getY();
-		float getZ();
 		float getTime();
 		vector<Point*> getPoints();
 		vector<Point*> getPointsCurv();
 		vector<Point*> genPointsCurv();
 		void getGlobalCatmullRomPoint(float, float*,float*, vector<Point*>);
-		void setX(float);
-		void setY(float);
-		void setZ(float);
 		void setTime(float);
 		void setPoints(vector<Point*>);
 		void addPoint(Point*);
 		void apply();
-		Translation* clone() const;
 		virtual ~Translation();
 };
 

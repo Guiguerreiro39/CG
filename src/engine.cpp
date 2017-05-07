@@ -107,17 +107,9 @@ void renderGroup(Group* group){
 
 	glPushMatrix();
 
-	Translation* translation = group->getTranslation();
-	if(translation)
-		translation->apply();
-
-	Rotation* rotation = group->getRotation();
-	if(rotation)
-		rotation->apply();
-
-	Scale* scale = group->getScale();
-	if(scale)
-		scale->apply();
+	vector<Operation*> operations = group->getOperations();
+	for(vector<Operation*>::iterator operation_it = operations.begin(); operation_it != operations.end(); ++operation_it)
+		(*operation_it)->apply();
 
 	vector<Light*> lights = group->getLights();
 	for(vector<Light*>::iterator light_it = lights.begin(); light_it != lights.end(); ++light_it)
@@ -128,12 +120,12 @@ void renderGroup(Group* group){
 		(*shape_it)->draw();
 	}
 
-	vector<Group*>  childs = group->getChilds();
+	vector<Group*> childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
 		renderGroup(*group_it);
 
 	glPopMatrix();
-}
+} 
 
 
 void renderScene(void) {
@@ -233,7 +225,7 @@ void initGL(){
 	ilEnable(IL_ORIGIN_SET);
 	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 	
-}
+} 
 
 int main(int argc, char** argv){
 
@@ -243,7 +235,7 @@ int main(int argc, char** argv){
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(800,800);
 	glutCreateWindow("CG_Trabalho");
-	ilInit();
+	ilInit(); 
 
 	if(argc < 2){
 		cout << "Invalid input. Use -h if you need some help." << endl;

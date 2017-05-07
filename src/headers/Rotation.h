@@ -2,28 +2,20 @@
 #define __ROTATION_H__
 
 #include <GL/glut.h>
+#include "Operation.h"
 
-class Rotation{
+class Rotation: public Operation {
 
 	float angle;
 	float time;
-	float x, y, z;
 
 	public:
-		Rotation();
 		Rotation(float,float,float,float,float);
 		float getAngle();
 		float getTime();
-		float getX();
-		float getY();
-		float getZ();
 		void setAngle(float);
 		void setTime(float);
-		void setX(float);
-		void setY(float);
-		void setZ(float);
 		void apply();
-		Rotation* clone() const;
 		virtual ~Rotation();
 };
 

@@ -2,24 +2,13 @@
 #define __SCALE_H__
 
 #include <GL/glut.h>
+#include "Operation.h"
 
-class Scale{
-
-	float x;
-	float y;
-	float z;
+class Scale: public Operation{
 
 	public:
-		Scale();
 		Scale(float,float,float);
-		float getX();
-		float getY();
-		float getZ();
-		void setX(float);
-		void setY(float);
-		void setZ(float);
 		void apply();
-		Scale* clone() const;
 		virtual ~Scale();
 };
 

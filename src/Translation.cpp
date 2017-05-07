@@ -1,12 +1,6 @@
 #include "headers/Translation.h"
 
-Translation::Translation(){
-}
-
-Translation::Translation(float a, float b, float c,float t){
-	x = a;
-	y = b;
-	z = c;
+Translation::Translation(float a, float b, float c,float t): Operation(a,b,c){
 	time = t;
 	up[0] = 0;
 	up[1] = 1;
@@ -146,36 +140,12 @@ void curveRotation(float *der, float *up){
 	glMultMatrixf((float*)m);
 }	
 
-float Translation::getX(){
-	return x;
-}
-
-float Translation::getY(){
-	return y;
-}
-
-float Translation::getZ(){
-	return z;
-}
-
 float Translation::getTime(){
 	return time;
 }
 
 vector<Point*> Translation::getPoints(){
 	return points_list;
-}
-
-void Translation::setX(float a){
-	x = a;
-}
-
-void Translation::setY(float b){
-	y = b;
-}
-
-void Translation::setZ(float c){
-	z = c;
 }
 
 void Translation::setTime(float t){
@@ -188,10 +158,6 @@ void Translation::setPoints(vector<Point*> v){
 
 void Translation::addPoint(Point* v){
 	points_list.push_back(v);
-}
-
-Translation* Translation::clone() const{
-	return new Translation(x,y,z,time);
 }
 
 void Translation::apply(){
@@ -209,7 +175,7 @@ void Translation::apply(){
 		glTranslatef(res[0], res[1], res[2]);
 		curveRotation(deriv,up);
 	}
-	else glTranslatef(x,y,z);
+	else glTranslatef(getX(),getY(),getZ());
 	
 }
 

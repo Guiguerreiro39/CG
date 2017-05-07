@@ -6,9 +6,7 @@
 #include <vector>
 
 #include "Shape.h"
-#include "Translation.h"
-#include "Rotation.h"
-#include "Scale.h"
+#include "Operation.h"
 #include "Light.h"
 
 using namespace std;
@@ -18,30 +16,24 @@ class Group{
 	int id;
 	vector<Shape*> group_shapes;
 	vector<Group*> group_childs;
+	vector<Operation*> group_operations;
 	vector<Light*> group_lights;
-
-	Translation* translation;
-	Rotation* rotation;
-	Scale* scale;
 
 	public:
 		Group();
 		Group(int);
-		Group(vector<Shape*>, vector<Group*>, vector<Light*>, Translation*, Rotation*, Scale*);
+		Group(vector<Shape*>, vector<Group*>, vector<Operation*>, vector<Light*>);
 		int getID();
 		vector<Shape*> getShapes();
 		vector<Group*> getChilds();
+		vector<Operation*> getOperations();
 		vector<Light*> getLights();
-		Translation* getTranslation();
-		Rotation* getRotation();
-		Scale* getScale();
 		void setShapes(vector<Shape*>);
 		void setChilds(vector<Group*>);
+		void setOperations(vector<Operation*>);
 		void setLights(vector<Light*>);
-		void setTranslation(Translation*);
-		void setRotation(Rotation*);
-		void setScale(Scale*);
 		void addChild(Group*);
+		void addOperation(Operation*);
 		virtual ~Group();
 };
 

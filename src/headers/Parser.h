@@ -9,6 +9,9 @@
 
 #include "tinyxml2.h"
 #include "Group.h"
+#include "Translation.h"
+#include "Rotation.h"
+#include "Scale.h"
 
 using namespace std;
 using namespace tinyxml2;
