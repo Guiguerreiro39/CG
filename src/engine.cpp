@@ -116,9 +116,9 @@ void renderGroup(Group* group){
 		(*light_it)->draw();
 
 	vector<Shape*> shape_list = group->getShapes();
-	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it){
+	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it)
 		(*shape_it)->draw();
-	}
+	
 
 	vector<Group*> childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 

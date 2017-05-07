@@ -7,18 +7,12 @@ Group* hereditaryChild(Group* father){
 	Group* son = new Group(total_groups++);
 	father->addChild(son);
 
-	/**son->setTranslation(new Translation(0,0,0,0));
-	son->setRotation(new Rotation(0,0,0,0,0));
-	son->setScale(new Scale(1,1,1));**/
-
 	return son;
 }
 
 void updateTranslation(XMLElement* element, Group* group){
 
 	float x=0, y=0, z=0, time=0;
-
-	//Translation* translation = group->getTranslation();
 
 	if(element->Attribute("time"))
 		time = stof(element->Attribute("time"));
@@ -57,8 +51,6 @@ void updateRotation(XMLElement* element, Group* group){
 
 	float x=0, y=0, z=0, time=0, angle=0;
 
-	//Rotation* rotation = group->getRotation();
-
 	if(element->Attribute("angle"))
 		angle = stof(element->Attribute("angle"));
 	if(element->Attribute("time"))
@@ -77,8 +69,6 @@ void updateRotation(XMLElement* element, Group* group){
 void updateScale(XMLElement* element, Group* group){
 
 	float x=0, y=0, z=0;
-
-	//Scale* scale = group->getScale();
 
 	if(element->Attribute("X")) 
 		x = stof(element->Attribute("X"));
@@ -300,10 +290,6 @@ Group* parseXML(char* file_name){
 	error = doc.LoadFile(file_name);
 	if(error == 0){
 		group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
-		/**group->setTranslation(new Translation(0,0,0,0));
-		group->setRotation(new Rotation(0,0,0,0,0));
-		group->setScale(new Scale(1,1,1));**/
-
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
 		exploreElement(element,group);
 	}
