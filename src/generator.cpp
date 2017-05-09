@@ -140,24 +140,26 @@ void printHelp(){
 int main(int argc, char** argv){
 
 	vector<Point*> v;
+	vector<Point*> normal_list;
+	vector<Point*> texture_list;
 
 	if(!strcmp(argv[1],"plane") && argc == 4)
-		v = createPlane(atof(argv[2]));
+		v = createPlane(atof(argv[2]),normal_list,texture_list);
 
 	else if(!strcmp(argv[1],"box") && argc == 7)
-		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]),atoi(argv[5]));
+		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]),atoi(argv[5]),normal_list,texture_list);
 
 	else if(!strcmp(argv[1],"sphere") && argc == 6)
-		v = createSphere(atof(argv[2]),atof(argv[3]),atof(argv[4]));
+		v = createSphere(atof(argv[2]),atof(argv[3]),atof(argv[4]),normal_list,texture_list);
 
 	else if(!strcmp(argv[1],"cone") && argc == 7)
-		v = createCone(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]));
+		v = createCone(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]),normal_list,texture_list);
 
 	else if(!strcmp(argv[1],"cylinder") && argc == 7)
-		v = createCylinder(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]));
+		v = createCylinder(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]),normal_list,texture_list);
 
 	else if(!strcmp(argv[1],"torus") && argc == 7)
-		v = createTorus(atof(argv[2]),atof(argv[3]),atoi(argv[4]),atoi(argv[5]));
+		v = createTorus(atof(argv[2]),atof(argv[3]),atoi(argv[4]),atoi(argv[5]),normal_list,texture_list);
 
 	else if(!strcmp(argv[1],"patch") && argc == 5){
 		parsePatchFile(atoi(argv[2]),argv[3],argv[4]);

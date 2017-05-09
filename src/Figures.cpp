@@ -1,11 +1,8 @@
 #include "headers/Figures.h"
 
-vector<Point*> createPlane(float size){
+vector<Point*> createPlane(float size, vector<Point*> normal_list, vector<Point*> texture_list){
 
 	vector<Point*> vertex_list;
-	vector<Point*> normal_list;
-	vector<Point*> texture_list;
-
 
 	float h = size/2; // para o plano ficar centrado na origem do referencial.
 	float texV = 1 / (float) size;
@@ -13,36 +10,35 @@ vector<Point*> createPlane(float size){
 
 	vertex_list.push_back(new Point(h,0,h));
 	normal_list.push_back(new Point(0,1,0));
-
-
-	vertex_list.push_back(new Point(h,0,-h));
-	normal_list.push_back(new Point(0,1,0));
-
-	vertex_list.push_back(new Point(-h,0,h));
-	normal_list.push_back(new Point(0,1,0));
-
-
-	vertex_list.push_back(new Point(-h,0,h));
-	normal_list.push_back(new Point(0,1,0));
+	texture_list.push_back(new Point(1,1,0));
 
 	vertex_list.push_back(new Point(h,0,-h));
 	normal_list.push_back(new Point(0,1,0));
+	texture_list.push_back(new Point(1,-1,0));
+
+	vertex_list.push_back(new Point(-h,0,h));
+	normal_list.push_back(new Point(0,1,0));
+	texture_list.push_back(new Point(-1,1,0));
+
+	vertex_list.push_back(new Point(-h,0,h));
+	normal_list.push_back(new Point(0,-1,0));
+	texture_list.push_back(new Point(-1,1,0));
+
+	vertex_list.push_back(new Point(h,0,-h));
+	normal_list.push_back(new Point(0,-1,0));
+	texture_list.push_back(new Point(1,-1,0));
 
 	vertex_list.push_back(new Point(-h,0,-h));
-	normal_list.push_back(new Point(0,1,0));
+	normal_list.push_back(new Point(0,-1,0));
+	texture_list.push_back(new Point(-1,-1,0));
 
 	// print vertex_list.size();
-
-
-
-
-
 
 	return vertex_list;
 
 }
 
-vector<Point*> createBox(float cX, float cY, float cZ, int div){
+vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> normal_list, vector<Point*> texture_list){
 
 	vector<Point*> vertex_list;
 	float x = cX/2;
@@ -58,61 +54,97 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div){
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y + (i*shiftY),z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y + (i*shiftY),z));
 			vertex_list.push_back(new Point(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),z));
+			normal_list.push_back(new Point(0,0,1));
+			normal_list.push_back(new Point(0,0,1));
+			normal_list.push_back(new Point(0,0,1));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y + (i*shiftY),z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),(-y+shiftY) + (i*shiftY),z));
+			normal_list.push_back(new Point(0,0,1));
+			normal_list.push_back(new Point(0,0,1));
+			normal_list.push_back(new Point(0,0,1));
 
 			//Face traseira
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y + (i*shiftY),-z));
 			vertex_list.push_back(new Point(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y + (i*shiftY),-z));
+			normal_list.push_back(new Point(0,0,-1));
+			normal_list.push_back(new Point(0,0,-1));
+			normal_list.push_back(new Point(0,0,-1));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y + (i*shiftY),-z));
+			normal_list.push_back(new Point(0,0,-1));
+			normal_list.push_back(new Point(0,0,-1));
+			normal_list.push_back(new Point(0,0,-1));
 
 			//Face direita
 			vertex_list.push_back(new Point(x,-y + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Point(x,(-y+shiftY) + (i*shiftY),-z +(j*shiftZ)));
 			vertex_list.push_back(new Point(x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
-			
+			normal_list.push_back(new Point(1,0,0));
+			normal_list.push_back(new Point(1,0,0));
+			normal_list.push_back(new Point(1,0,0));
+
 			vertex_list.push_back(new Point(x,(-y+shiftY) + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Point(x,(-y+shiftY) + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			vertex_list.push_back(new Point(x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
-			
+			normal_list.push_back(new Point(1,0,0));
+			normal_list.push_back(new Point(1,0,0));
+			normal_list.push_back(new Point(1,0,0));
+
 			//Face esquerda
 			vertex_list.push_back(new Point(-x,-y + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Point(-x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			vertex_list.push_back(new Point(-x,(-y+shiftY) + (i*shiftY),-z +(j*shiftZ)));
-			
+			normal_list.push_back(new Point(-1,0,0));
+			normal_list.push_back(new Point(-1,0,0));
+			normal_list.push_back(new Point(-1,0,0));
+
 			vertex_list.push_back(new Point(-x,(-y+shiftY) + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Point(-x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
 			vertex_list.push_back(new Point(-x,(-y+shiftY) + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
+			normal_list.push_back(new Point(-1,0,0));
+			normal_list.push_back(new Point(-1,0,0));
+			normal_list.push_back(new Point(-1,0,0));
 
 			//Topo
 			vertex_list.push_back(new Point(-x + (j*shiftX),y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Point(-x + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),y,-z + (i*shiftZ)));
-			
+			normal_list.push_back(new Point(0,1,0));
+			normal_list.push_back(new Point(0,1,0));
+			normal_list.push_back(new Point(0,1,0));
+
 			vertex_list.push_back(new Point(-x + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),y,-z + (i*shiftZ)));
-			
+			normal_list.push_back(new Point(0,1,0));
+			normal_list.push_back(new Point(0,1,0));
+			normal_list.push_back(new Point(0,1,0));
+
 			//Base
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y,(-z+shiftZ) + (i*shiftZ)));
+			normal_list.push_back(new Point(0,-1,0));
+			normal_list.push_back(new Point(0,-1,0));
+			normal_list.push_back(new Point(0,-1,0));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y,-z + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y,(-z+shiftZ) + (i*shiftZ)));	
+			normal_list.push_back(new Point(0,-1,0));
+			normal_list.push_back(new Point(0,-1,0));
+			normal_list.push_back(new Point(0,-1,0));
 		}
 	}
 	return vertex_list;
 }
 
-vector<Point*> createCone(float radius, float height, int slice, int stack){
+vector<Point*> createCone(float radius, float height, int slice, int stack, vector<Point*> normal_list, vector<Point*> texture_list){
 
 	vector<Point*> vertex_list;
 
@@ -128,57 +160,72 @@ vector<Point*> createCone(float radius, float height, int slice, int stack){
 			if (i == 0){
 				// desenhar a base
 				vertex_list.push_back(new Point(0,0,0));
+				normal_list.push_back(new Point(0,-1,0));
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,0,z));
+				normal_list.push_back(new Point(0,-1,0));
 
 				x = radius * sin(alfa);
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,0,z));
+				normal_list.push_back(new Point(0,-1,0));
+
 			}
 			if (i < stack - 1) {
 				// desenhar 2 triangulos para um lado (slice)
 				x = (radius - ((i+1)*t)) * sin(alfa + dimSide);
 				z = (radius - ((i+1)*t)) * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
+				normal_list.push_back(new Point(sin(alfa + dimSide),l,cos(alfa + dimSide)));
 				
 				x = (radius - ((i+1)*t)) * sin(alfa);
 				z = (radius - ((i+1)*t)) * cos(alfa);
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
+				normal_list.push_back(new Point(sin(alfa),l,cos(alfa)));
 				
 				x = (radius - (i*t)) * sin(alfa);
 				z = (radius - (i*t)) * cos(alfa);
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point(sin(alfa),l,cos(alfa)));
 
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point(sin(alfa),l,cos(alfa)));
 				
 				x = (radius - (i*t)) * sin(alfa + dimSide);
 				z = (radius - (i*t)) * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point(sin(alfa + dimSide),l,cos(alfa + dimSide)));
 				
 				x = (radius - ((i+1)*t)) * sin(alfa + dimSide);
 				z = (radius - ((i+1)*t)) * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
+				normal_list.push_back(new Point(sin(alfa + dimSide),l,cos(alfa + dimSide)));
+
 			}
 			else {
 				// desenhar o topo do cone
 				x = (radius - (i*t)) * sin(alfa);
 				z = (radius - (i*t)) * cos(alfa);
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point(0,-1,0));
 
 				x = (radius - (i*t)) * sin(alfa + dimSide);
 				z = (radius - (i*t)) * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point(0,-1,0));
 
 				vertex_list.push_back(new Point(0,(i+1)*l,0));
+				normal_list.push_back(new Point(0,-1,0));
+
 			}
 		}
 	}
 	return vertex_list;
 }
 
-vector<Point*> createSphere(float radius, int slice, int stack){
+vector<Point*> createSphere(float radius, int slice, int stack, vector<Point*> normal_list, vector<Point*> texture_list){
 
 	vector<Point*> vertex_list;
 
@@ -213,19 +260,25 @@ vector<Point*> createSphere(float radius, int slice, int stack){
 			//valor do cos vai aumentado (e certa altura diminuir), com a interaçao do ciclo, fazendo a fatia ganhar uma curvatura.
 
 			//Pontos superiores do triangulo
-			aux = cos(asin(alturaCima/radius));
-			cimaActX = actualX * aux;
-			cimaActZ = actualZ * aux;
-			cimaNexX = nextX * aux;
-			cimaNexZ = nextZ * aux;
+			float aux2 = cos(asin(alturaCima/radius));
+			cimaActX = actualX * aux2;
+			cimaActZ = actualZ * aux2;
+			cimaNexX = nextX * aux2;
+			cimaNexZ = nextZ * aux2;
 
 			vertex_list.push_back(new Point(actX,altura,actZ));
 			vertex_list.push_back(new Point(nexX,altura,nexZ));
 			vertex_list.push_back(new Point(cimaActX,alturaCima,cimaActZ));
+			normal_list.push_back(new Point(sin(i*passoH),altura/radius,cos(i*passoH)));
+			normal_list.push_back(new Point(sin((i+1)*passoH),altura/radius,cos((i+1)*passoH)));
+			normal_list.push_back(new Point(sin(i*passoH),alturaCima/radius,cos(i*passoH)));
 
 			vertex_list.push_back(new Point(cimaActX,alturaCima,cimaActZ));
 			vertex_list.push_back(new Point(nexX,altura,nexZ));
 			vertex_list.push_back(new Point(cimaNexX,alturaCima,cimaNexZ));
+			normal_list.push_back(new Point(sin(i*passoH),alturaCima/radius,cos(i*passoH)));
+			normal_list.push_back(new Point(sin((i+1)*passoH),altura/radius,cos((i+1)*passoH)));
+			normal_list.push_back(new Point(sin((i+1)*passoH),alturaCima/radius,cos((i+1)*passoH)));
 
 			//Passa o valor de altura para alturaCima, e actualiza o valor de altura, para desenhar os triangulos abaixo.
 			alturaCima = altura;
@@ -238,7 +291,7 @@ vector<Point*> createSphere(float radius, int slice, int stack){
 	return vertex_list;
 }
 
-vector<Point*> createCylinder(float radius, float height, int slice, int stack){
+vector<Point*> createCylinder(float radius, float height, int slice, int stack, vector<Point*> normal_list, vector<Point*> texture_list){
 
 	vector<Point*> vertex_list;
 
@@ -254,50 +307,63 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack){
 			if (i == 0){
 				// desenhar a base
 				vertex_list.push_back(new Point(0,0,0));
+				normal_list.push_back(new Point(0,-1,0));
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,0,z));
+				normal_list.push_back(new Point(0,-1,0));
 
 				x = radius * sin(alfa);
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,0,z));
+				normal_list.push_back(new Point(0,-1,0));
 			}
 			if (i < stack - 1) {
 				// desenhar 2 triangulos para um lado (slice)
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
+				normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
 
 				x = radius  * sin(alfa);
 				z = radius  * cos(alfa);
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point( sin(alfa), 0, cos(alfa)));
+				normal_list.push_back(new Point( sin(alfa), 0, cos(alfa)));
 				
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point( sin(alfa), 0, cos(alfa)));
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,i*l,z));
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
+				normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+				normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+
 			}
 			else {
 				// desenhar o topo do cilindro
 				x = radius * sin(alfa);
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,i*l,z));
+				normal_list.push_back(new Point(0,1,0));
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,i*l,z));
 				vertex_list.push_back(new Point(0,i*l,0));
+				normal_list.push_back(new Point(0,1,0));
+				normal_list.push_back(new Point(0,1,0));
 			}
 		}
 	}
 	return vertex_list;
 }
 
-vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings){
+vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings, vector<Point*> normal_list, vector<Point*> texture_list){
 
 	vector<Point*> vertex_list;
 
@@ -328,10 +394,16 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 			vertex_list.push_back(new Point(x0*r,y0*r,z));
 			vertex_list.push_back(new Point(x1*r,y1*r,z));
 			vertex_list.push_back(new Point(x0*nr,y0*nr,nz));
+			normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+			normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+			normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
 
 			vertex_list.push_back(new Point(x0*nr,y0*nr,nz));
 			vertex_list.push_back(new Point(x1*r,y1*r,z));
-			vertex_list.push_back(new Point(x1*nr,y1*nr,nz));		
+			vertex_list.push_back(new Point(x1*nr,y1*nr,nz));
+			normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+			normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+			normal_list.push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
 		}
 	}
 		
