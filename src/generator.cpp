@@ -16,6 +16,7 @@ void printFile(vector<Point*> v, string file_name){
 
 	ofstream file (file_dir);
 	if(file.is_open()){
+		file << v.size() << endl;
 		for (vector<Point*>::iterator it = v.begin() ; it != v.end(); ++it)
 			file << (*it)->print() << endl;
 		file.close();
@@ -171,6 +172,8 @@ int main(int argc, char** argv){
 	else cout << "Invalid input. Use -h if you need some help." << endl; 
 
 	if(v.size()) printFile(v,argv[argc-1]);
+	if(normal_list.size()) printFile(normal_list,argv[argc-1]);
+	if(texture_list.size()) printFile(texture_list,argv[argc-1]);
 
 	return 0;
 }
