@@ -9,16 +9,47 @@
 
 using namespace std; 
 
-void printFile(vector<Point*> v, string file_name){
+void printFile(vector<Point*> v, vector<Point*> n, vector<Point*> t, string file_name){
 
 	system("mkdir -p ../files/ ");
 	string file_dir = "../files/" + file_name;
 
 	ofstream file (file_dir);
 	if(file.is_open()){
+		
 		file << v.size() << endl;
 		for (vector<Point*>::iterator it = v.begin() ; it != v.end(); ++it)
 			file << (*it)->print() << endl;
+		
+		if(n.size()){
+			file << n.size() << endl;
+			for (vector<Point*>::iterator it = n.begin() ; it != n.end(); ++it)
+				file << (*it)->print() << endl;
+		}
+
+		if(t.size()){
+			file << t.size() << endl;
+			for (vector<Point*>::iterator it = t.begin() ; it != t.end(); ++it)
+				file << (*it)->print() << endl;
+		}
+
+		file.close();
+	}
+	else cout << "Unable to open file: " << file_name << "." << endl;
+}
+
+void printFileBezier(vector<Point*> v, string file_name){
+
+	system("mkdir -p ../files/ ");
+	string file_dir = "../files/" + file_name;
+
+	ofstream file (file_dir);
+	if(file.is_open()){
+		
+		file << v.size() << endl;
+		for (vector<Point*>::iterator it = v.begin() ; it != v.end(); ++it)
+			file << (*it)->print() << endl;
+		
 		file.close();
 	}
 	else cout << "Unable to open file: " << file_name << "." << endl;
@@ -92,7 +123,7 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 			}
 		}
 
-		printFile(renderBezierPatch(tessellation,patches_list),output_file);
+		printFileBezier(renderBezierPatch(tessellation,patches_list),output_file);
 
 		file.close();
 	}
@@ -145,22 +176,22 @@ int main(int argc, char** argv){
 	vector<Point*> texture_list;
 
 	if(!strcmp(argv[1],"plane") && argc == 4)
-		v = createPlane(atof(argv[2]),normal_list,texture_list);
+		v = createPlane(atof(argv[2]),&normal_list,&texture_list);
 
 	else if(!strcmp(argv[1],"box") && argc == 7)
-		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]),atoi(argv[5]),normal_list,texture_list);
+		v = createBox(atof(argv[2]),atof(argv[3]),atof(argv[4]),atoi(argv[5]),&normal_list,&texture_list);
 
 	else if(!strcmp(argv[1],"sphere") && argc == 6)
-		v = createSphere(atof(argv[2]),atof(argv[3]),atof(argv[4]),normal_list,texture_list);
+		v = createSphere(atof(argv[2]),atof(argv[3]),atof(argv[4]),&normal_list,&texture_list);
 
 	else if(!strcmp(argv[1],"cone") && argc == 7)
-		v = createCone(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]),normal_list,texture_list);
+		v = createCone(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]),&normal_list,&texture_list);
 
 	else if(!strcmp(argv[1],"cylinder") && argc == 7)
-		v = createCylinder(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]),normal_list,texture_list);
+		v = createCylinder(atof(argv[2]),atof(argv[3]),atof(argv[4]),atof(argv[5]),&normal_list,&texture_list);
 
 	else if(!strcmp(argv[1],"torus") && argc == 7)
-		v = createTorus(atof(argv[2]),atof(argv[3]),atoi(argv[4]),atoi(argv[5]),normal_list,texture_list);
+		v = createTorus(atof(argv[2]),atof(argv[3]),atoi(argv[4]),atoi(argv[5]),&normal_list,&texture_list);
 
 	else if(!strcmp(argv[1],"patch") && argc == 5){
 		parsePatchFile(atoi(argv[2]),argv[3],argv[4]);
@@ -171,9 +202,8 @@ int main(int argc, char** argv){
 
 	else cout << "Invalid input. Use -h if you need some help." << endl; 
 
-	if(v.size()) printFile(v,argv[argc-1]);
-	if(normal_list.size()) printFile(normal_list,argv[argc-1]);
-	if(texture_list.size()) printFile(texture_list,argv[argc-1]);
+	if(v.size())
+		printFile(v, normal_list, texture_list, argv[argc-1]);
 
 	return 0;
 }
