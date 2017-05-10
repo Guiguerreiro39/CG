@@ -173,6 +173,11 @@ void exploreModels(XMLElement* element, Group* group){
 
 			readFile(element->Attribute("file"), &vertex_list, &normal_list, &texture_list);
 
+			/**for(int i = 0; i < normal_list.size(); i++){
+				Point* p = normal_list[i];
+				cout << p->getX() << " | " << p->getY() << " | " << p->getZ() << endl;
+			}**/
+
 			if(vertex_list.size()){
 				Shape* shape;
 				if(element->Attribute("texture"))
@@ -225,7 +230,7 @@ void exploreElement(XMLElement* element, Group* group){
 
 void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* normal_list, vector<Point*>* texture_list){
 
-	vector<string> tokens;
+	vector<string> tokens_v, tokens_n, tokens_t;
 	string buf;
 	string line;
 	int index;
@@ -241,11 +246,12 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 			getline(file,line);
 			stringstream ss(line); 
 			while(ss >> buf) 
-				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+				tokens_v.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 			
-			vertex_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			vertex_list->push_back(new Point(stof(tokens_v[index]),stof(tokens_v[index+1]),stof(tokens_v[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
+
 
 		index = 0;
 		getline(file, line);
@@ -255,9 +261,9 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 			getline(file,line);
 			stringstream ss(line); 
 			while(ss >> buf) 
-				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+				tokens_n.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 
-			normal_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
+			normal_list->push_back(new Point(stof(tokens_n[index]),stof(tokens_n[index+1]),stof(tokens_n[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
 		}
 		
@@ -268,10 +274,10 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 		for(int i=0; i < n_texture; i++){
 			getline(file,line);
 			stringstream ss(line); 
-			while(ss >> buf) 
-				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
+			while(ss >> buf)
+				tokens_t.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 			
-			texture_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),0)); // adicionar vértice ao vector
+			texture_list->push_back(new Point(stof(tokens_t[index]),stof(tokens_t[index+1]),0)); // adicionar vértice ao vector
 			index+=2; // incrementar o índice
 		}
 
