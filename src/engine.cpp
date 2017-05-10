@@ -107,19 +107,18 @@ void renderGroup(Group* group){
 
 	glPushMatrix();
 
-	vector<Operation*> operations = group->getOperations();
-	for(vector<Operation*>::iterator operation_it = operations.begin(); operation_it != operations.end(); ++operation_it)
-		(*operation_it)->apply();
-
 	vector<Light*> lights = group->getLights();
 	for(vector<Light*>::iterator light_it = lights.begin(); light_it != lights.end(); ++light_it)
 		(*light_it)->draw();
+
+	vector<Operation*> operations = group->getOperations();
+	for(vector<Operation*>::iterator operation_it = operations.begin(); operation_it != operations.end(); ++operation_it)
+		(*operation_it)->apply();
 
 	vector<Shape*> shape_list = group->getShapes();
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it)
 		(*shape_it)->draw();
 	
-
 	vector<Group*> childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
 		renderGroup(*group_it);
