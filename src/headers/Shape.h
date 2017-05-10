@@ -20,7 +20,7 @@ class Shape{
 	public:
 		Shape();
 		Shape(vector<Point*>,vector<Point*>,vector<Point*>); 
-		//Shape(string,vector<Point*>,vector<Point*>,vector<Point*>);
+		Shape(string,vector<Point*>,vector<Point*>,vector<Point*>);
 
 		GLuint* getBuffers();
 		GLuint getTexture();
@@ -29,7 +29,7 @@ class Shape{
 		void setColourComponent(Material*);
 		
 		void prepare(vector<Point*>, vector<Point*>, vector<Point*>);
-		//void loadTexture(string);
+		void loadTexture(string);
 		void draw();
 		virtual ~Shape();
 };

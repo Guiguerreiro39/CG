@@ -175,9 +175,9 @@ void exploreModels(XMLElement* element, Group* group){
 
 			if(vertex_list.size()){
 				Shape* shape;
-				if(element->Attribute("texture"));
-					//shape = new Shape(element->Attribute("texture"), vertex_list, normal_list, texture_list);
-				else 
+				if(element->Attribute("texture"))
+					shape = new Shape(element->Attribute("texture"), vertex_list, normal_list, texture_list);
+				else
 					shape = new Shape(vertex_list, normal_list, texture_list);
 
 				updateColourComponent(element, shape);
@@ -261,7 +261,7 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 			index+=3; // incrementar o índice
 		}
 		
-		/**index = 0;
+		index = 0;
 		getline(file, line);
 		int n_texture = atoi(line.c_str());
 
@@ -271,9 +271,9 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 			while(ss >> buf) 
 				tokens.push_back(buf); // percorrer as coordenadas dos vértices em cada linha
 			
-			texture_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
-			index+=3; // incrementar o índice
-		}**/
+			texture_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),0)); // adicionar vértice ao vector
+			index+=2; // incrementar o índice
+		}
 
 		file.close();
 	}
@@ -291,7 +291,7 @@ Group* parseXML(char* file_name){
 	if(error == 0){
 		group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
 		element = doc.FirstChildElement("scene")->FirstChildElement("lights");
-		updateLights(element,group);
+		if(element) updateLights(element,group);
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
 		exploreElement(element,group);
 	}
