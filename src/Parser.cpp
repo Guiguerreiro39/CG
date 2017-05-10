@@ -290,6 +290,8 @@ Group* parseXML(char* file_name){
 	error = doc.LoadFile(file_name);
 	if(error == 0){
 		group = new Group(total_groups++); // Este é o grupo 0 -> corresponde à 'Scene'.
+		element = doc.FirstChildElement("scene")->FirstChildElement("lights");
+		updateLights(element,group);
 		element = doc.FirstChildElement("scene")->FirstChildElement("group");
 		exploreElement(element,group);
 	}
