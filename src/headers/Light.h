@@ -2,6 +2,7 @@
 #define __LIGHT_H__
 
 #include <GLUT/glut.h>
+#include <iostream>
 
 #include "Point.h"
 

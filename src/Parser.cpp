@@ -175,8 +175,8 @@ void exploreModels(XMLElement* element, Group* group){
 
 			if(vertex_list.size()){
 				Shape* shape;
-				if(element->Attribute("texture"))
-					shape = new Shape(element->Attribute("texture"), vertex_list, normal_list, texture_list);
+				if(element->Attribute("texture"));
+					//shape = new Shape(element->Attribute("texture"), vertex_list, normal_list, texture_list);
 				else 
 					shape = new Shape(vertex_list, normal_list, texture_list);
 
@@ -261,7 +261,7 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 			index+=3; // incrementar o índice
 		}
 		
-		index = 0;
+		/**index = 0;
 		getline(file, line);
 		int n_texture = atoi(line.c_str());
 
@@ -273,7 +273,7 @@ void readFile(string file_name, vector<Point*>* vertex_list, vector<Point*>* nor
 			
 			texture_list->push_back(new Point(stof(tokens[index]),stof(tokens[index+1]),stof(tokens[index+2]))); // adicionar vértice ao vector
 			index+=3; // incrementar o índice
-		}
+		}**/
 
 		file.close();
 	}

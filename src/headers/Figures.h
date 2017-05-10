@@ -5,7 +5,7 @@
 
 #include <math.h>
 #include <vector>
-#include <iostream>
+#include <iostream> // retirar 
 
 #include "Patch.h"
 #include "Point.h"

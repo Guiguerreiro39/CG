@@ -153,6 +153,10 @@ void printHelp(){
 	cout << "|      Creates a cone with the radius, height, number of slices  |" << endl;
 	cout << "|      and stacks given.                                         |" << endl;
 	cout << "|                                                                |" << endl;
+	cout << "| - cylinder [RADIUS] [HEIGHT] [SLICE] [STACK]                   |" << endl;
+	cout << "|      Creates a cylinder with the radius, height, number of     |" << endl;
+	cout << "|      slices and stacks given.                                  |" << endl;
+	cout << "|                                                                |" << endl;
 	cout << "| - torus [INNER RADIUS] [OUTER RADIUS] [SIDES] [RINGS]          |" << endl;
 	cout << "|      Creates a torus with the inner and outer radius, sides    |" << endl;
 	cout << "|      and rings given.                                          |" << endl;
