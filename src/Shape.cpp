@@ -66,8 +66,6 @@ void Shape::prepare(vector<Point*> vertex_list, vector<Point*> normal_list, vect
 	for(vector<Point*>::const_iterator texture_it = texture_list.begin(); texture_it != texture_list.end(); ++texture_it){					
 		texture_array[index] = (*texture_it)->getX();
 		texture_array[index+1] = (*texture_it)->getY();
-		cout << texture_array[index] <<"x" << endl;
-		cout << texture_array[index+1]<< "y" << endl;
 		index+=2;
 	}
 
