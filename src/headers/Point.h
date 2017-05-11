@@ -16,6 +16,7 @@ class Point{
 		float getY();
 		float getZ();
 		string print();
+		string print2();
 		virtual ~Point(void);
 };
 

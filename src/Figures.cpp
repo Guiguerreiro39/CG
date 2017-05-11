@@ -14,23 +14,23 @@ vector<Point*> createPlane(float size, vector<Point*> *normal_list, vector<Point
 
 	vertex_list.push_back(new Point(h,0,-h));
 	normal_list->push_back(new Point(0,1,0));
-	texture_list->push_back(new Point(1,-1,0));
+	texture_list->push_back(new Point(1,0,0));
 
 	vertex_list.push_back(new Point(-h,0,h));
 	normal_list->push_back(new Point(0,1,0));
-	texture_list->push_back(new Point(-1,1,0));
+	texture_list->push_back(new Point(0,1,0));
 
 	vertex_list.push_back(new Point(-h,0,h));
 	normal_list->push_back(new Point(0,-1,0));
-	texture_list->push_back(new Point(-1,1,0));
+	texture_list->push_back(new Point(0,1,0));
 
 	vertex_list.push_back(new Point(h,0,-h));
 	normal_list->push_back(new Point(0,-1,0));
-	texture_list->push_back(new Point(1,-1,0));
+	texture_list->push_back(new Point(1,0,0));
 
 	vertex_list.push_back(new Point(-h,0,-h));
 	normal_list->push_back(new Point(0,-1,0));
-	texture_list->push_back(new Point(-1,-1,0));
+	texture_list->push_back(new Point(0,0,0));
 
 	// print vertex_list.size();
 

@@ -29,6 +29,11 @@ string Point::print(){
 	return res;
 }
 
+string Point::print2(){
+	string res = to_string(x) + " " + to_string(y);
+	return res;
+}
+
 Point::~Point(void){
 }
 

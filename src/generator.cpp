@@ -30,7 +30,7 @@ void printFile(vector<Point*> v, vector<Point*> n, vector<Point*> t, string file
 		if(t.size()){
 			file << t.size() << endl;
 			for (vector<Point*>::iterator it = t.begin() ; it != t.end(); ++it)
-				file << (*it)->print() << endl;
+				file << (*it)->print2() << endl;
 		}
 
 		file.close();

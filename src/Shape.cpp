@@ -66,6 +66,8 @@ void Shape::prepare(vector<Point*> vertex_list, vector<Point*> normal_list, vect
 	for(vector<Point*>::const_iterator texture_it = texture_list.begin(); texture_it != texture_list.end(); ++texture_it){					
 		texture_array[index] = (*texture_it)->getX();
 		texture_array[index+1] = (*texture_it)->getY();
+		cout << texture_array[index] <<"x" << endl;
+		cout << texture_array[index+1]<< "y" << endl;
 		index+=2;
 	}
 
@@ -109,8 +111,6 @@ void Shape::draw(){
 
 	colour_component->draw();
 
-	glBindTexture(GL_TEXTURE_2D, texture);
-
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
 	glVertexPointer(3, GL_FLOAT, 0, 0);
 
@@ -120,6 +120,7 @@ void Shape::draw(){
 	glBindBuffer(GL_ARRAY_BUFFER, buffers[2]);
 	glTexCoordPointer(2, GL_FLOAT, 0, 0); 
 
+	glBindTexture(GL_TEXTURE_2D, texture);
 	glDrawArrays(GL_TRIANGLES, 0, buffers_size[0] * 3);
 	glBindTexture(GL_TEXTURE_2D, 0);
  
