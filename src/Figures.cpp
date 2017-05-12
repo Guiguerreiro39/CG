@@ -44,9 +44,21 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 	float x = cX/2;
 	float y = cY/2;
 	float z = cZ/2;
+
 	float shiftX = (float)cX/div;
 	float shiftY = (float)cY/div;
 	float shiftZ = (float)cZ/div;
+
+	float textureY1 = cZ/((cZ*2)+cY);
+	float textureY2 = (cZ+cY)/((cZ*2)+cY);
+
+	float textureX1 = (cZ)/((cZ*2)+(cX*2));
+	float textureX2 = (cZ+cX)/((cZ*2)+(cX*2));
+	float textureX3 = ((cZ*2)+cX)/((cZ*2)+(cX*2));
+
+	float textureShiftY = (cY/((cZ*2)+cY))/float(div);
+	float textureShiftX = (cX/((cZ*2)+(cX*2)))/float(div);
+	float textureShiftZ = (cZ/((cZ*2)+(cX*2)))/float(div);
 
 	for(int i=0;i<div;i++){
 		for(int j=0;j<div;j++){
@@ -57,6 +69,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,0,1));
 			normal_list->push_back(new Point(0,0,1));
 			normal_list->push_back(new Point(0,0,1));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y + (i*shiftY),z));
@@ -64,6 +79,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,0,1));
 			normal_list->push_back(new Point(0,0,1));
 			normal_list->push_back(new Point(0,0,1));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
 
 			//Face traseira
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y + (i*shiftY),-z));
@@ -72,6 +90,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,0,-1));
 			normal_list->push_back(new Point(0,0,-1));
 			normal_list->push_back(new Point(0,0,-1));
+			texture_list->push_back(new Point(1-(j*textureShiftX),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point(1-(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((1-textureShiftX)-(j*textureShiftX),textureY1+(i*textureShiftY),0));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),(-y+shiftY) + (i*shiftY),-z));
@@ -79,6 +100,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,0,-1));
 			normal_list->push_back(new Point(0,0,-1));
 			normal_list->push_back(new Point(0,0,-1));
+			texture_list->push_back(new Point(1-(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((1-textureShiftX)-(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((1-textureShiftX)-(j*textureShiftX),textureY1+(i*textureShiftY),0));
 
 			//Face direita
 			vertex_list.push_back(new Point(x,-y + (i*shiftY),-z + (j*shiftZ)));
@@ -87,6 +111,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(1,0,0));
 			normal_list->push_back(new Point(1,0,0));
 			normal_list->push_back(new Point(1,0,0));
+			texture_list->push_back(new Point(textureX3-(j*textureShiftZ),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point(textureX3-(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((textureX3-textureShiftZ)-(j*textureShiftZ),textureY1+(i*textureShiftY),0));
 
 			vertex_list.push_back(new Point(x,(-y+shiftY) + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Point(x,(-y+shiftY) + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
@@ -94,6 +121,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(1,0,0));
 			normal_list->push_back(new Point(1,0,0));
 			normal_list->push_back(new Point(1,0,0));
+			texture_list->push_back(new Point(textureX3-(j*textureShiftZ),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((textureX3-textureShiftZ)-(j*textureShiftX),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point((textureX3-textureShiftZ)-(j*textureShiftX),textureY1+(i*textureShiftY),0));
 
 			//Face esquerda
 			vertex_list.push_back(new Point(-x,-y + (i*shiftY),-z + (j*shiftZ)));
@@ -102,6 +132,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(-1,0,0));
 			normal_list->push_back(new Point(-1,0,0));
 			normal_list->push_back(new Point(-1,0,0));
+			texture_list->push_back(new Point((j*textureShiftZ),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point(textureShiftZ+(j*textureShiftZ),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point((j*textureShiftZ),(textureY1+textureShiftY)+(i*textureShiftY),0));
 
 			vertex_list.push_back(new Point(-x,(-y+shiftY) + (i*shiftY),-z + (j*shiftZ)));
 			vertex_list.push_back(new Point(-x,-y + (i*shiftY),(-z+shiftZ) + (j*shiftZ)));
@@ -109,6 +142,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(-1,0,0));
 			normal_list->push_back(new Point(-1,0,0));
 			normal_list->push_back(new Point(-1,0,0));
+			texture_list->push_back(new Point((j*textureShiftZ),(textureY1+textureShiftY)+(i*textureShiftY),0));
+			texture_list->push_back(new Point(textureShiftZ+(j*textureShiftZ),textureY1+(i*textureShiftY),0));
+			texture_list->push_back(new Point(textureShiftZ+(j*textureShiftZ),(textureY1+textureShiftY)+(i*textureShiftY),0));
 
 			//Topo
 			vertex_list.push_back(new Point(-x + (j*shiftX),y,-z + (i*shiftZ)));
@@ -117,6 +153,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,1,0));
 			normal_list->push_back(new Point(0,1,0));
 			normal_list->push_back(new Point(0,1,0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),1-(i*textureShiftZ),0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),(1-textureShiftZ)-(i*textureShiftZ),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),1-(i*textureShiftZ),0));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),y,(-z+shiftZ) + (i*shiftZ)));
@@ -124,6 +163,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,1,0));
 			normal_list->push_back(new Point(0,1,0));
 			normal_list->push_back(new Point(0,1,0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),(1-textureShiftZ)-(i*textureShiftZ),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),(1-textureShiftZ)-(i*textureShiftZ),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),1-(i*textureShiftZ),0));
 
 			//Base
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y,-z + (i*shiftZ)));
@@ -132,6 +174,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,-1,0));
 			normal_list->push_back(new Point(0,-1,0));
 			normal_list->push_back(new Point(0,-1,0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),(i*textureShiftZ),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),(i*textureShiftZ),0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),textureShiftZ+(i*textureShiftZ),0));
 
 			vertex_list.push_back(new Point(-x + (j*shiftX),-y,(-z+shiftZ) + (i*shiftZ)));
 			vertex_list.push_back(new Point((-x+shiftX) + (j*shiftX),-y,-z + (i*shiftZ)));
@@ -139,6 +184,9 @@ vector<Point*> createBox(float cX, float cY, float cZ, int div, vector<Point*> *
 			normal_list->push_back(new Point(0,-1,0));
 			normal_list->push_back(new Point(0,-1,0));
 			normal_list->push_back(new Point(0,-1,0));
+			texture_list->push_back(new Point(textureX1+(j*textureShiftX),textureShiftZ+(i*textureShiftZ),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),(i*textureShiftZ),0));
+			texture_list->push_back(new Point((textureX1+textureShiftX)+(j*textureShiftX),textureShiftZ+(i*textureShiftZ),0));
 		}
 	}
 	return vertex_list;
@@ -288,6 +336,36 @@ vector<Point*> createSphere(float radius, int slice, int stack, vector<Point*> *
 		altura = radius * sin((M_PI/2) - passoV);
 		alturaCima = radius;
 	}
+
+	for(int i = 0; i < vertex_list.size(); i+=3){
+		float x,y,x2,y2,x3,y3;
+
+		x = (-atan2(-vertex_list[i]->getX(),vertex_list[i]->getZ())+ M_PI) /  (2*M_PI);
+		y = 1-(((-(vertex_list[i]->getY()/radius))+1)/2.0);
+		
+		x2 = (-atan2(-vertex_list[i+1]->getX(),vertex_list[i+1]->getZ())+ M_PI) /  (2*M_PI);
+		y2 = 1-(((-(vertex_list[i+1]->getY()/radius))+1)/2.0);
+
+		x3 = (-atan2(-vertex_list[i+2]->getX(),vertex_list[i+2]->getZ())+ M_PI) /  (2*M_PI);
+		y3 = 1-(((-(vertex_list[i+2]->getY()/radius))+1)/2.0);
+
+		if(x > x2 && fabs(x - x2) > 0.8)
+        	x2 = 1.0;
+      	if(x > x3 && fabs(x - x3) > 0.8)
+        	x3 = 1.0;
+      	if (x2 > x && fabs(x2 - x) > 0.8)
+        	x = 1.0;
+      	if (x2 > x3 && fabs(x2 - x3) > 0.8)
+        	x3 = 1.0;
+      	if (x3 > x && fabs(x3 - x) > 0.8)
+        	x = 1.0;
+      	if (x3 > x2 && fabs(x3 - x2) > 0.8)
+        	x2 = 1.0;
+
+		texture_list->push_back(new Point(x,y,0));
+		texture_list->push_back(new Point(x2,y2,0));
+		texture_list->push_back(new Point(x3,y3,0));
+	}
 	return vertex_list;
 }
 
@@ -308,16 +386,20 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				// desenhar a base
 				vertex_list.push_back(new Point(0,0,0));
 				normal_list->push_back(new Point(0,-1,0));
+				texture_list->push_back(new Point());
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,0,z));
 				normal_list->push_back(new Point(0,-1,0));
+				texture_list->push_back(new Point());
 
 				x = radius * sin(alfa);
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,0,z));
 				normal_list->push_back(new Point(0,-1,0));
+				texture_list->push_back(new Point());
+
 			}
 			if (i < stack - 1) {
 				// desenhar 2 triangulos para um lado (slice)
@@ -350,6 +432,8 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,i*l,z));
 				normal_list->push_back(new Point(0,1,0));
+				texture_list->push_back(new Point());
+
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
@@ -357,6 +441,8 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				vertex_list.push_back(new Point(0,i*l,0));
 				normal_list->push_back(new Point(0,1,0));
 				normal_list->push_back(new Point(0,1,0));
+				texture_list->push_back(new Point());
+				texture_list->push_back(new Point());
 			}
 		}
 	}

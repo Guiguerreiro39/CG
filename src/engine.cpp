@@ -20,7 +20,7 @@ Group* scene;
 float angleX = 1.0, angleY = 1.0;
 float camX = 5.0, camY = 5.0, camZ = 5.0;
 float raio = 10.0f;
-float xp = 40, yp = 10, zp = 100, xr = 0, yr = 0, angle = 0.0;
+float xp = 0, yp = 5, zp = 20, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
 
 // mouse motion
@@ -147,6 +147,8 @@ void renderScene(void) {
 	
 	// put drawing instructions here
 	glPolygonMode(GL_FRONT_AND_BACK,linha);
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 
 	glTranslatef(0.0f, 0.0f, -raio);
 	glRotatef(xr,1.0,0.0,0.0);
@@ -157,6 +159,25 @@ void renderScene(void) {
 	glColor3f(255,255,255);
 
 	renderGroup(scene);
+
+	glColor3f(0.5,0.5,0.5);
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0,0,0);
+		glVertex3f(0,10,0);
+	glEnd();
+
+	glColor3f(1,1,1);
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0,0,0);
+		glVertex3f(0,0,10);
+	glEnd();
+
+	glColor3f(0.3,0.1,0.6);
+	glBegin(GL_LINE_LOOP);
+		glVertex3f(0,0,0);
+		glVertex3f(10,0,0);
+	glEnd();
+
 	displayFPS();
 
 	// End of frame
@@ -216,6 +237,8 @@ void initGL(){
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	// Textures
+	glEnable(GL_TEXTURE_2D);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -224,11 +247,6 @@ void initGL(){
 	// Refresh normals after scale
 	glEnable(GL_NORMALIZE);
 
-	// Textures
-	glEnable(GL_TEXTURE_2D);
-	ilEnable(IL_ORIGIN_SET);
-	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-	
 } 
 
 int main(int argc, char** argv){

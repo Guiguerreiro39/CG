@@ -66,6 +66,8 @@ void Shape::prepare(vector<Point*> vertex_list, vector<Point*> normal_list, vect
 	for(vector<Point*>::const_iterator texture_it = texture_list.begin(); texture_it != texture_list.end(); ++texture_it){					
 		texture_array[index] = (*texture_it)->getX();
 		texture_array[index+1] = (*texture_it)->getY();
+		cout << texture_array[index] << endl;
+		cout << texture_array[index+1] << endl;
 		index+=2;
 	}
 
@@ -87,6 +89,10 @@ void Shape::loadTexture(string texture_file){
 	unsigned int t,tw,th;
 	unsigned char *texData;
 
+	if(){
+		ilEnable(IL_ORIGIN_SET);
+		ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+	}
 	ilGenImages(1, &t);
 	ilBindImage(t);
 	ilLoadImage((ILstring) texture_file.c_str());
