@@ -86,7 +86,9 @@ void Shape::loadTexture(string texture_file){
 
 	unsigned int t,tw,th;
 	unsigned char *texData;
-
+	
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 	ilGenImages(1, &t);
 	ilBindImage(t);
 	ilLoadImage((ILstring) texture_file.c_str());

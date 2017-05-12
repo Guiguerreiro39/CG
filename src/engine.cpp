@@ -140,6 +140,8 @@ void renderScene(void) {
 	
 	// put drawing instructions here
 	glPolygonMode(GL_FRONT_AND_BACK,linha);
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
 
 	// Camera instructions
 	Point* position = camera->getPosition();
@@ -154,6 +156,7 @@ void renderScene(void) {
 	glColor3f(255,255,255);
 
 	renderGroup(scene);
+
 	displayFPS();
 
 	// End of frame
@@ -200,6 +203,8 @@ void initGL(){
 	// OpenGL settings 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
+	// Textures
+	glEnable(GL_TEXTURE_2D);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
@@ -208,11 +213,6 @@ void initGL(){
 	// Refresh normals after scale
 	glEnable(GL_NORMALIZE);
 
-	// Textures
-	glEnable(GL_TEXTURE_2D);
-	ilEnable(IL_ORIGIN_SET);
-	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-	
 } 
 
 int main(int argc, char** argv){
