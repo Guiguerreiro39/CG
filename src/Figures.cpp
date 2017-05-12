@@ -378,6 +378,7 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 	float l = sqrt(pow(h,2) + pow(radius,2))/stack;
 	float t = radius/stack;
 	float dimSide = (2*M_PI)/slice;
+	float aux = float(0.625f)/float(stack);
 
 	for (int i = 0; i < stack; i++) {		
 		for (int j = 0; j < slice; j++) {
@@ -386,20 +387,21 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				// desenhar a base
 				vertex_list.push_back(new Point(0,0,0));
 				normal_list->push_back(new Point(0,-1,0));
-				texture_list->push_back(new Point());
-
+				texture_list->push_back(new Point(0.8125,0.1875,0));
+				
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,0,z));
 				normal_list->push_back(new Point(0,-1,0));
-				texture_list->push_back(new Point());
-
+				texture_list->push_back(new Point( 0.8125 + 0.1875 * sin(alfa + dimSide),0.1875 + 0.1875 * cos(alfa + dimSide),0));
+				
 				x = radius * sin(alfa);
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,0,z));
 				normal_list->push_back(new Point(0,-1,0));
-				texture_list->push_back(new Point());
-
+				texture_list->push_back(new Point( 0.8125 + 0.1875 * sin(alfa),0.1875 + 0.1875 * cos(alfa),0));
+				
+				
 			}
 			if (i < stack - 1) {
 				// desenhar 2 triangulos para um lado (slice)
@@ -407,6 +409,7 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
 				normal_list->push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+				texture_list->push_back(new Point(float(j+1)/float(slice),(float(i+1)*aux)+0.375f,0));
 
 				x = radius  * sin(alfa);
 				z = radius  * cos(alfa);
@@ -414,9 +417,12 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				vertex_list.push_back(new Point(x,i*l,z));
 				normal_list->push_back(new Point( sin(alfa), 0, cos(alfa)));
 				normal_list->push_back(new Point( sin(alfa), 0, cos(alfa)));
+				texture_list->push_back(new Point(float(j)/float(slice),(float(i+1)*aux)+0.375f,0));
+				texture_list->push_back(new Point(float(j)/float(slice),(float(i)*aux)+0.375f,0));
 				
 				vertex_list.push_back(new Point(x,i*l,z));
 				normal_list->push_back(new Point( sin(alfa), 0, cos(alfa)));
+				texture_list->push_back(new Point(float(j)/float(slice),(float(i)*aux)+0.375f,0));
 
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
@@ -424,6 +430,8 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				vertex_list.push_back(new Point(x,(i+1)*l,z));
 				normal_list->push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
 				normal_list->push_back(new Point( sin(alfa + dimSide), 0, cos(alfa + dimSide)));
+				texture_list->push_back(new Point(float(j+1)/float(slice),(float(i)*aux)+0.375f,0));
+				texture_list->push_back(new Point(float(j+1)/float(slice),(float(i+1)*aux)+0.375f,0));
 
 			}
 			else {
@@ -432,18 +440,19 @@ vector<Point*> createCylinder(float radius, float height, int slice, int stack, 
 				z = radius * cos(alfa);
 				vertex_list.push_back(new Point(x,i*l,z));
 				normal_list->push_back(new Point(0,1,0));
-				texture_list->push_back(new Point());
-
-
+				texture_list->push_back(new Point( 0.4375 + 0.1875 * sin(alfa),0.1875 + 0.1875 * cos(alfa),0));
+				
+				
 				x = radius * sin(alfa + dimSide);
 				z = radius * cos(alfa + dimSide);
 				vertex_list.push_back(new Point(x,i*l,z));
 				vertex_list.push_back(new Point(0,i*l,0));
 				normal_list->push_back(new Point(0,1,0));
 				normal_list->push_back(new Point(0,1,0));
-				texture_list->push_back(new Point());
-				texture_list->push_back(new Point());
-			}
+				texture_list->push_back(new Point( 0.4375 + 0.1875 * sin(alfa + dimSide),0.1875 + 0.1875 * cos(alfa + dimSide),0));
+				texture_list->push_back(new Point( 0.4375, 0.1875, 0));
+				
+	}
 		}
 	}
 	return vertex_list;
