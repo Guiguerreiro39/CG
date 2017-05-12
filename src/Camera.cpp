@@ -8,7 +8,7 @@ Camera::Camera(){
 	xOri = -1;
 	yOri = -1;
 
-	cameraPosition = new Point(0.0f, 0.0f, 3.0f);
+	cameraPosition = new Point(0.0f, 0.0f, -50.0f);
 	cameraFront = new Point(0.0f, 0.0f, -1.0f);
 	cameraTilt = new Point(0.0f, 1.0f, 0.0f);
 	cameraSpeed = 0.5;
