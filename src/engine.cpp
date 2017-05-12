@@ -9,23 +9,16 @@
 
 #include "headers/Parser.h"
 #include "headers/tinyxml2.h"
+#include "headers/Camera.h"
 
 using namespace std;
 using namespace tinyxml2;
 
 // Geral
 Group* scene;
+Camera* camera;
 
-// Mouse and Keyboard interaction
-float angleX = 1.0, angleY = 1.0;
-float camX = 5.0, camY = 5.0, camZ = 5.0;
-float raio = 10.0f;
-float xp = 40, yp = 10, zp = 100, xr = 0, yr = 0, angle = 0.0;
 int linha = GL_LINE;
-
-// mouse motion
-//int startX, startY, tracking = 0;
-//int alpha = 0, beta = 0, r = 5;
 
 // Frames Per Second
 int timebase = 0, frame = 0;
@@ -148,11 +141,15 @@ void renderScene(void) {
 	// put drawing instructions here
 	glPolygonMode(GL_FRONT_AND_BACK,linha);
 
-	glTranslatef(0.0f, 0.0f, -raio);
-	glRotatef(xr,1.0,0.0,0.0);
+	// Camera instructions
+	Point* position = camera->getPosition();
+	Point* focus = camera->getFocus();
+	Point* tilt = camera->getTilt();
 
-	glRotatef(yr,0.0,1.0,0.0); 
-	glTranslated(-xp,-yp,-zp);
+	gluLookAt( position->getX(), position->getY(), position->getZ(),
+               focus->getX(), focus->getY(), focus->getZ(),
+               tilt->getX(),  tilt->getY(),  tilt->getZ() );
+	camera->move(); 
 
 	glColor3f(255,255,255);
 
@@ -161,54 +158,41 @@ void renderScene(void) {
 
 	// End of frame
 	glutSwapBuffers();
-	angle++;
 } 
 
-void keyboard (unsigned char key, int x, int y) {
-	
-	float xrotrad, yrotrad;
+void keyboard(unsigned char key_code, int x, int y){
+	switch(key_code){
 
-	switch(key){
-    	case 'w':	yrotrad = (yr / 180 * M_PI);
-    				xrotrad = (xr / 180 * M_PI); 
-    				xp += float(sin(yrotrad)) * 2;
-    				zp -= float(cos(yrotrad)) * 2;
-    				yp -= float(sin(xrotrad)) * 2;
-    				break;
-    	case 's':	yrotrad = (yr / 180 * M_PI);
-    				xrotrad = (xr / 180 * M_PI); 
-    				xp -= float(sin(yrotrad)) * 2;
-    				zp += float(cos(yrotrad)) * 2;
-    				yp += float(sin(xrotrad)) * 2;
-    				break;
-    	case 'd':	yrotrad = (yr / 180 * M_PI);
-    				xp += float(cos(yrotrad)) * 2;
-    				zp += float(sin(yrotrad)) * 2;
-    				break;
-    	case 'a':	yrotrad = (yr / 180 * M_PI);
-    				xp -= float(cos(yrotrad)) * 2;
-    				zp -= float(sin(yrotrad)) * 2;
-    				break;
     	case 'p':	linha = GL_POINT;
     				break;
     	case 'l':	linha = GL_LINE;
     				break;
     	case 'o':	linha = GL_FILL;
     				break;
-    }
+    	default :	camera->normalKey(key_code, true);
+					glutPostRedisplay();
+	}
 }
 
-void keyboardArrows (int key_code, int x , int y){
-	switch(key_code){
-		case GLUT_KEY_UP: 	xr+=3;
-						 	break;
-		case GLUT_KEY_DOWN:	xr-=3;
-							break;
-		case GLUT_KEY_LEFT: yr-=3;
-							break;
-		case GLUT_KEY_RIGHT:yr+=3; 
-							break;
-	}
+void upkeyboard(unsigned char key_code, int x, int y){
+	camera->normalKey(key_code, false);
+	glutPostRedisplay();
+}
+void specialkeyboard(int key_code, int x, int y){
+	camera->specialKey(key_code, true);
+	glutPostRedisplay();
+}
+void upspecialkeyboard(int key_code, int x, int y){
+	camera->specialKey(key_code, false);
+	glutPostRedisplay();
+} 
+
+void mousePress(int button, int state, int x, int y) {
+	camera->mousePress(button, state, x, y);
+} 
+
+void mouseMotion(int xx, int yy){
+	camera->mouseMotion(xx, yy);
 }
 
 void initGL(){
@@ -240,6 +224,7 @@ int main(int argc, char** argv){
 	glutInitWindowSize(800,800);
 	glutCreateWindow("CG_Trabalho");
 	ilInit(); 
+	camera = new Camera();
 
 	if(argc < 2){
 		cout << "Invalid input. Use -h if you need some help." << endl;
@@ -261,7 +246,11 @@ int main(int argc, char** argv){
 
 		// put here the registration of the keyboard callbacks
 		glutKeyboardFunc(keyboard);
-		glutSpecialFunc(keyboardArrows);
+		glutKeyboardUpFunc(upkeyboard);
+		glutSpecialFunc(specialkeyboard);
+		glutSpecialUpFunc(upspecialkeyboard);
+		glutMotionFunc(mouseMotion); 
+		glutMouseFunc(mousePress);
 
 		initGL();
 

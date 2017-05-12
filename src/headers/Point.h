@@ -1,6 +1,9 @@
 #ifndef __POINT_H__
 #define __POINT_H__
-#include <string>
+
+#include <math.h>
+#include <string> 
+
 using namespace std;
 
 class Point{
@@ -12,11 +15,18 @@ class Point{
 	public:
 		Point();
 		Point(float,float,float);
+		Point(const Point &p);
 		float getX();
 		float getY();
 		float getZ();
-		string print();
-		string print2();
+		string print(); // retirar
+		string print2(); // retirar
+		void incr(Point*);
+		void vector_scale(float);
+		void vector_cross(Point*);
+		void vector_normalize();
+		void sphericToCartesian(Point*);
+		void cartesianToSpheric(Point*);
 		virtual ~Point(void);
 };
 
