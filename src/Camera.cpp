@@ -31,19 +31,27 @@ void Camera::move(){
     }
 
     if (normalKeys['a']){
-		Point* p = new Point(*cameraFront);
-		p->vector_cross(cameraTilt);
-		p->vector_scale(-cameraSpeed);
-		p->vector_normalize();
-		cameraPosition->incr(p);
+		float px = cameraPosition->getX();
+		float py = cameraPosition->getY();
+		float pz = cameraPosition->getZ();
+		float rx = cameraFront->getX();
+		float rz = cameraFront->getZ();
+		px += rz*cameraSpeed;
+		pz -= rx*cameraSpeed;
+
+		cameraPosition = new Point(px, py, pz);
     }
 
     if (normalKeys['d']){
-		Point* p = new Point(*cameraFront);
-		p->vector_cross(cameraTilt);
-		p->vector_scale(cameraSpeed);
-		p->vector_normalize();
-		cameraPosition->incr(p);
+		float px = cameraPosition->getX();
+		float py = cameraPosition->getY();
+		float pz = cameraPosition->getZ();
+		float rx = cameraFront->getX();
+		float rz = cameraFront->getZ();
+		px -= rz*cameraSpeed;
+		pz += rx*cameraSpeed;
+
+		cameraPosition = new Point(px, py, pz);
 	}
 }
 
