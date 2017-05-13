@@ -29,7 +29,7 @@ void Light::draw(){
 	GLfloat amb[4] = {0.2, 0.2, 0.2, 1.0};
 	GLfloat diff[4] = {1.0, 1.0, 1.0, 1.0};
 	GLfloat pos[4] = {point->getX(), point->getY() , point->getZ(), (float) isPoint};
-	GLfloat black [] ={0.f,0.f,0.f,0.f};
+	GLfloat mat[3] ={1,1,1};
 	
 	// light position
 	glLightfv(GL_LIGHT0, GL_POSITION, pos);

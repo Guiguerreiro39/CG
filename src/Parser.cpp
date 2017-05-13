@@ -173,11 +173,6 @@ void exploreModels(XMLElement* element, Group* group){
 
 			readFile(element->Attribute("file"), &vertex_list, &normal_list, &texture_list);
 
-			/**for(int i = 0; i < normal_list.size(); i++){
-				Point* p = normal_list[i];
-				cout << p->getX() << " | " << p->getY() << " | " << p->getZ() << endl;
-			}**/
-
 			if(vertex_list.size()){
 				Shape* shape;
 				if(element->Attribute("texture"))

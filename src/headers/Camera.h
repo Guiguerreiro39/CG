@@ -24,6 +24,8 @@ class Camera{
 		void move();
 		void mousePress(int button, int state, int x, int y);
 		void mouseMotion(int, int);
+		void incSpeed();
+		void decSpeed();
 		void specialKey(int, bool);
 		void normalKey(unsigned char, bool);
 		Point* getPosition();

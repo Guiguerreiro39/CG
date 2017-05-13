@@ -164,14 +164,18 @@ void renderScene(void) {
 } 
 
 void keyboard(unsigned char key_code, int x, int y){
-	switch(key_code){
 
+	switch(key_code){
     	case 'p':	linha = GL_POINT;
     				break;
     	case 'l':	linha = GL_LINE;
     				break;
     	case 'o':	linha = GL_FILL;
     				break;
+    	case '+': 	camera->incSpeed();
+					break;
+		case '-': 	camera->decSpeed();
+					break;
     	default :	camera->normalKey(key_code, true);
 					glutPostRedisplay();
 	}
@@ -185,6 +189,7 @@ void specialkeyboard(int key_code, int x, int y){
 	camera->specialKey(key_code, true);
 	glutPostRedisplay();
 }
+
 void upspecialkeyboard(int key_code, int x, int y){
 	camera->specialKey(key_code, false);
 	glutPostRedisplay();

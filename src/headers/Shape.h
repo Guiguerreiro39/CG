@@ -4,7 +4,6 @@
 #include <vector>
 #include <GL/glut.h>
 #include <IL/il.h>
-#include <iostream>
 
 #include "Point.h"
 #include "Material.h"
