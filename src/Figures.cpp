@@ -465,6 +465,9 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 	float dimSide = (2*M_PI)/sides;
 	float dimRing = (2*M_PI)/rings;
 
+	float textureSide = float(1)/float(sides);
+	float textureRing = float(1)/float(rings);
+
 	for (int i = 0; i < rings; i++) {		
 		double a0 = i*dimRing;
 		double a1 = a0 + dimRing;
@@ -492,6 +495,10 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 			normal_list->push_back(new Point( 0, 0, sin(j*dimSide)));
 			normal_list->push_back(new Point( 0, 0, sin(j*dimSide)));
 			normal_list->push_back(new Point( 0, 0, sin((j+1)*dimSide)));
+			texture_list->push_back(new Point(i*textureRing,j*textureSide,0));
+			texture_list->push_back(new Point((i+1)*textureRing,j*textureSide,0));
+			texture_list->push_back(new Point(i*textureRing,(j+1)*textureSide,0));
+				
 
 			vertex_list.push_back(new Point(x0*nr,y0*nr,nz));
 			vertex_list.push_back(new Point(x1*r,y1*r,z));
@@ -499,6 +506,9 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 			normal_list->push_back(new Point( 0, 0, sin((j+1)*dimSide)));
 			normal_list->push_back(new Point( 0, 0, sin(j*dimSide)));
 			normal_list->push_back(new Point( 0, 0, sin((j+1)*dimSide)));
+			texture_list->push_back(new Point(i*textureRing,(j+1)*textureSide,0));
+			texture_list->push_back(new Point((i+1)*textureRing,j*textureSide,0));
+			texture_list->push_back(new Point((i+1)*textureRing,(j+1)*textureSide,0));	
 		}
 	}
 		
