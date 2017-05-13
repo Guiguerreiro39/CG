@@ -94,12 +94,10 @@ void Camera::mousePress(int button, int state, int x, int y){
 
 void Camera::incSpeed(){
 	cameraSpeed+=0.5;
-	cout << cameraSpeed << endl;
 }
 
 void Camera::decSpeed(){
 	if(cameraSpeed>0.5) cameraSpeed-=0.5;
-	cout << cameraSpeed << endl;
 }
 
 void Camera::specialKey(int key, bool pressed){

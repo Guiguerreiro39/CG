@@ -2,7 +2,6 @@
 #define __CAMERA_H__
 
 #include <string>
-#include <iostream> // retirar
 #include "Point.h"
 #include <GL/glut.h>
 
