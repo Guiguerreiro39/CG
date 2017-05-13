@@ -125,7 +125,9 @@ void Shape::draw(){
 		glBindTexture(GL_TEXTURE_2D, texture);
 	}
 	
+	glEnable(GL_LIGHTING);
 	glDrawArrays(GL_TRIANGLES, 0, buffers_size[0] * 3);
+	glDisable(GL_LIGHTING);
 	glBindTexture(GL_TEXTURE_2D, 0);
  
 }

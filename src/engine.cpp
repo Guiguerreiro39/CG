@@ -108,8 +108,6 @@ void renderGroup(Group* group){
 	vector<Light*> lights = group->getLights();
 	for(vector<Light*>::iterator light_it = lights.begin(); light_it != lights.end(); ++light_it){
 		// Light
-		glEnable(GL_LIGHT0);
-		glEnable(GL_LIGHTING);
 		(*light_it)->draw();
 	}
 
@@ -210,6 +208,9 @@ void initGL(){
 	glEnable(GL_CULL_FACE);
 	// Textures
 	glEnable(GL_TEXTURE_2D);
+
+	glEnable(GL_LIGHT0);
+	glEnable(GL_LIGHTING);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
