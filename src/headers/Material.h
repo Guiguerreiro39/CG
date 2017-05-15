@@ -2,8 +2,12 @@
 #define __MATERIAL_H__
 
 #include <GLUT/glut.h>
+#include <iostream>
 
 #include "Colour.h"
+
+
+using namespace std;
 
 class Material{
 

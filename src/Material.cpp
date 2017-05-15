@@ -20,16 +20,15 @@ Material::Material(Colour* diff, Colour* amb, Colour* spec, Colour* emi, float s
 	specular[2] = spec->getB();
 	specular[3] = 1;
 
-	emission[0] = spec->getR();
-	emission[1] = spec->getG();
-	emission[2] = spec->getB();
+	emission[0] = emi->getR();
+	emission[1] = emi->getG();
+	emission[2] = emi->getB();
 	emission[3] = 1;
 
 	shininess = shi;
 }
 
 void Material::draw() {
-
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);

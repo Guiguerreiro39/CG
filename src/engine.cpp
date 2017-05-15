@@ -210,7 +210,6 @@ void initGL(){
 	glEnable(GL_TEXTURE_2D);
 
 	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_NORMAL_ARRAY);
