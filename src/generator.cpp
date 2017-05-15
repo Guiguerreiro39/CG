@@ -179,6 +179,11 @@ int main(int argc, char** argv){
 	vector<Point*> normal_list;
 	vector<Point*> texture_list;
 
+	if(argc < 2){
+		cout << "Not enough arguments. Use -h if you need some help." << endl;
+		return 0;
+	}
+
 	if(!strcmp(argv[1],"plane") && argc == 4)
 		v = createPlane(atof(argv[2]),&normal_list,&texture_list);
 
@@ -204,7 +209,10 @@ int main(int argc, char** argv){
 	else if(!strcmp(argv[1],"-h") || !strcmp(argv[1],"-help"))
 		printHelp();	
 
-	else cout << "Invalid input. Use -h if you need some help." << endl; 
+	else {
+		cout << "Invalid input. Use -h if you need some help." << endl; 
+		return 0;
+	}
 
 	if(v.size())
 		printFile(v, normal_list, texture_list, argv[argc-1]);
