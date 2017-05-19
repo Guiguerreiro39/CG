@@ -34,30 +34,32 @@ void printHelp(){
 	cout << "| the models you wish to create are specified                    |" << endl;
 	cout << "|                                                                |" << endl;
 	cout << "|   MOVE:                                                        |" << endl;
-	cout << "| - w: Move your position forward                                |" << endl;
+	cout << "|   w: Move your position forward                                |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - s: Move your position back                                   |" << endl;
+	cout << "|   s: Move your position back                                   |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - a: Move your position to the left                            |" << endl;
+	cout << "|   a: Move your position to the left                            |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - d: Move your position to the right                           |" << endl;
+	cout << "|   d: Move your position to the right                           |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - ↑ : Rotate your view up                                      |" << endl;
+	cout << "|   ↑ (mouse) : Rotate your view up                              |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - ↓ : Rotate your view down                                    |" << endl;
+	cout << "|   ↓ (mouse) : Rotate your view down                            |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - ← : Rotate your view to the left                             |" << endl;
+	cout << "|   ← (mouse) : Rotate your view to the left                     |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - → : Rotate your view to the right                            |" << endl;
+	cout << "|   → (mouse) : Rotate your view to the right                    |" << endl;
 	cout << "|                                                                |" << endl;
-	cout << "| - r : Reset the camera to the initial position                 |" << endl;
+	cout << "|   + : Increase camera speed                                    |" << endl;
+	cout << "|                                                                |" << endl;
+	cout << "|   - : Decrease camera speed                                    |" << endl;
 	cout << "|                                                                |" << endl;
 	cout << "|   FORMAT:                                                      |" << endl;													        
-	cout << "| - p: Change the figure format into points                      |" << endl;														    
+	cout << "|   p: Change the figure format into points                      |" << endl;														    
 	cout << "|                                                                |" << endl;
-	cout << "| - l: Change the figure format into lines                       |" << endl;
+	cout << "|   l: Change the figure format into lines                       |" << endl;
 	cout << "|                                                                |" << endl;	
-	cout << "| - o: Fill up the figure                                        |" << endl;														
+	cout << "|   o: Fill up the figure                                        |" << endl;														
 	cout << "#________________________________________________________________#" << endl;        
 }
 
@@ -105,20 +107,22 @@ void renderGroup(Group* group){
 
 	glPushMatrix();
 
+	// Apply Lights
 	vector<Light*> lights = group->getLights();
-	for(vector<Light*>::iterator light_it = lights.begin(); light_it != lights.end(); ++light_it){
-		// Light
+	for(vector<Light*>::iterator light_it = lights.begin(); light_it != lights.end(); ++light_it)
 		(*light_it)->draw();
-	}
 
+	// Apply Operations
 	vector<Operation*> operations = group->getOperations();
 	for(vector<Operation*>::iterator operation_it = operations.begin(); operation_it != operations.end(); ++operation_it)
 		(*operation_it)->apply();
 
+	// Draw Shapes
 	vector<Shape*> shape_list = group->getShapes();
 	for(vector<Shape*>::iterator shape_it = shape_list.begin(); shape_it != shape_list.end(); ++shape_it)
 		(*shape_it)->draw();
 	
+	// Render group-childs
 	vector<Group*> childs = group->getChilds();
 	for(vector<Group*>::iterator group_it = childs.begin(); group_it != childs.end(); ++group_it) 
 		renderGroup(*group_it);
@@ -133,10 +137,8 @@ void renderScene(void) {
 	glClearColor(0.0f,0.0f,0.0f,0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// set the camera
 	glLoadIdentity();
 	
-	// put drawing instructions here
 	glPolygonMode(GL_FRONT_AND_BACK,linha);
 	ilEnable(IL_ORIGIN_SET);
 	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
@@ -153,6 +155,7 @@ void renderScene(void) {
 
 	glColor3f(255,255,255);
 
+	// recursive render
 	renderGroup(scene);
 
 	displayFPS();
