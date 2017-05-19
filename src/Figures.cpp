@@ -21,15 +21,15 @@ vector<Point*> createPlane(float size, vector<Point*> *normal_list, vector<Point
 	texture_list->push_back(new Point(0,1,0));
 
 	vertex_list.push_back(new Point(-h,0,h));
-	normal_list->push_back(new Point(0,-1,0));
+	normal_list->push_back(new Point(0,1,0));
 	texture_list->push_back(new Point(0,1,0));
 
 	vertex_list.push_back(new Point(h,0,-h));
-	normal_list->push_back(new Point(0,-1,0));
+	normal_list->push_back(new Point(0,1,0));
 	texture_list->push_back(new Point(1,0,0));
 
 	vertex_list.push_back(new Point(-h,0,-h));
-	normal_list->push_back(new Point(0,-1,0));
+	normal_list->push_back(new Point(0,1,0));
 	texture_list->push_back(new Point(0,0,0));
 
 	// print vertex_list.size();
@@ -492,9 +492,9 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 			vertex_list.push_back(new Point(x0*r,y0*r,z));
 			vertex_list.push_back(new Point(x1*r,y1*r,z));
 			vertex_list.push_back(new Point(x0*nr,y0*nr,nz));
-			normal_list->push_back(new Point( 0, 0, sin(j*dimSide)));
-			normal_list->push_back(new Point( 0, 0, sin(j*dimSide)));
-			normal_list->push_back(new Point( 0, 0, sin((j+1)*dimSide)));
+			normal_list->push_back(new Point( x0*cos(j*dimSide), y0*cos(j*dimSide), sin(j*dimSide)));
+			normal_list->push_back(new Point( x1*cos(j*dimSide), y1*cos(j*dimSide), sin(j*dimSide)));
+			normal_list->push_back(new Point( x0*cos((j+1)*dimSide), y0*cos((j+1)*dimSide), sin((j+1)*dimSide)));
 			texture_list->push_back(new Point(i*textureRing,j*textureSide,0));
 			texture_list->push_back(new Point((i+1)*textureRing,j*textureSide,0));
 			texture_list->push_back(new Point(i*textureRing,(j+1)*textureSide,0));
@@ -503,9 +503,9 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 			vertex_list.push_back(new Point(x0*nr,y0*nr,nz));
 			vertex_list.push_back(new Point(x1*r,y1*r,z));
 			vertex_list.push_back(new Point(x1*nr,y1*nr,nz));
-			normal_list->push_back(new Point( 0, 0, sin((j+1)*dimSide)));
-			normal_list->push_back(new Point( 0, 0, sin(j*dimSide)));
-			normal_list->push_back(new Point( 0, 0, sin((j+1)*dimSide)));
+			normal_list->push_back(new Point( x0*cos((j+1)*dimSide), y0*cos((j+1)*dimSide), sin((j+1)*dimSide)));
+			normal_list->push_back(new Point( x1*cos(j*dimSide), y1*cos(j*dimSide), sin(j*dimSide)));
+			normal_list->push_back(new Point( x1*cos((j+1)*dimSide), y1*cos((j+1)*dimSide), sin((j+1)*dimSide)));
 			texture_list->push_back(new Point(i*textureRing,(j+1)*textureSide,0));
 			texture_list->push_back(new Point((i+1)*textureRing,j*textureSide,0));
 			texture_list->push_back(new Point((i+1)*textureRing,(j+1)*textureSide,0));	
