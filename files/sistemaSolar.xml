@@ -8,7 +8,7 @@
  			<scale X="10" Y="10" Z="10" />
  			<rotate time="50" X="0" Y="1" Z="0" />
  			<models>
- 				<model file="./CG/files/sphere.3d" texture="./CG/textures/sol.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 				<model file="sphere.3d" texture="sol.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  			</models>
  		</group>
  		<!--MERCURIO-->
@@ -26,7 +26,7 @@
  			<rotate time="10" X="0" Y="1" Z="0"/>
  			<scale X="0.3525" Y="0.3525" Z="0.3525" />
  			<models>
- 				<model file="./CG/files/sphere.3d" texture="./CG/textures/mercurio.jpg" emiX="0" emiY="0" emiZ="0"/>
+ 				<model file="sphere.3d" texture="mercurio.jpg" emiX="0" emiY="0" emiZ="0"/>
  			</models>
  		</group>
  		<!--VENUS-->
@@ -44,7 +44,7 @@
   			<rotate time="15" X="0" Y="-1" Z="0"/>
  			<scale X="0.8790" Y="0.8790" Z="0.8790" />
  			<models>
- 				<model file="./CG/files/sphere.3d" texture="./CG/textures/venus.jpg" emiX="0" emiY="0" emiZ="0" />
+ 				<model file="sphere.3d" texture="venus.jpg" emiX="0" emiY="0" emiZ="0" />
  			</models>
  		</group>
  		<!--TERRA-->
@@ -64,16 +64,21 @@
  				<rotate time="22" X="0" Y="1" Z="0"/>
  				<scale X="0.8865" Y="0.8865" Z="0.8865" />
  				<models>
- 					<model file="./CG/files/sphere.3d" texture="./CG/textures/terra.jpg" emiX="0" emiY="0" emiZ="0"/>
+ 					<model file="sphere.3d" texture="terra.jpg" emiX="0" emiY="0" emiZ="0"/>
  				</models>
  				<group>
  					<rotate angle="-23" X="0" Y="1" Z="1"/>
- 					<translate X="0" Y="0.25" Z="3"/>
+ 					<translate time="27.3">
+        				<point X="-3" Y="-0.25" Z="3" />
+        				<point X="3" Y="0.50" Z="3" />
+       					<point X="3" Y="0.25" Z="-3" />
+        				<point X="-3" Y="1" Z="-3" />
+      				</translate>
  					<group>
- 						<rotate time="22" X="0" Y="1" Z="0"/>
+ 						<rotate time="6.7" X="0" Y="1" Z="0"/>
 						<scale X="0.30" Y="0.30" Z="0.30" />
 						<models>
-							<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+							<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 						</models>
 					</group>
 				</group>
@@ -96,7 +101,7 @@
  				<rotate time="28" X="0" Y="1" Z="0"/>
  				<scale X="0.3720" Y="0.3720" Z="0.3720" />
  				<models>
- 					<model file="./CG/files/sphere.3d" texture="./CG/textures/marte.jpg" emiX="0" emiY="0" emiZ="0"/>
+ 					<model file="sphere.3d" texture="marte.jpg" emiX="0" emiY="0" emiZ="0"/>
  				</models>
  			</group>
  		</group>
@@ -115,7 +120,7 @@
  			<rotate time="33" X="0" Y="1" Z="0"/>
  			<scale X="2.25" Y="2.25" Z="2.25" />
  			<models>
- 				<model file="./CG/files/sphere.3d" texture="./CG/textures/jupiter.jpg" emiX="0" emiY="0" emiZ="0"/>
+ 				<model file="sphere.3d" texture="jupiter.jpg" emiX="0" emiY="0" emiZ="0"/>
  			</models>
  			<!--SATELITE N.-->
  			<group>
@@ -123,7 +128,7 @@
 				<rotate time="33" X="0" Y="1" Z="0"/>
 				<scale X="0.05" Y="0.05" Z="0.05" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
 			<!--SATELITE N.-->
@@ -132,7 +137,7 @@
 				<rotate time="34" X="0" Y="1" Z="0"/>
 				<scale X="0.035" Y="0.035" Z="0.035" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
 			<!--SATELITE N.-->
@@ -141,7 +146,7 @@
 				<rotate time="35" X="0" Y="1" Z="0"/>
 				<scale X="0.1" Y="0.1" Z="0.1" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
 			<!--SATELITE N.-->
@@ -150,7 +155,7 @@
 				<rotate time="36" X="0" Y="1" Z="0"/>
 				<scale X="0.11" Y="0.11" Z="0.11" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
  		</group>
@@ -171,7 +176,7 @@
  			<rotate time="39" X="0" Y="1" Z="0"/>
 			<scale X="1.995" Y="1.995" Z="1.995" />
 			<models>
-				<model file="./CG/files/sphere.3d" texture="./CG/textures/saturno.jpg" emiX="0" emiY="0" emiZ="0"/>
+				<model file="sphere.3d" texture="saturno.jpg" emiX="0" emiY="0" emiZ="0"/>
 			</models>
 			<!--SATELITE N.-->
 			<group>
@@ -179,7 +184,7 @@
 				<rotate time="39" X="0" Y="1" Z="0"/>
 				<scale X="0.15" Y="0.15" Z="0.15" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
 			<!--ANEL-->
@@ -187,7 +192,7 @@
 				<rotate angle="90" X="1" Y="0" Z="0"/>
 				<scale X="1" Y="1" Z="0.01"/>
 				<models>
-					<model file="torus.3d" texture="./CG/textures/anel.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="torus.3d" texture="anel.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
 			</group>
@@ -209,7 +214,7 @@
 				<rotate time="48" X="0" Y="-1" Z="0"/>
 				<scale X="1.290" Y="1.290" Z="1.290" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/urano.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="urano.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 			</group>
 		</group>
@@ -230,7 +235,7 @@
 				<rotate time="60" X="0" Y="1" Z="0"/>
 				<scale X="1.275" Y="1.275" Z="1.275" />
 				<models>
-					<model file="./CG/files/sphere.3d" texture="./CG/textures/neptuno.jpg" emiX="0" emiY="0" emiZ="0"/>
+					<model file="sphere.3d" texture="neptuno.jpg" emiX="0" emiY="0" emiZ="0"/>
 				</models>
 				<!--SATELITE N.-->
 				<group>
@@ -238,7 +243,7 @@
 					<rotate time="60" X="0" Y="1" Z="0"/>
 					<scale X="0.15" Y="0.15" Z="0.15" />
 					<models>
-						<model file="./CG/files/sphere.3d" texture="./CG/textures/lua.jpg" emiX="0" emiY="0" emiZ="0"/>
+						<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
 					</models>
 				</group>
 			</group>
@@ -264,9 +269,9 @@
 				<point X="36.9552" Y="0" Z="-120.182" />
 			</translate>
 			<rotate angle="270" X="1" Y="0" Z="0"/>
-	    	<scale X="1" Y="1" Z="1" />
+	    	<scale X="0.05" Y="0.05" Z="0.05" />
 			<models>
-				<model file="teapot.3d" diffX="0.2" diffY="0.5" diffZ="0.1"/>
+				<model file="teapot.3d" emiX="0" emiY="0" emiZ="0"/>
 			</models>
 		</group>
 	</group>
