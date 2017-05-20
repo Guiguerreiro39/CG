@@ -4,16 +4,22 @@ Material::Material(){
 }
 
 Material::Material(Colour* diff, Colour* amb, Colour* spec, Colour* emi, float shi){
+	diffuse[3] = -1;
+	ambient[3] = -1;
 
-	diffuse[0] = diff->getR();
-	diffuse[1] = diff->getG();
-	diffuse[2] = diff->getB();
-	diffuse[3] = 1;
+	if(diff != NULL){
+		diffuse[0] = diff->getR();
+		diffuse[1] = diff->getG();
+		diffuse[2] = diff->getB();
+		diffuse[3] = 1;
+	}
 
-	ambient[0] = amb->getR();
-	ambient[1] = amb->getG();
-	ambient[2] = amb->getB();
-	ambient[3] = 1;
+	if(amb != NULL){
+		ambient[0] = amb->getR();
+		ambient[1] = amb->getG();
+		ambient[2] = amb->getB();
+		ambient[3] = 1;
+	}
 
 	specular[0] = spec->getR();
 	specular[1] = spec->getG();
@@ -29,10 +35,13 @@ Material::Material(Colour* diff, Colour* amb, Colour* spec, Colour* emi, float s
 }
 
 void Material::draw() {
-	
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
-	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+	
+	if(diffuse[3] != -1)
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+	if(ambient[3] != -1)
+		glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+	
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
 }
