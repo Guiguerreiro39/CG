@@ -27,11 +27,11 @@ void printFile(vector<Point*> v, vector<Point*> n, vector<Point*> t, string file
 				file << (*it)->print() << endl;
 		}
 
-		/*if(t.size()){
+		if(t.size()){
 			file << t.size() << endl;
 			for (vector<Point*>::iterator it = t.begin() ; it != t.end(); ++it)
 				file << (*it)->print2() << endl;
-		}*/
+		}
 
 		file.close();
 	}
@@ -54,6 +54,10 @@ void printFileBezier(vector<Point*> v, vector<Point*> n, string file_name){
 			file << n.size() << endl;
 			for (vector<Point*>::iterator it = n.begin() ; it != n.end(); ++it)
 				file << (*it)->print() << endl;
+
+			file << n.size() << endl;
+			for (vector<Point*>::iterator it = n.begin() ; it != n.end(); ++it)
+				file << (*it)->print2() << endl;
 		}
 		
 		file.close();
@@ -128,8 +132,8 @@ void parsePatchFile(int tessellation, string file_name, string output_file){
 				patch->addVertex(new Point(vertex_coords[0],vertex_coords[1],vertex_coords[2]));
 			}
 		}
-		vector<Point*> normais;
-		vector<Point*> res = renderBezierPatch(tessellation,patches_list,&normais);
+		vector<Point*> res = renderBezierPatch(tessellation,patches_list);
+		vector<Point*> normais = bezierTangent(tessellation,patches_list);
 		printFileBezier(res,normais,output_file);
 
 		file.close();

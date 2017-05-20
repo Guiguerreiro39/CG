@@ -24,7 +24,7 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 // Patches
 Point* evalBezierCurve(float t, Point* p1, Point* p2, Point* p3, Point* p4);
 Point* evalBezierPatch(float u, float v, vector<Point*> control_points);
-vector<Point*> renderBezierPatch(int divs, vector<Patch*> patch_list,vector<Point*> *normais);
+vector<Point*> renderBezierPatch(int divs, vector<Patch*> patch_list);
 vector<Point*> bezierTangent(int divs, vector<Patch*> patch_list);
 
 #endif
