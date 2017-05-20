@@ -20,9 +20,11 @@ vector<Point*> createSphere(float radius, int slice, int stack, vector<Point*> *
 vector<Point*> createCylinder(float radius, float height, int slice, int stack, vector<Point*> *normal_list, vector<Point*> *texture_list);
 vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings, vector<Point*> *normal_list, vector<Point*> *texture_list);
 
+
 // Patches
 Point* evalBezierCurve(float t, Point* p1, Point* p2, Point* p3, Point* p4);
 Point* evalBezierPatch(float u, float v, vector<Point*> control_points);
-vector<Point*> renderBezierPatch(int divs, vector<Patch*> patch_list);
+vector<Point*> renderBezierPatch(int divs, vector<Patch*> patch_list,vector<Point*> *normais);
+vector<Point*> bezierTangent(int divs, vector<Patch*> patch_list);
 
 #endif

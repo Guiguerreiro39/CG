@@ -19,6 +19,9 @@ class Point{
 		float getX();
 		float getY();
 		float getZ();
+		void setX(float);
+		void setY(float);
+		void setZ(float);
 		string print(); // retirar
 		string print2(); // retirar
 		void incr(Point*);

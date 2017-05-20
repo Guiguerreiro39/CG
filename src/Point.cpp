@@ -30,6 +30,18 @@ float Point::getZ(){
 	return z;
 }
 
+void Point::setX(float p){
+    x = p;
+}
+
+void Point::setY(float p){
+    y=p;
+}
+
+void Point::setZ(float p){
+    z=p;
+}
+
 string Point::print(){
 	string res = to_string(x) + " " + to_string(y) + " " + to_string(z);
 	return res;
