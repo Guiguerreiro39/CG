@@ -104,7 +104,7 @@ void updateColourComponent(XMLElement* element, Shape* shape){
 		ambient->setG(stof(element->Attribute("ambY")));
 	if(element->Attribute("ambZ"))
 		ambient->setB(stof(element->Attribute("ambZ")));
-
+	
 	// Specular
 	if(element->Attribute("specX"))
 		specular->setR(stof(element->Attribute("specX")));
