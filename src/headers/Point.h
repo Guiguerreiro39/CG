@@ -22,14 +22,14 @@ class Point{
 		void setX(float);
 		void setY(float);
 		void setZ(float);
-		string print(); // retirar
-		string print2(); // retirar
 		void incr(Point*);
 		void vector_scale(float);
 		void vector_cross(Point*);
 		void vector_normalize();
 		void sphericToCartesian(Point*);
 		void cartesianToSpheric(Point*);
+		string print();
+		string print2();
 		virtual ~Point(void);
 };
 
