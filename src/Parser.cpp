@@ -83,11 +83,11 @@ void updateScale(XMLElement* element, Group* group){
 
 void updateColourComponent(XMLElement* element, Shape* shape){
 
-	Colour* diffuse = new Colour(0.8, 0.8, 0.8);
-	Colour* ambient = new Colour(0.2, 0.2, 0.2);
+	Colour* diffuse = new Colour(0.8f, 0.8f, 0.8f);
+	Colour* ambient = new Colour(0.2f, 0.2f, 0.2f);
 	Colour* specular = new Colour(0, 0, 0);
 	Colour* emission = new Colour(0, 0, 0);
-	float shininess = 0;
+	float shininess = 20;
 
 	// Diffuse
 	if(element->Attribute("diffX"))
@@ -96,7 +96,7 @@ void updateColourComponent(XMLElement* element, Shape* shape){
 		diffuse->setG(stof(element->Attribute("diffY")));
 	if(element->Attribute("diffZ"))
 		diffuse->setB(stof(element->Attribute("diffZ")));
-
+	
 	// Ambient
 	if(element->Attribute("ambX"))
 		ambient->setR(stof(element->Attribute("ambX")));
@@ -126,6 +126,7 @@ void updateColourComponent(XMLElement* element, Shape* shape){
 		shininess = stof(element->Attribute("shini"));
 
 	Material* colour_component = new Material(diffuse, ambient, specular, emission, shininess);
+
 	shape->setColourComponent(colour_component);
 }
 

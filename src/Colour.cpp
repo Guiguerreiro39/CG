@@ -3,10 +3,10 @@
 Colour::Colour(){
 }
 
-Colour::Colour(float a, float b, float c){
-	r = a;
-	g = b;
-	b = c;
+Colour::Colour(float rr, float gg, float bb){
+	r = rr;
+	g = gg;
+	b = bb;
 }
 
 float Colour::getR(){

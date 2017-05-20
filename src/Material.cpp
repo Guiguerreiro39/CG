@@ -30,8 +30,8 @@ Material::Material(Colour* diff, Colour* amb, Colour* spec, Colour* emi, float s
 
 void Material::draw() {
 	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
-	//glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, emission);
 }
