@@ -83,27 +83,33 @@ void updateScale(XMLElement* element, Group* group){
 
 void updateColourComponent(XMLElement* element, Shape* shape){
 
-	Colour* diffuse = new Colour(0.8, 0.8, 0.8);
-	Colour* ambient = new Colour(0.2, 0.2, 0.2);
+	Colour* diffuse = NULL;
+	Colour* ambient = NULL;
 	Colour* specular = new Colour(0, 0, 0);
 	Colour* emission = new Colour(0, 0, 0);
 	float shininess = 0;
 
 	// Diffuse
-	if(element->Attribute("diffX"))
-		diffuse->setR(stof(element->Attribute("diffX")));
-	if(element->Attribute("diffY"))
-		diffuse->setG(stof(element->Attribute("diffY")));
-	if(element->Attribute("diffZ"))
-		diffuse->setB(stof(element->Attribute("diffZ")));
+	if(element->Attribute("diffX") || element->Attribute("diffY") || element->Attribute("diffZ")){
+		diffuse = new Colour(0.8, 0.8, 0.8);
+		if(element->Attribute("diffX"))
+			diffuse->setR(stof(element->Attribute("diffX")));
+		if(element->Attribute("diffY"))
+			diffuse->setG(stof(element->Attribute("diffY")));
+		if(element->Attribute("diffZ"))
+			diffuse->setB(stof(element->Attribute("diffZ")));
+	}
 
 	// Ambient
-	if(element->Attribute("ambX"))
-		ambient->setR(stof(element->Attribute("ambX")));
-	if(element->Attribute("ambY"))
-		ambient->setG(stof(element->Attribute("ambY")));
-	if(element->Attribute("ambZ"))
-		ambient->setB(stof(element->Attribute("ambZ")));
+	if(element->Attribute("ambX") || element->Attribute("ambY") || element->Attribute("ambZ")){
+		ambient = new Colour(0.2, 0.2, 0.2);
+		if(element->Attribute("ambX"))
+			ambient->setR(stof(element->Attribute("ambX")));
+		if(element->Attribute("ambY"))
+			ambient->setG(stof(element->Attribute("ambY")));
+		if(element->Attribute("ambZ"))
+			ambient->setB(stof(element->Attribute("ambZ")));
+	}
 
 	// Specular
 	if(element->Attribute("specX"))

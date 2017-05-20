@@ -511,7 +511,6 @@ vector<Point*> createTorus(float radiusIn, float radiusOut, int sides, int rings
 			texture_list->push_back(new Point((i+1)*textureRing,(j+1)*textureSide,0));	
 		}
 	}
-		
 	return vertex_list;
 }
 
