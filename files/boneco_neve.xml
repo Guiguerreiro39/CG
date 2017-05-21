@@ -1,238 +1,294 @@
 <scene>
 	<!--BODY-->
 	<group>
- 		<colour R="255" G="255" B="255" />
+  		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="10" Y="10" Z="10" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/snow.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>		
 	</group>
 	<!--HEAD-->
 	<group>
 		<translate X="0" Y="30" Z="0" />
- 		<colour R="255" G="255" B="255" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="7" Y="7" Z="7" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/snow.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>		
 	</group>
 	<!--NOSE-->
 	<group>
+ 	   	<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+   		</lights>
 		<translate X="0" Y="31" Z="13" />
 		<rotate angle="90" X="0" Y="0" Z="1" />
 		<group>
 			<rotate angle="90" X="1" Y="0" Z="0" />
 			<models>
-				<model file="cone.3d" />
+				<model file="./CG/files/cone.3d" emiX="0.4" emiY="0.1" emiZ="0" shini="20"/>
  			</models>
- 		 	<colour R="251" G="119" B="9" />
  			<scale X="2.3" Y="2.3" Z="2.3" />	
 		</group>	
 	</group>
 	<!--EYES-->
 	<group>
 		<translate X="5.5" Y="35" Z="10" />
-		<colour R="0" G="0" B="0" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="1.5" Y="1.5" Z="1.5" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/white.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<group>
 		<translate X="6" Y="35.3" Z="12.3" />
-		<colour R="255" G="255" B="255" />
- 		<scale X="0.45" Y="0.45" Z="0.45" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.6" Y="0.6" Z="0.6" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<group>
 		<translate X="-5.5" Y="35" Z="10" />
-		<colour R="0" G="0" B="0" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="1.5" Y="1.5" Z="1.5" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/white.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<group>
 		<translate X="-6" Y="35.3" Z="12.3" />
-		<colour R="255" G="255" B="255" />
- 		<scale X="0.45" Y="0.45" Z="0.45" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.6" Y="0.6" Z="0.6" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<!--MOUTH-->
+	<group>
+		<translate X="0" Y="25" Z="13" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="1.5" Y="25.2" Z="12.8" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="3" Y="25.47" Z="12.6" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="4.5" Y="25.74" Z="12.4" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="6" Y="26.11" Z="12" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="-1.5" Y="25.2" Z="12.8" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="-3" Y="25.47" Z="12.6" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="-4.5" Y="25.74" Z="12.4" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 		</models>
+	</group>
+	<group>
+		<translate X="-6" Y="26.11" Z="12" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 		<models>
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<!--BUTTONS-->
 	<group>
 		<translate X="0" Y="0" Z="19" />
-		<colour R="34" G="34" B="34" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="0.87" Y="0.87" Z="0.87" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<group>
 		<translate X="0" Y="5" Z="18.45" />
-		<colour R="34" G="34" B="34" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="0.87" Y="0.87" Z="0.87" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<group>
 		<translate X="0" Y="-5" Z="18.45" />
-		<colour R="34" G="34" B="34" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
  		<scale X="0.87" Y="0.87" Z="0.87" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/sphere.3d" texture="./CG/textures/black.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<!--SCARF-->
 	<group>
 		<translate X="0" Y="18" Z="1" />
 		<rotate angle="90" X="1" Y="0" Z="0" />
-		<colour R="255" G="0" B="0" />
- 		<scale X="1.9" Y="3" Z="1.9" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="4" Y="5" Z="4" />
  		<models>
-			<model file="torus.3d" />
+			<model file="./CG/files/torus1.3d" texture="./CG/textures/red.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<group>
-		<translate X="4" Y="7.6" Z="14.6" />
+		<translate X="4" Y="8" Z="12.6" />
 		<rotate angle="19" X="-1" Y="0" Z="0" />
-		<colour R="255" G="0" B="0" />
- 		<scale X="1.5" Y="3" Z="1.5" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="5" Y="6" Z="6" />
  		<models>
-			<model file="cylinder.3d" />
+			<model file="./CG/files/cylinder.3d" texture="./CG/textures/red.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
-	<!--MOUTH-->
-	<group>
-		<translate X="0" Y="25" Z="13" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
+	<!--TABLE-->
+ 	<group>
+	 	<translate X="0" Y="0" Z="37" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="23" Y="1" Z="23" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/box.3d" texture="./CG/textures/wood1.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
-	<group>
-		<translate X="1.5" Y="25.2" Z="12.8" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 	<group>
+	 	<translate X="0" Y="-20" Z="37" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="1" Y="14.8" Z="1" />
  		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/cylinder.3d" texture="./CG/textures/wood2.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
-	<group>
-		<translate X="3" Y="25.47" Z="12.6" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
+ 	<group>
+	 	<translate X="0" Y="-20" Z="37" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="9" Y="0.5" Z="9" />
  		<models>
-			<model file="sphere.3d" />
- 		</models>
-	</group>
-	<group>
-		<translate X="4.5" Y="25.74" Z="12.4" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
- 		<models>
-			<model file="sphere.3d" />
- 		</models>
-	</group>
-	<group>
-		<translate X="6" Y="26.11" Z="12" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
- 		<models>
-			<model file="sphere.3d" />
- 		</models>
-	</group>
-	<group>
-		<translate X="-1.5" Y="25.2" Z="12.8" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
- 		<models>
-			<model file="sphere.3d" />
- 		</models>
-	</group>
-	<group>
-		<translate X="-3" Y="25.47" Z="12.6" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
- 		<models>
-			<model file="sphere.3d" />
- 		</models>
-	</group>
-	<group>
-		<translate X="-4.5" Y="25.74" Z="12.4" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
- 		<models>
-			<model file="sphere.3d" />
- 		</models>
-	</group>
-	<group>
-		<translate X="-6" Y="26.11" Z="12" />
-		<colour R="34" G="34" B="34" />
- 		<scale X="0.3" Y="0.3" Z="0.3" />
- 		<models>
-			<model file="sphere.3d" />
+			<model file="./CG/files/box.3d" texture="./CG/textures/wood2.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<!--HAT-->
 	<group>
 		<translate X="0" Y="40.5" Z="1" />
 		<rotate angle="90" X="1" Y="0" Z="0" />
-		<colour R="204" G="102" B="0" />
- 		<scale X="3.2" Y="3" Z="1.9" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+ 		<scale X="5" Y="5" Z="2.2" />
  		<models>
- 			<model file="torus.3d" />
+ 			<model file="./CG/files/torus1.3d" texture="./CG/textures/hat1.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
 	 	</models>
 	</group>
  	<group>
 	 	<translate X="0" Y="40.5" Z="0" />
 		<colour R="153" G="76" B="0" />
- 		<scale X="3.8" Y="4" Z="3.8" />
+ 		<scale X="9" Y="8.5" Z="9" />
  		<models>
-			<model file="cylinder.3d" />
- 		</models>
-	</group>
-	<!--TABLE-->
- 	<group>
-	 	<translate X="0" Y="0" Z="37" />
-		<colour R="204" G="102" B="0" />
- 		<scale X="7" Y="0.3" Z="7" />
- 		<models>
-			<model file="test_box.3d" />
- 		</models>
-	</group>
- 	<group>
-	 	<translate X="0" Y="-20" Z="37" />
-		<colour R="153" G="76" B="0" />
- 		<scale X="0.5" Y="6" Z="0.5" />
- 		<models>
-			<model file="cylinder.3d" />
- 		</models>
-	</group>
- 	<group>
-	 	<translate X="0" Y="-20" Z="37" />
-		<colour R="153" G="76" B="0" />
- 		<scale X="4" Y="0.1" Z="4" />
- 		<models>
-			<model file="test_box.3d" />
+			<model file="./CG/files/cylinder.3d" texture="./CG/textures/hat1.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>
 	</group>
 	<!--TEA-->
 	<group>
-	 	<translate X="0" Y="1" Z="32" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+	 	<translate X="0" Y="0.5" Z="30" />
 		<colour R="164" G="175" B="175" />
  		<scale X="4" Y="4" Z="4" />
  		<models>
-			<model file="teacup.3d" />
+			<model file="./CG/files/teacup.3d" texture="./CG/textures/gold.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>		
 	</group>
 	<group>
-	 	<translate X="3" Y="1.75" Z="34" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+	 	<translate X="3" Y="0.75" Z="32" />
 	 	<rotate angle="90" X="0" Y="0" Z="0.7" />
 	 	<group>
 	 		<rotate angle="90" X="1" Y="0" Z="0" />
@@ -241,18 +297,22 @@
 				<colour R="124" G="124" B="124" />
 	 			<scale X="4" Y="4" Z="4" />
 	 			<models>
-					<model file="teaspoon.3d" />
+					<model file="./CG/files/teaspoon.3d" texture="./CG/textures/gold.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
 	 			</models>
 	 		</group>
  		</group>		
 	</group>
 	<group>
-	 	<translate X="-5" Y="1" Z="48" />
+   		<lights>
+      		<light type="POINT" X="0" Y="0" Z="0"/>
+    	</lights>
+	 	<translate X="-4" Y="0.5" Z="44" />
 	 	<rotate angle="-90" X="1" Y="0" Z="0" />
 		<colour R="164" G="175" B="175" />
  		<scale X="2" Y="2" Z="2" />
  		<models>
-			<model file="teapot.3d" />
+			<model file="./CG/files/teapot.3d" texture="./CG/textures/gold.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  		</models>		
 	</group>
 </scene>
+	

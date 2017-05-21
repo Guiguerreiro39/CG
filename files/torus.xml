@@ -1,0 +1,13 @@
+<scene>
+	<group>
+		<group>
+	   		<lights>
+	      		<light type="POINT" X="0" Y="0" Z="0"/>
+	    	</lights>
+	 		<scale X="4" Y="5" Z="4" />
+	 		<models>
+				<model file="./CG/files/torus.3d" texture="./CG/textures/gold.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+	 		</models>
+ 		</group>
+	</group>
+</scene>
