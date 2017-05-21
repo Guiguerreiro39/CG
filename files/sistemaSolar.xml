@@ -68,14 +68,14 @@
  				</models>
  				<group>
  					<rotate angle="-23" X="0" Y="1" Z="1"/>
- 					<translate time="27.3">
-        				<point X="-3" Y="-0.25" Z="3" />
-        				<point X="3" Y="0.50" Z="3" />
-       					<point X="3" Y="0.25" Z="-3" />
+ 					<translate time="616">
+        				<point X="-3" Y="1" Z="3" />
+        				<point X="3" Y="1" Z="3" />
+       					<point X="3" Y="1" Z="-3" />
         				<point X="-3" Y="1" Z="-3" />
       				</translate>
  					<group>
- 						<rotate time="6.7" X="0" Y="1" Z="0"/>
+ 						<rotate time="616" X="0" Y="1" Z="0"/>
 						<scale X="0.30" Y="0.30" Z="0.30" />
 						<models>
 							<model file="sphere.3d" texture="lua.jpg" emiX="0" emiY="0" emiZ="0"/>
