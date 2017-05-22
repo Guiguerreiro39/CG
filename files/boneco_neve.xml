@@ -1,4 +1,19 @@
 <scene>
+
+	<group>
+		<!--FUNDO-->
+ 		<group>
+ 			<lights>
+      			<light type="POINT" X="0" Y="0" Z="0"/>
+    		</lights>
+ 			<scale X="-300" Y="-300" Z="-300" />
+ 			<models>
+ 				<model file="./CG/files/giant_sphere.3d" texture="./CG/textures/stars.jpg" emiX="1" emiY="1" emiZ="1" shini="100"/>
+ 			</models>
+ 		</group>
+ 	</group>
+
+
 	<!--BODY-->
 	<group>
   		<lights>

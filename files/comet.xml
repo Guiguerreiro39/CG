@@ -1,14 +1,13 @@
 <scene>
-    <!-- COMET -->
+  <group>
     <group>
-    <translate time="20">
-      <point x="-200.9" y="-10" z="20.0.9" />
-      <point x="100.9" y="20" z="50.9" />
-      <point x="200.9" y="-30" z="-200.9" />
-      <point x="-100.9" y="-20" z="-50.9" />
-    </translate>
-    <models>
-      <model file="teapot.3d" diffX="0.2" diffY="0.5" diffZ="0.1"/>
-    </models>
+      <lights>
+            <light type="POINT" X="0" Y="0" Z="0"/>
+        </lights>
+      <scale X="5" Y="5" Z="5" />
+      <models>
+        <model file="./CG/files/teapot.3d" emiX="1" emiY="1" emiZ="1" shini="20"/>
+      </models>
+    </group>
   </group>
 </scene>

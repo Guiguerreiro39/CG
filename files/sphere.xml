@@ -7,7 +7,7 @@
     		</lights>
  			<scale X="5" Y="5" Z="5" />
  			<models>
- 				<model file="./CG/files/sphere.3d" texture="./CG/textures/sphere.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
+ 				<model file="./CG/files/giant_sphere.3d" texture="./CG/textures/sphere.jpg" emiX="1" emiY="1" emiZ="1" shini="20"/>
  			</models>
  		</group>
 	</group>
